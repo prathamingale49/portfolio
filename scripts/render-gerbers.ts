@@ -74,7 +74,8 @@ const copperLayerOutputs = [
 function colorizeLayerSvg(svg: string, color: string) {
   const withoutRootColor = svg
     .replace(/<svg\s+fill="#[0-9a-fA-F]{3,6}"\s+stroke="#[0-9a-fA-F]{3,6}"\s+/, "<svg ")
-    .replace(/<svg\s+/, `<svg fill="${color}" stroke="${color}" `);
+    .replace(/<svg\s+/, `<svg color="${color}" fill="${color}" stroke="${color}" `)
+    .replace(/currentColor/g, color);
 
   return withoutRootColor;
 }

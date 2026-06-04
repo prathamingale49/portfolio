@@ -39,6 +39,13 @@ export function LayoutViewer({ slug, views, callouts }: LayoutViewerProps) {
     [callouts, selectedView?.id],
   );
 
+  const selectedAssetUrl = useMemo(() => {
+    const assetUrl = getAssetUrl(selectedView?.file);
+    const version = selectedView?.color?.replace("#", "") ?? selectedView?.id ?? "layout";
+
+    return assetUrl ? `${assetUrl}${assetUrl.includes("?") ? "&" : "?"}v=${version}` : "";
+  }, [selectedView?.color, selectedView?.file, selectedView?.id]);
+
   if (!selectedView) {
     return (
       <EmptyState
@@ -133,7 +140,7 @@ export function LayoutViewer({ slug, views, callouts }: LayoutViewerProps) {
               </div>
             ) : (
               <img
-                src={getAssetUrl(selectedView.file)}
+                src={selectedAssetUrl}
                 alt={selectedView.title}
                 className="h-full w-full object-contain contrast-125"
                 draggable={false}
