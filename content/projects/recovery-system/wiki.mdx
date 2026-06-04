@@ -31,7 +31,7 @@ The schematic hierarchy is organized around several repeated safety-critical blo
 - Five recovery-driver banks.
 - Sensor interfaces for IMU, magnetometer, barometer, and thermometer functions.
 
-The portfolio viewer uses manually defined hotspots to approximate the Altium sheet hierarchy from the exported PDF.
+The schematic viewer embeds the actual exported PDF so the browser's PDF viewer can preserve Altium's internal sheet navigation links.
 
 ## Power Architecture
 
@@ -62,7 +62,7 @@ The source PDF contains 24 exported schematic pages. The most useful portfolio-l
 - Recovery drivers
 - Output connectors
 
-The actual PDF is stored at `/content/projects/recovery-system/schematic/recovery-system.pdf` as a source schematic artifact. The interactive viewer uses web-friendly SVG placeholders and manually defined hotspots rather than attempting to parse Altium schematic files.
+The actual PDF is stored at `/content/projects/recovery-system/schematic/recovery-system.pdf` and embedded directly on the schematic page. This keeps the Altium-exported click-through behavior without attempting to parse raw Altium schematic files.
 
 ## PCB Layout Walkthrough
 

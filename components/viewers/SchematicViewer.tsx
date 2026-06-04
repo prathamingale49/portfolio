@@ -2,7 +2,7 @@
 
 import { useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
 import { getAssetUrl } from "@/lib/assets";
 import type { SchematicHotspot, SchematicPage } from "@/types/project";
 import { EmptyState } from "@/components/EmptyState";
@@ -67,6 +67,8 @@ export function SchematicViewer({ slug, pages }: SchematicViewerProps) {
     }
   }
 
+  const selectedAssetUrl = getAssetUrl(selectedPage.file);
+  const isPdf = selectedPage.file.toLowerCase().endsWith(".pdf");
   const pageIndex = pages.findIndex((page) => page.id === selectedPage.id);
   const toolbarExtra = (
     <div className="flex items-center gap-2">
@@ -132,64 +134,95 @@ export function SchematicViewer({ slug, pages }: SchematicViewerProps) {
         ) : null}
       </aside>
       <main className="min-w-0 bg-[#080b10]">
-        <ViewerToolbar
-          zoom={zoom}
-          onZoomIn={() => setZoom((value) => Math.min(value + 0.15, 2.5))}
-          onZoomOut={() => setZoom((value) => Math.max(value - 0.15, 0.45))}
-          onReset={() => {
-            setZoom(1);
-            setPan({ x: 0, y: 0 });
-          }}
-          extra={toolbarExtra}
-        />
-        <div
-          className="viewer-scrollbar schematic-grid h-[calc(100vh-113px)] cursor-grab overflow-hidden active:cursor-grabbing"
-          onPointerDown={(event) => {
-            dragStart.current = {
-              pointerId: event.pointerId,
-              x: event.clientX,
-              y: event.clientY,
-              pan,
-            };
-            event.currentTarget.setPointerCapture(event.pointerId);
-          }}
-          onPointerMove={(event) => {
-            if (!dragStart.current) return;
-            const dx = event.clientX - dragStart.current.x;
-            const dy = event.clientY - dragStart.current.y;
-            setPan({ x: dragStart.current.pan.x + dx, y: dragStart.current.pan.y + dy });
-          }}
-          onPointerUp={() => {
-            dragStart.current = null;
-          }}
-        >
-          <div
-            className="relative mx-auto my-8 aspect-[16/10] w-[96%] min-w-[760px] max-w-6xl origin-center rounded border border-line-soft bg-white shadow-glow"
-            style={{ transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})` }}
-          >
-            {missingAsset ? (
-              <div className="grid h-full place-items-center bg-[#111827] p-8 text-center">
-                <EmptyState
-                  title="Schematic export missing"
-                  message="Place the exported Altium schematic SVG or a PDF-derived SVG at the file path listed in project.json."
+        {isPdf ? (
+          <>
+            <div className="sticky top-[57px] z-20 flex min-h-14 flex-wrap items-center justify-between gap-3 border-b border-line-soft bg-panel px-3 py-2">
+              <div>
+                <p className="text-sm font-medium text-slate-100">Embedded Altium schematic PDF</p>
+                <p className="text-xs text-slate-500">
+                  Use the PDF viewer controls and internal sheet links to navigate.
+                </p>
+              </div>
+              <a
+                href={selectedAssetUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex h-9 items-center gap-2 rounded border border-line-soft bg-[#0b1018] px-3 text-sm text-slate-200 hover:border-signal/45"
+              >
+                <ExternalLink className="size-4" aria-hidden="true" />
+                Open PDF
+              </a>
+            </div>
+            <div className="h-[calc(100vh-113px)] bg-[#080b10] p-3">
+              <iframe
+                src={`${selectedAssetUrl}#view=FitH`}
+                title={selectedPage.title}
+                className="h-full w-full rounded border border-line-soft bg-white shadow-glow"
+              />
+            </div>
+          </>
+        ) : (
+          <>
+            <ViewerToolbar
+              zoom={zoom}
+              onZoomIn={() => setZoom((value) => Math.min(value + 0.15, 2.5))}
+              onZoomOut={() => setZoom((value) => Math.max(value - 0.15, 0.45))}
+              onReset={() => {
+                setZoom(1);
+                setPan({ x: 0, y: 0 });
+              }}
+              extra={toolbarExtra}
+            />
+            <div
+              className="viewer-scrollbar schematic-grid h-[calc(100vh-113px)] cursor-grab overflow-hidden active:cursor-grabbing"
+              onPointerDown={(event) => {
+                dragStart.current = {
+                  pointerId: event.pointerId,
+                  x: event.clientX,
+                  y: event.clientY,
+                  pan,
+                };
+                event.currentTarget.setPointerCapture(event.pointerId);
+              }}
+              onPointerMove={(event) => {
+                if (!dragStart.current) return;
+                const dx = event.clientX - dragStart.current.x;
+                const dy = event.clientY - dragStart.current.y;
+                setPan({ x: dragStart.current.pan.x + dx, y: dragStart.current.pan.y + dy });
+              }}
+              onPointerUp={() => {
+                dragStart.current = null;
+              }}
+            >
+              <div
+                className="relative mx-auto my-8 aspect-[16/10] w-[96%] min-w-[760px] max-w-6xl origin-center rounded border border-line-soft bg-white shadow-glow"
+                style={{ transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})` }}
+              >
+                {missingAsset ? (
+                  <div className="grid h-full place-items-center bg-[#111827] p-8 text-center">
+                    <EmptyState
+                      title="Schematic export missing"
+                      message="Place the exported Altium schematic SVG or a PDF-derived SVG at the file path listed in project.json."
+                    />
+                  </div>
+                ) : (
+                  <img
+                    src={selectedAssetUrl}
+                    alt={selectedPage.title}
+                    className="h-full w-full object-contain"
+                    draggable={false}
+                    onError={() => setMissingAsset(true)}
+                  />
+                )}
+                <HotspotOverlay
+                  items={selectedPage.hotspots}
+                  activeId={selectedHotspot?.id}
+                  onSelect={selectHotspot}
                 />
               </div>
-            ) : (
-              <img
-                src={getAssetUrl(selectedPage.file)}
-                alt={selectedPage.title}
-                className="h-full w-full object-contain"
-                draggable={false}
-                onError={() => setMissingAsset(true)}
-              />
-            )}
-            <HotspotOverlay
-              items={selectedPage.hotspots}
-              activeId={selectedHotspot?.id}
-              onSelect={selectHotspot}
-            />
-          </div>
-        </div>
+            </div>
+          </>
+        )}
       </main>
       <CalloutPanel
         slug={slug}
