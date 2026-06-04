@@ -1,0 +1,58 @@
+{
+  "slug": "darcy-battery-management-system",
+  "title": "Darcy Battery Management System",
+  "subtitle": "Battery management and power distribution schematic package for Darcy avionics",
+  "category": ["Avionics", "Power Electronics", "Embedded Systems", "High Current"],
+  "status": "Designed",
+  "role": "Schematic design, responsible engineering, and PCB layout design",
+  "dateRange": "2026",
+  "tools": ["Altium Designer", "Bench Supply", "Oscilloscope", "Electronic Load"],
+  "layerCount": 0,
+  "stackup": "Stackup to be added from Altium exports",
+  "boardSize": "TBD from mechanical export",
+  "summary": "A Darcy battery management system schematic package covering top-level architecture, power, load switching, ADC measurement, connector load switches, and current-loop circuitry.",
+  "thumbnail": "/generated/recovery-system/thumbnails/card.svg",
+  "tags": ["BMS", "Power", "Load Switches", "ADC", "Current Loop", "Altium"],
+  "highlights": [
+    { "label": "Schematic Pages", "value": "10" },
+    { "label": "Load Switch Sheets", "value": "5" },
+    { "label": "Measurement Path", "value": "ADC" },
+    { "label": "Interface", "value": "Current Loop" }
+  ],
+  "keyComponents": [
+    "Battery management circuitry",
+    "Power input and regulation",
+    "Load switches",
+    "ADC measurement path",
+    "Connector load-switch channels",
+    "Current-loop interface"
+  ],
+  "mainConstraints": [
+    "Manage battery and distribution behavior with clear power-path documentation",
+    "Keep load switch channels consistent and reviewable",
+    "Expose measurement and current-loop interfaces for validation",
+    "Document the design from exported Altium artifacts without parsing raw files"
+  ],
+  "publicNote": "This project is derived from the exported Altium schematic PDF only. Raw .SchDoc and .PcbDoc files are not parsed by this portfolio.",
+  "model3d": {
+    "title": "Darcy BMS 3D Model",
+    "description": "Add an Altium STEP export under content/projects/darcy-battery-management-system/model to replace the interactive placeholder."
+  },
+  "schematic": {
+    "pages": [
+      {
+        "id": "pdf",
+        "title": "Exported Schematic PDF",
+        "file": "/content/projects/darcy-battery-management-system/schematic/darcy-bms.pdf",
+        "description": "The exported Altium schematic PDF for the Darcy battery management system.",
+        "hotspots": []
+      }
+    ]
+  },
+  "layout": {
+    "views": [],
+    "callouts": []
+  },
+  "tests": [],
+  "revisions": []
+}

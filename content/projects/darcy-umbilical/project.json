@@ -1,0 +1,56 @@
+{
+  "slug": "darcy-umbilical",
+  "title": "Darcy Umbilical",
+  "subtitle": "Ground-side and vehicle-side umbilical interface schematic package",
+  "category": ["Avionics", "Embedded Systems", "Test / HITL"],
+  "status": "Designed",
+  "role": "Schematic design, responsible engineering, and PCB layout design",
+  "dateRange": "2026",
+  "tools": ["Altium Designer", "Bench Supply", "Oscilloscope"],
+  "layerCount": 0,
+  "stackup": "Stackup to be added from Altium exports",
+  "boardSize": "TBD from mechanical export",
+  "summary": "A Darcy umbilical interface project with separate ground-side and vehicle-side schematic sheets for carrying launch, test, and vehicle interface signals through a controlled connector boundary.",
+  "thumbnail": "/generated/recovery-system/thumbnails/card.svg",
+  "tags": ["Umbilical", "Avionics", "Ground Support", "Vehicle Interface", "Altium"],
+  "highlights": [
+    { "label": "Schematic Pages", "value": "2" },
+    { "label": "Sides", "value": "Ground / Vehicle" },
+    { "label": "Project Outputs", "value": "PDF" },
+    { "label": "Workflow", "value": "Static Altium Export" }
+  ],
+  "keyComponents": [
+    "Ground-side connector interface",
+    "Vehicle-side connector interface",
+    "Umbilical signal routing",
+    "Test and support connections"
+  ],
+  "mainConstraints": [
+    "Clearly separate ground-side and vehicle-side interfaces",
+    "Keep umbilical pinout and signal naming auditable",
+    "Support test and launch operations through static exported documentation",
+    "Avoid depending on raw Altium source files in the portfolio"
+  ],
+  "publicNote": "This project is derived from the exported Altium schematic PDF only. Raw .SchDoc and .PcbDoc files are not parsed by this portfolio.",
+  "model3d": {
+    "title": "Darcy Umbilical 3D Model",
+    "description": "Add an Altium STEP export under content/projects/darcy-umbilical/model to replace the interactive placeholder."
+  },
+  "schematic": {
+    "pages": [
+      {
+        "id": "pdf",
+        "title": "Exported Schematic PDF",
+        "file": "/content/projects/darcy-umbilical/schematic/darcy-umbilical.pdf",
+        "description": "The exported Altium schematic PDF with ground-side and vehicle-side sheets.",
+        "hotspots": []
+      }
+    ]
+  },
+  "layout": {
+    "views": [],
+    "callouts": []
+  },
+  "tests": [],
+  "revisions": []
+}

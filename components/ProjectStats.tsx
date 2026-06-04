@@ -6,7 +6,7 @@ interface ProjectStatsProps {
 
 export function ProjectStats({ project }: ProjectStatsProps) {
   const stats = [
-    { label: "Layers", value: `${project.layerCount}` },
+    { label: "Layers", value: project.layerCount > 0 ? `${project.layerCount}` : "TBD" },
     { label: "Stackup", value: project.stackup },
     { label: "Board Size", value: project.boardSize ?? "TBD" },
     { label: "Tools", value: project.tools.join(", ") },

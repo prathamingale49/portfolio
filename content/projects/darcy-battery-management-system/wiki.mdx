@@ -1,0 +1,48 @@
+# Darcy Battery Management System
+
+## Purpose
+
+The Darcy Battery Management System project documents a power and battery-management PCB package from exported Altium schematic artifacts. The available PDF contains 10 pages covering top level, primary sheet, power, load switching, ADC, connector load switches, and current-loop circuitry.
+
+## Requirements
+
+- Preserve the exported schematic PDF as the source artifact.
+- Add board layout renders when Gerber-derived or manually exported SVGs are available.
+- Add the Altium STEP export for the interactive 3D model when available.
+- Keep the project static-first and avoid raw Altium document parsing.
+
+## System Context
+
+The board belongs in the power electronics and avionics portion of the Darcy stack. The portfolio focus should be power-path decisions, load-switch channel consistency, measurement strategy, and validation planning.
+
+## Architecture
+
+The schematic package includes a top-level view, a primary sheet, a power sheet, a load-switch sheet, ADC measurement, multiple connector load-switch sheets, and a current-loop sheet. That organization suggests a design centered on controlled power distribution and monitored outputs.
+
+## Schematic Walkthrough
+
+Use the schematic page to open the exported PDF. The PDF viewer preserves the Altium-generated navigation and keeps the schematic package browsable without reconstructing every sheet as a separate SVG.
+
+## PCB Layout Walkthrough
+
+Layout renders have not been added yet. Add top/bottom or layer-specific SVGs under `public/generated/darcy-battery-management-system/layout` when the Gerber render pipeline or manual exports are ready.
+
+## Bring-up Plan
+
+- Bring up input power with current-limited supplies.
+- Verify regulated rails and load-switch enable behavior.
+- Check ADC measurement scaling before high-current testing.
+- Validate connector load-switch outputs one channel at a time.
+- Record current-loop behavior with known loads.
+
+## Test Results
+
+No lab evidence has been added yet.
+
+## Revision History
+
+The current portfolio entry is based on the exported Altium schematic PDF dated March 18, 2026.
+
+## What I Would Change
+
+Add board renders, a STEP model, BOM-derived component tables, and featured screenshots for the power path and repeated load-switch channel structure.

@@ -139,7 +139,7 @@ export function LayoutViewer({ slug, views, callouts }: LayoutViewerProps) {
                 />
               </div>
             ) : (
-              <div className="h-full w-full overflow-hidden rounded-sm bg-[#c7a24f]">
+              <div className="h-full w-full overflow-hidden rounded-sm bg-white">
                 <img
                   src={selectedAssetUrl}
                   alt={selectedView.title}

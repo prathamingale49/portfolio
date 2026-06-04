@@ -1,0 +1,60 @@
+{
+  "slug": "hardware-in-the-loop",
+  "title": "Hardware In The Loop",
+  "subtitle": "HITL avionics board for sensor, actuator, power, and communication emulation",
+  "category": ["Avionics", "Test / HITL", "Embedded Systems", "Power Electronics"],
+  "status": "Designed",
+  "role": "Schematic design, responsible engineering, and PCB layout design",
+  "dateRange": "2026",
+  "tools": ["Altium Designer", "Oscilloscope", "Bench Supply"],
+  "layerCount": 0,
+  "stackup": "Stackup to be added from the Altium layer stack manager or fabrication package",
+  "boardSize": "TBD from mechanical export",
+  "summary": "A hardware-in-the-loop PCB project for Yellow Jacket Space Program that combines power conversion, CM5-based control, communications, ADC/DAC signal paths, sensor emulation, valve outputs, detonator interfaces, and switched power outputs.",
+  "thumbnail": "/generated/recovery-system/thumbnails/card.svg",
+  "tags": ["HITL", "Avionics", "Sensor Emulation", "CM5", "Altium"],
+  "highlights": [
+    { "label": "Schematic Pages", "value": "30" },
+    { "label": "Power Domains", "value": "48 V / 24 V / 5 V / 3.3 V" },
+    { "label": "Signal Domains", "value": "ADC / DAC / GPIO" },
+    { "label": "Export Type", "value": "Altium PDF" }
+  ],
+  "keyComponents": [
+    "Raspberry Pi CM5",
+    "ADC front ends",
+    "DAC outputs",
+    "48 V boost stage",
+    "5 V buck / LDO rails",
+    "3.3 V LDO rail",
+    "Sensor emulation channels",
+    "Valve and detonator interfaces"
+  ],
+  "mainConstraints": [
+    "Emulate multiple avionics sensor and actuator interfaces from one board",
+    "Keep power conversion and low-level analog measurement paths understandable during bring-up",
+    "Expose communication paths including Ethernet, USB, CAN, RS-485, and SPI",
+    "Document the design from exported Altium artifacts without parsing raw schematic or PCB files"
+  ],
+  "publicNote": "This project is derived from the exported Altium schematic PDF only. Raw .SchDoc and .PcbDoc files are not parsed by this portfolio.",
+  "model3d": {
+    "title": "Hardware In The Loop 3D Model",
+    "description": "Add an Altium STEP export under content/projects/hardware-in-the-loop/model to replace the interactive placeholder."
+  },
+  "schematic": {
+    "pages": [
+      {
+        "id": "pdf",
+        "title": "Exported Schematic PDF",
+        "file": "/content/projects/hardware-in-the-loop/schematic/hardware-in-the-loop.pdf",
+        "description": "The exported Altium schematic PDF with its native page navigation and sheet links.",
+        "hotspots": []
+      }
+    ]
+  },
+  "layout": {
+    "views": [],
+    "callouts": []
+  },
+  "tests": [],
+  "revisions": []
+}

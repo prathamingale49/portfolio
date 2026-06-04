@@ -1,0 +1,47 @@
+# Darcy Umbilical
+
+## Purpose
+
+The Darcy Umbilical project documents the connector boundary between ground-side support hardware and the vehicle-side interface. The available Altium export contains two schematic pages: `Ground_Side.SchDoc` and `Vehicle_Side.SchDoc`.
+
+## Requirements
+
+- Preserve the exported PDF as the schematic source for portfolio browsing.
+- Keep ground-side and vehicle-side responsibilities easy to distinguish.
+- Add layout renders and board media when the PCB outputs are available.
+- Do not parse raw Altium schematic or PCB documents.
+
+## System Context
+
+Umbilical hardware is a high-visibility interface in test and launch operations. The useful portfolio story here is pinout clarity, signal ownership, connector strategy, and how the board supports safe integration between ground equipment and vehicle electronics.
+
+## Architecture
+
+The schematic package is split into ground-side and vehicle-side sheets. This structure is useful for checking signal direction, connector pin assignments, and how test/support signals are handed across the umbilical boundary.
+
+## Schematic Walkthrough
+
+Open the schematic page to view the embedded PDF. The PDF itself is the exported Altium artifact and should be treated as the source of truth until manually defined hotspots or additional SVG pages are added.
+
+## PCB Layout Walkthrough
+
+Layout renders have not been added yet. Add Gerber-derived SVGs or manually exported board images when available.
+
+## Bring-up Plan
+
+- Verify connector pinout continuity against the schematic.
+- Check ground-side and vehicle-side signal naming before harness integration.
+- Validate any critical interlocks or launch-support lines with current-limited equipment.
+- Document final pinout checks with lab photos or continuity tables.
+
+## Test Results
+
+No test evidence has been added yet.
+
+## Revision History
+
+The current portfolio entry is based on the exported Altium schematic PDF dated March 18, 2026.
+
+## What I Would Change
+
+Add pinout tables, harness photos, board renders, and a focused featured screenshot for the connector region.

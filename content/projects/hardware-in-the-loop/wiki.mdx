@@ -1,0 +1,48 @@
+# Hardware In The Loop
+
+## Purpose
+
+This project is a hardware-in-the-loop avionics board built around exported Altium schematic artifacts. The available PDF contains 30 schematic pages covering the top-level architecture, input power, load switching, boost conversion, CM5 control, ADC/DAC paths, sensor emulation, valve outputs, detonator interfaces, and output power.
+
+## Requirements
+
+- Present the exported schematic PDF directly so its internal sheet links remain usable.
+- Add Gerber-derived layout renders when the fabrication outputs are available.
+- Add the Altium STEP export when the 3D board model is ready.
+- Keep the portfolio page static-first and avoid parsing raw Altium project files.
+
+## System Context
+
+The board sits in a test and validation context for avionics hardware. It appears to combine power rails, compute/control, communications, analog conversion, and emulated loads or sensor interfaces so flight electronics can be exercised before full system integration.
+
+## Architecture
+
+The schematic PDF includes sheets for input power, input load switching, 48 V boost conversion, 5 V and 3.3 V regulation, CM5 main control, temperature sensing, communication, GPIO, ADC, DAC, differential sensors, thermocouple, current loop, RTD, valve, detonator, RBF tag, signal connectors, and output load switching.
+
+## Schematic Walkthrough
+
+Use the schematic page to open the exported PDF. The embedded viewer preserves the native PDF navigation generated from Altium, so sheet links can be followed without manually recreating hotspots in the portfolio.
+
+## PCB Layout Walkthrough
+
+Layout renders have not been added yet. Add Gerber-derived SVGs under `public/generated/hardware-in-the-loop/layout` or define manual layout image paths in `project.json`.
+
+## Bring-up Plan
+
+- Bring up input power with current limits enabled.
+- Verify intermediate rails before loading sensitive digital or analog devices.
+- Validate communication links before closing control loops.
+- Exercise ADC/DAC channels with known references.
+- Test each emulated sensor/actuator path against expected electrical behavior.
+
+## Test Results
+
+No lab evidence has been added yet. Add scope captures, thermal images, and board photos under the project media folder as validation progresses.
+
+## Revision History
+
+The current portfolio entry is based on the exported Altium schematic PDF dated March 18, 2026.
+
+## What I Would Change
+
+Add board render SVGs, a STEP model, BOM-derived component summaries, and focused screenshots of the most interesting analog and power sections.

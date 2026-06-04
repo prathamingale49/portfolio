@@ -10,6 +10,9 @@ interface BoardModelViewerProps {
   title: string;
   description?: string;
   compact?: boolean;
+  chrome?: boolean;
+  className?: string;
+  viewerClassName?: string;
 }
 
 interface OcctMesh {
@@ -214,7 +217,15 @@ function createStepGroup(result: OcctResult) {
   return group;
 }
 
-export function BoardModelViewer({ stepFile, title, description, compact = false }: BoardModelViewerProps) {
+export function BoardModelViewer({
+  stepFile,
+  title,
+  description,
+  compact = false,
+  chrome = true,
+  className,
+  viewerClassName,
+}: BoardModelViewerProps) {
   const mountRef = useRef<HTMLDivElement>(null);
   const [status, setStatus] = useState(stepFile ? "Loading STEP export" : "STEP export not added yet");
 
@@ -324,8 +335,23 @@ export function BoardModelViewer({ stepFile, title, description, compact = false
     };
   }, [stepUrl]);
 
+  const heightClass = compact ? "h-[18rem]" : "h-[32rem]";
+
+  if (!chrome) {
+    return (
+      <div className={className ?? "overflow-hidden bg-[#0a1018]"}>
+        <div
+          ref={mountRef}
+          className={viewerClassName ?? heightClass}
+          aria-label={title}
+          title={status}
+        />
+      </div>
+    );
+  }
+
   return (
-    <section className="overflow-hidden rounded-lg border border-line-soft bg-panel shadow-glow">
+    <section className={className ?? "overflow-hidden rounded-lg border border-line-soft bg-panel shadow-glow"}>
       <div className="flex items-start justify-between gap-4 border-b border-line-soft px-4 py-3">
         <div>
           <h2 className="text-sm font-semibold text-white">{title}</h2>
@@ -337,7 +363,7 @@ export function BoardModelViewer({ stepFile, title, description, compact = false
           {status}
         </span>
       </div>
-      <div ref={mountRef} className={compact ? "h-[18rem]" : "h-[32rem]"} aria-label={title} />
+      <div ref={mountRef} className={viewerClassName ?? heightClass} aria-label={title} />
     </section>
   );
 }
