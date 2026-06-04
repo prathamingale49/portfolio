@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-label="Top PCB render placeholder">
+  <rect width="1600" height="1000" fill="#07110f"/>
+  <rect x="110" y="110" width="1380" height="780" rx="44" fill="#0f5136" stroke="#7dd3a8" stroke-width="8"/>
+  <g opacity="0.22" stroke="#b7f7d5" stroke-width="2">
+    <path d="M170 170h1260M170 250h1260M170 330h1260M170 410h1260M170 490h1260M170 570h1260M170 650h1260M170 730h1260M170 810h1260"/>
+    <path d="M220 150v700M340 150v700M460 150v700M580 150v700M700 150v700M820 150v700M940 150v700M1060 150v700M1180 150v700M1300 150v700M1420 150v700"/>
+  </g>
+  <g fill="#d7a253" stroke="#f5c16c" stroke-width="3">
+    <rect x="300" y="235" width="245" height="150" rx="10"/>
+    <rect x="800" y="360" width="430" height="220" rx="12"/>
+    <rect x="265" y="520" width="330" height="165" rx="12"/>
+    <rect x="1090" y="170" width="265" height="110" rx="10"/>
+    <rect x="1090" y="705" width="265" height="110" rx="10"/>
+  </g>
+  <g fill="none" stroke="#f5c16c" stroke-width="10" stroke-linecap="round" opacity="0.85">
+    <path d="M420 310c170 20 230 70 360 120"/>
+    <path d="M1015 470c-170 80-300 110-460 105"/>
+    <path d="M1140 230c-160 130-270 180-430 215"/>
+    <path d="M420 605c210 60 390 80 710 135"/>
+  </g>
+  <g fill="#dcfce7">
+    <circle cx="205" cy="200" r="26"/>
+    <circle cx="1395" cy="200" r="26"/>
+    <circle cx="205" cy="800" r="26"/>
+    <circle cx="1395" cy="800" r="26"/>
+  </g>
+  <g font-family="Inter, Arial" fill="#f8fafc">
+    <text x="145" y="84" font-size="36" font-weight="700">HITL Sensor Emulation - Top Layer Placeholder</text>
+    <text x="315" y="320" font-size="28" font-weight="700">Buck / Power</text>
+    <text x="825" y="480" font-size="28" font-weight="700">Analog Sensor Region</text>
+    <text x="295" y="615" font-size="26" font-weight="700">CM5 Digital Control</text>
+    <text x="1125" y="235" font-size="24" font-weight="700">Harness A</text>
+    <text x="1125" y="770" font-size="24" font-weight="700">Test Points</text>
+  </g>
+</svg>

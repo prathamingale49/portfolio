@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 625" role="img" aria-label="Oscilloscope placeholder">
+  <rect width="1000" height="625" fill="#06120f"/>
+  <g stroke="#1f7a5b" stroke-width="1">
+    <path d="M0 125h1000M0 250h1000M0 375h1000M0 500h1000M125 0v625M250 0v625M375 0v625M500 0v625M625 0v625M750 0v625M875 0v625"/>
+  </g>
+  <path d="M40 330c70-140 120-140 190 0s120 140 190 0 120-140 190 0 120 140 190 0 120-140 160-30" fill="none" stroke="#f0c35a" stroke-width="7"/>
+  <path d="M40 420h220l20-95 25 190 25-95h630" fill="none" stroke="#55b8ff" stroke-width="7"/>
+  <text x="42" y="72" font-family="Inter, Arial" font-size="42" font-weight="700" fill="#e7edf5">Oscilloscope Capture Placeholder</text>
+  <text x="42" y="112" font-family="Inter, Arial" font-size="20" fill="#94a3b8">Replace with bring-up evidence from the lab.</text>
+</svg>

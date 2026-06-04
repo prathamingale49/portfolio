@@ -1,0 +1,233 @@
+{
+  "slug": "hitl-sensor-emulation",
+  "title": "HITL Sensor Emulation Platform",
+  "subtitle": "Hardware-in-the-loop board for avionics sensor and actuator validation",
+  "category": ["Avionics", "Test / HITL", "Embedded Systems"],
+  "status": "Designed",
+  "role": "Electrical design, schematic architecture, PCB layout, validation planning",
+  "dateRange": "2025-2026",
+  "tools": ["Altium Designer", "LTspice", "Python", "Oscilloscope", "Electronic Load"],
+  "layerCount": 8,
+  "stackup": "8-layer mixed-signal PCB with separated analog/digital regions",
+  "boardSize": "160 mm x 100 mm target envelope",
+  "summary": "A board-level HITL platform for validating sensor acquisition modules by emulating RTDs, current-loop pressure transducers, thermocouples, valves, and differential sensors.",
+  "thumbnail": "/generated/hitl-sensor-emulation/thumbnails/card.svg",
+  "tags": ["HITL", "Avionics", "Mixed Signal", "RTD", "Current Loop", "Validation"],
+  "highlights": [
+    { "label": "RTD Channels", "value": "6" },
+    { "label": "Current Loop Channels", "value": "6" },
+    { "label": "Valve Channels", "value": "6" },
+    { "label": "Differential Sensor Channels", "value": "3" }
+  ],
+  "keyComponents": [
+    "Raspberry Pi CM5",
+    "ADS124S06 / ADS124S08-class ADC",
+    "DAC80508",
+    "THS4531",
+    "TLV6700",
+    "Load switches",
+    "Precision references"
+  ],
+  "mainConstraints": [
+    "Low-noise analog emulation near high-current actuator loads",
+    "Deterministic command and measurement paths for HITL automation",
+    "Clear separation between digital control, analog front ends, and valve interfaces",
+    "Accessible test points for bring-up and validation"
+  ],
+  "publicNote": "Public portfolio version omits proprietary harness details and final requirement limits.",
+  "schematic": {
+    "pages": [
+      {
+        "id": "top",
+        "title": "Top Level",
+        "file": "/content/projects/hitl-sensor-emulation/schematic/top-level.svg",
+        "description": "Top-level schematic showing major functional blocks and interconnects.",
+        "hotspots": [
+          {
+            "id": "power-tree",
+            "label": "Power Tree",
+            "type": "page",
+            "target": "power",
+            "x": 7,
+            "y": 11,
+            "width": 28,
+            "height": 20,
+            "description": "Input protection, 24 V to 5 V conversion, local 3.3 V regulation, and analog references."
+          },
+          {
+            "id": "rtd-emulation",
+            "label": "RTD Emulation",
+            "type": "page",
+            "target": "rtd",
+            "x": 48,
+            "y": 17,
+            "width": 35,
+            "height": 22,
+            "description": "Analog emulation path for RTD channels."
+          },
+          {
+            "id": "current-loop",
+            "label": "Current Loop PT",
+            "type": "page",
+            "target": "current-loop",
+            "x": 49,
+            "y": 47,
+            "width": 35,
+            "height": 18,
+            "description": "Pressure transducer current-loop emulation channels."
+          },
+          {
+            "id": "bring-up",
+            "label": "Bring-up Plan",
+            "type": "wiki",
+            "target": "bring-up-plan",
+            "x": 11,
+            "y": 73,
+            "width": 29,
+            "height": 13,
+            "description": "Jump to the validation and bring-up sequence."
+          }
+        ]
+      },
+      {
+        "id": "power",
+        "title": "Power Tree",
+        "file": "/content/projects/hitl-sensor-emulation/schematic/power-tree.svg",
+        "description": "Power architecture, input protection, buck conversion, load switching, and reference generation.",
+        "hotspots": [
+          {
+            "id": "hot-loop-note",
+            "label": "Switching Loop",
+            "type": "note",
+            "x": 49,
+            "y": 31,
+            "width": 24,
+            "height": 21,
+            "description": "Keep switch node copper compact, place input ceramic capacitors against the converter pins, and provide a short return to the power ground plane."
+          }
+        ]
+      },
+      {
+        "id": "rtd",
+        "title": "RTD Emulation",
+        "file": "/content/projects/hitl-sensor-emulation/schematic/rtd-emulation.svg",
+        "description": "RTD emulation channel schematic with DAC control, precision resistor network, and measurement feedback.",
+        "hotspots": [
+          {
+            "id": "analog-front-end",
+            "label": "Analog Front End",
+            "type": "wiki",
+            "target": "analog-front-end",
+            "x": 42,
+            "y": 30,
+            "width": 34,
+            "height": 25,
+            "description": "Open the wiki section describing low-noise analog choices."
+          }
+        ]
+      },
+      {
+        "id": "current-loop",
+        "title": "Current Loop PT Emulation",
+        "file": "/content/projects/hitl-sensor-emulation/schematic/current-loop.svg",
+        "description": "Current-loop pressure transducer emulation, protection, and readback hooks.",
+        "hotspots": []
+      },
+      {
+        "id": "adc",
+        "title": "ADC Front End",
+        "file": "/content/projects/hitl-sensor-emulation/schematic/adc-front-end.svg",
+        "description": "Measurement front end and precision conversion path.",
+        "hotspots": []
+      }
+    ]
+  },
+  "layout": {
+    "views": [
+      {
+        "id": "top",
+        "title": "Top Layer",
+        "file": "/generated/hitl-sensor-emulation/layout/top.svg"
+      },
+      {
+        "id": "bottom",
+        "title": "Bottom Layer",
+        "file": "/generated/hitl-sensor-emulation/layout/bottom.svg"
+      }
+    ],
+    "callouts": [
+      {
+        "id": "hot-loop",
+        "label": "Buck Converter Hot Loop",
+        "view": "top",
+        "x": 18,
+        "y": 24,
+        "width": 20,
+        "height": 17,
+        "description": "Compact switching loop placement to reduce EMI and ringing.",
+        "wikiSection": "pcb-layout-walkthrough"
+      },
+      {
+        "id": "analog-region",
+        "label": "Analog Sensor Region",
+        "view": "top",
+        "x": 52,
+        "y": 34,
+        "width": 30,
+        "height": 24,
+        "description": "Analog front-end region for low-noise sensor emulation and measurement.",
+        "wikiSection": "analog-front-end"
+      },
+      {
+        "id": "connector-strain",
+        "label": "Connector Strain Relief",
+        "view": "bottom",
+        "x": 14,
+        "y": 60,
+        "width": 28,
+        "height": 18,
+        "description": "Mounting and connector area reserved for harness strain relief and repeated lab handling.",
+        "wikiSection": "pcb-layout-walkthrough"
+      }
+    ]
+  },
+  "tests": [
+    {
+      "name": "Power Rail Bring-up",
+      "purpose": "Verify all generated rails before loading sensitive ICs.",
+      "setup": "Bench supply current-limited at input, measure 5 V, 3.3 V, analog references.",
+      "expected": "Rails within tolerance, no abnormal current draw.",
+      "actual": "Placeholder result.",
+      "status": "Not Tested",
+      "evidence": ["/content/projects/hitl-sensor-emulation/media/scope-placeholder.svg"],
+      "notes": "Initial test should be performed before installing high-value analog ICs if the assembly process allows it."
+    },
+    {
+      "name": "RTD Emulation Accuracy",
+      "purpose": "Validate emulated resistance/temperature behavior against expected ADC readings.",
+      "setup": "Command DAC values and compare ADC output against expected PT100 curve.",
+      "expected": "Error within defined tolerance across operating range.",
+      "actual": "Placeholder result.",
+      "status": "Not Tested",
+      "evidence": ["/content/projects/hitl-sensor-emulation/media/thermal-placeholder.svg"],
+      "notes": "Capture error tables and note calibration assumptions in the wiki."
+    },
+    {
+      "name": "Current Loop Load Sweep",
+      "purpose": "Confirm pressure-transducer emulation across expected loop loading.",
+      "setup": "Sweep command values while logging loop current and rail temperature.",
+      "expected": "Loop current tracks command without thermal or compliance failures.",
+      "actual": "Placeholder result.",
+      "status": "Not Tested",
+      "evidence": ["/content/projects/hitl-sensor-emulation/media/board-photo-placeholder.svg"],
+      "notes": "Use external electronic load for boundary cases."
+    }
+  ],
+  "revisions": [
+    {
+      "rev": "Rev A",
+      "status": "Designed",
+      "notes": "Initial architecture and layout."
+    }
+  ]
+}

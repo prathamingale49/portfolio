@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 625" role="img" aria-label="Thermal image placeholder">
+  <defs>
+    <radialGradient id="heat" cx="52%" cy="48%" r="58%">
+      <stop offset="0%" stop-color="#fff7ad"/>
+      <stop offset="28%" stop-color="#f97316"/>
+      <stop offset="58%" stop-color="#7c2d12"/>
+      <stop offset="100%" stop-color="#172554"/>
+    </radialGradient>
+  </defs>
+  <rect width="1000" height="625" fill="#111827"/>
+  <rect x="130" y="95" width="740" height="435" rx="28" fill="url(#heat)" opacity="0.95"/>
+  <rect x="205" y="175" width="180" height="130" rx="16" fill="#0f172a" opacity="0.55"/>
+  <rect x="570" y="250" width="220" height="150" rx="16" fill="#0f172a" opacity="0.35"/>
+  <text x="50" y="65" font-family="Inter, Arial" font-size="42" font-weight="700" fill="#e7edf5">Thermal Image Placeholder</text>
+  <text x="50" y="590" font-family="Inter, Arial" font-size="20" fill="#cbd5e1">Use real thermal captures to document regulator and load-channel behavior.</text>
+</svg>

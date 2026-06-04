@@ -1,0 +1,6 @@
+Designator,Layer,X_mm,Y_mm,Rotation
+U1,Top,42.0,51.0,0
+U2,Top,86.0,42.0,90
+U3,Top,96.0,55.0,90
+J1,Top,12.0,72.0,180
+J2,Top,145.0,30.0,0

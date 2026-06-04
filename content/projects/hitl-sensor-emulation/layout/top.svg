@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-label="Manual top layout export placeholder">
+  <rect width="1600" height="1000" fill="#0f5136"/>
+  <text x="110" y="120" font-family="Inter, Arial" font-size="42" font-weight="700" fill="#f8fafc">Manual top layout export placeholder</text>
+  <text x="110" y="170" font-family="Inter, Arial" font-size="22" fill="#dcfce7">Copy a real top.svg into public/generated/hitl-sensor-emulation/layout for the viewer.</text>
+</svg>
