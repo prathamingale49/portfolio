@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-label="Recovery System voting logic placeholder">
+  <rect width="1600" height="1000" fill="#f8fafc"/>
+  <text x="70" y="82" font-family="Inter, Arial" font-size="40" font-weight="700" fill="#0f172a">1-Fault-Tolerant Voting Logic</text>
+  <text x="70" y="122" font-family="Inter, Arial" font-size="18" fill="#475569">Voting_Logic.SchDoc gates recovery enables before driver activation.</text>
+  <g font-family="Inter, Arial" stroke="#334155" stroke-width="3">
+    <rect x="120" y="360" width="310" height="180" rx="14" fill="#eef2ff"/><text x="165" y="435" font-size="29" font-weight="700" fill="#0f172a">uC A / B / C</text><text x="165" y="477" font-size="19" fill="#475569">Enable requests</text>
+    <rect x="575" y="280" width="500" height="300" rx="14" fill="#fefce8"/><text x="635" y="392" font-size="32" font-weight="700" fill="#0f172a">Voting Network</text><text x="635" y="438" font-size="20" fill="#334155">RECO1_EN, RECO2_EN, RECO3_EN, LS_EN</text><text x="635" y="485" font-size="18" fill="#64748b">Latch / select / sense control nets</text>
+    <rect x="1210" y="360" width="260" height="180" rx="14" fill="#fff7ed"/><text x="1250" y="435" font-size="29" font-weight="700" fill="#0f172a">Drivers</text><text x="1250" y="477" font-size="19" fill="#475569">Validated enables</text>
+    <path d="M430 450h145M1075 450h135" stroke="#334155" stroke-width="4"/>
+  </g>
+</svg>

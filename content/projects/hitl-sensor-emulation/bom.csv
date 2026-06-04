@@ -1,7 +1,0 @@
-Designator,Quantity,Value,Description
-U1,1,CM5,Raspberry Pi CM5 module placeholder
-U2,1,DAC80508,8-channel precision DAC placeholder
-U3,1,ADS124S08,Precision delta-sigma ADC placeholder
-U4,1,THS4531,Fully differential amplifier placeholder
-RREF1,1,0.1%,Precision reference resistor placeholder
-CIN1,4,10uF,Input ceramic capacitors placeholder

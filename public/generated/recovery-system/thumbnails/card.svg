@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="Recovery System project thumbnail">
+  <rect width="1200" height="675" fill="#080b10"/>
+  <rect x="95" y="78" width="1010" height="515" rx="34" fill="#17324d" stroke="#55b8ff" stroke-width="6"/>
+  <g opacity="0.22" stroke="#bfdbfe" stroke-width="2"><path d="M150 155h900M150 250h900M150 345h900M150 440h900"/><path d="M220 120v430M370 120v430M520 120v430M670 120v430M820 120v430M970 120v430"/></g>
+  <g fill="#d48a3a" stroke="#f0c35a" stroke-width="3"><rect x="200" y="190" width="260" height="125" rx="10"/><rect x="650" y="305" width="315" height="150" rx="12"/><rect x="360" y="420" width="250" height="80" rx="10"/></g>
+  <g fill="none" stroke="#f0c35a" stroke-width="8" stroke-linecap="round"><path d="M330 255c185 40 350 85 500 130"/><path d="M780 385c-230 55-330 72-520 80"/></g>
+  <g font-family="Inter, Arial" fill="#f8fafc"><text x="140" y="620" font-size="42" font-weight="700">Recovery System</text><text x="140" y="655" font-size="20" fill="#cbd5e1">Redundant rocket recovery avionics board</text></g>
+</svg>

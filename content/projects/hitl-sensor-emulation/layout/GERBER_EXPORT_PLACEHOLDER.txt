@@ -1,1 +1,0 @@
-Replace this placeholder with exported Gerber and NC drill files from Altium Designer, then create gerbers.zip from those files.

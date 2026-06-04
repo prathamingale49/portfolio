@@ -43,7 +43,7 @@ export default function HomePage() {
                 <ArrowRight className="size-4" aria-hidden="true" />
               </Link>
               <Link
-                href="/projects/hitl-sensor-emulation/wiki"
+                href="/projects/recovery-system/wiki"
                 className="inline-flex h-11 items-center rounded border border-line-soft px-4 text-sm font-semibold text-slate-200 hover:border-signal/35"
               >
                 Read sample wiki

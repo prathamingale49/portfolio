@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-label="Recovery System power schematic placeholder">
+  <rect width="1600" height="1000" fill="#f8fafc"/>
+  <text x="70" y="82" font-family="Inter, Arial" font-size="40" font-weight="700" fill="#0f172a">Power Architecture</text>
+  <text x="70" y="122" font-family="Inter, Arial" font-size="18" fill="#475569">PDF sheets: Power, 24V Buck, 3V3 Buck, Power OR, LV Power OR.</text>
+  <g font-family="Inter, Arial" stroke="#334155" stroke-width="3">
+    <rect x="110" y="360" width="250" height="150" rx="14" fill="#eef2ff"/><text x="150" y="425" font-size="28" font-weight="700" fill="#0f172a">VIN1 / VIN2</text><text x="150" y="465" font-size="18" fill="#475569">Dual inputs</text>
+    <rect x="500" y="220" width="450" height="180" rx="14" fill="#ecfeff"/><text x="550" y="300" font-size="30" font-weight="700" fill="#0f172a">48 V to 24 V Buck</text><text x="550" y="342" font-size="20" fill="#334155">P48V0 to P24V0, approx. 8 A path</text>
+    <rect x="500" y="610" width="450" height="170" rx="14" fill="#f0fdf4"/><text x="550" y="685" font-size="30" font-weight="700" fill="#0f172a">LV Power OR</text><text x="550" y="725" font-size="20" fill="#334155">P3V3A / P3V3B to P3V3</text>
+    <rect x="1100" y="360" width="330" height="150" rx="14" fill="#fff7ed"/><text x="1150" y="425" font-size="28" font-weight="700" fill="#0f172a">Board Rails</text><text x="1150" y="465" font-size="18" fill="#475569">P24V0, P3V3, VSNS</text>
+    <path d="M360 435h140M950 310c150 30 190 80 210 130M950 695c150-50 190-90 210-150" stroke="#334155" stroke-width="4" fill="none"/>
+  </g>
+</svg>

@@ -118,13 +118,14 @@ Known limitation: tracespace package and CLI integration can vary by package ver
 
 ## Sample Project
 
-The HITL Sensor Emulation Platform sample includes:
+The Recovery System sample includes:
 
 - Placeholder schematic SVG pages
+- The exported Altium schematic PDF as a source artifact
 - Top/bottom board render SVGs
 - BOM CSV
 - Pick-and-place CSV
-- Oscilloscope, thermal, and board-photo placeholders
+- Power bring-up, recovery driver test, and board-photo placeholders
 - A navigable MDX wiki
 
 Replace placeholders with real Altium exports as the design matures.

@@ -1,5 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-label="Manual bottom layout export placeholder">
-  <rect width="1600" height="1000" fill="#12324b"/>
-  <text x="110" y="120" font-family="Inter, Arial" font-size="42" font-weight="700" fill="#f8fafc">Manual bottom layout export placeholder</text>
-  <text x="110" y="170" font-family="Inter, Arial" font-size="22" fill="#d2f4ff">Copy a real bottom.svg into public/generated/hitl-sensor-emulation/layout for the viewer.</text>
-</svg>

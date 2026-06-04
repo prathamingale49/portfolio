@@ -1,0 +1,290 @@
+{
+  "slug": "recovery-system",
+  "title": "Recovery System",
+  "subtitle": "Redundant avionics board for rocket recovery deployment control and monitoring",
+  "category": ["Avionics", "Embedded Systems", "Power Electronics", "High Current"],
+  "status": "Designed",
+  "role": "Responsible engineer and PCB layout designer; schematic design across power, microcontroller, sensor, and driver sheets",
+  "dateRange": "2026",
+  "tools": ["Altium Designer", "Oscilloscope", "Electronic Load", "Bench Supply"],
+  "layerCount": 4,
+  "stackup": "Mixed-signal avionics PCB with high-current recovery-driver routing and separated logic/power regions",
+  "boardSize": "TBD from final mechanical export",
+  "summary": "A rocket recovery avionics board for Yellow Jacket Space Program that combines redundant microcontroller channels, 1-fault-tolerant voting logic, dual power inputs, 48 V to 24 V conversion, 3.3 V regulation, sensor interfaces, and constant-current recovery deployment drivers.",
+  "thumbnail": "/generated/recovery-system/thumbnails/card.svg",
+  "tags": ["Avionics", "Recovery", "Voting Logic", "Redundant Control", "High Current", "Altium"],
+  "highlights": [
+    { "label": "Voting Domains", "value": "2" },
+    { "label": "Microcontroller Channels", "value": "3" },
+    { "label": "Recovery Driver Banks", "value": "5" },
+    { "label": "Schematic Pages", "value": "24" }
+  ],
+  "keyComponents": [
+    "Recovery_Board.PrjPcb",
+    "48 V to 24 V buck converters",
+    "3.3 V buck converters",
+    "LM73100RPWR eFuse / power path",
+    "RT1987N-A power path",
+    "IMU",
+    "Magnetometer",
+    "Barometer / thermometer",
+    "Constant-current recovery drivers"
+  ],
+  "mainConstraints": [
+    "Redundant recovery command paths with voting before deployment outputs",
+    "Dual input power handling and power-OR behavior",
+    "High-current driver routing with measurable fault and current feedback",
+    "Flight-computer SPI interface and recovery disable inputs",
+    "Accessible bring-up points for 24 V, 3.3 V, driver fault, and sensor signals"
+  ],
+  "publicNote": "This portfolio entry is derived from the exported Altium schematic PDF. It does not parse or include raw .SchDoc or .PcbDoc files.",
+  "schematic": {
+    "pages": [
+      {
+        "id": "top",
+        "title": "Primary Sheet",
+        "file": "/content/projects/recovery-system/schematic/primary-sheet.svg",
+        "description": "Top-level hierarchy from the exported Recovery System schematic PDF, showing power, voting, microcontroller, sensor, and recovery-driver sheets.",
+        "hotspots": [
+          {
+            "id": "power",
+            "label": "Power Tree",
+            "type": "page",
+            "target": "power",
+            "x": 7,
+            "y": 14,
+            "width": 27,
+            "height": 18,
+            "description": "Dual VIN inputs, 48 V to 24 V conversion, 3.3 V regulation, and voltage-sense feedback."
+          },
+          {
+            "id": "voting",
+            "label": "1-FT Voting",
+            "type": "page",
+            "target": "voting",
+            "x": 40,
+            "y": 13,
+            "width": 24,
+            "height": 18,
+            "description": "Voting logic gates recovery enable signals before the driver banks."
+          },
+          {
+            "id": "drivers",
+            "label": "Recovery Drivers",
+            "type": "page",
+            "target": "drivers",
+            "x": 69,
+            "y": 29,
+            "width": 23,
+            "height": 28,
+            "description": "Five driver banks with RECO1/RECO2 power, return, VREF feedback, and fault monitoring."
+          },
+          {
+            "id": "microcontrollers",
+            "label": "Microcontrollers",
+            "type": "page",
+            "target": "microcontrollers",
+            "x": 39,
+            "y": 55,
+            "width": 25,
+            "height": 20,
+            "description": "Three redundant microcontroller channels connected through SPI, sensor, voting, and driver control nets."
+          },
+          {
+            "id": "source-pdf",
+            "label": "Source PDF Notes",
+            "type": "wiki",
+            "target": "schematic-walkthrough",
+            "x": 10,
+            "y": 70,
+            "width": 24,
+            "height": 13,
+            "description": "Jump to the wiki section explaining how the exported PDF was translated into this browsable portfolio entry."
+          }
+        ]
+      },
+      {
+        "id": "power",
+        "title": "Power",
+        "file": "/content/projects/recovery-system/schematic/power.svg",
+        "description": "Power hierarchy from the PDF: dual inputs, TVS/bulk capacitance, 24 V and 3.3 V conversion, and power-OR stages.",
+        "hotspots": [
+          {
+            "id": "buck-24",
+            "label": "48 V to 24 V Buck",
+            "type": "note",
+            "x": 44,
+            "y": 22,
+            "width": 28,
+            "height": 18,
+            "description": "The PDF notes a 48 V to 24 V buck stage sized around an 8 A output path, with switching-loop placement and bulk-cap placement as important layout items."
+          },
+          {
+            "id": "lv-power-or",
+            "label": "LV Power OR",
+            "type": "note",
+            "x": 43,
+            "y": 61,
+            "width": 29,
+            "height": 17,
+            "description": "Low-voltage power-OR behavior is built around eFuse / power-path devices with UVLO, OVLO, slew-rate, and power-good thresholds."
+          }
+        ]
+      },
+      {
+        "id": "voting",
+        "title": "Voting Logic",
+        "file": "/content/projects/recovery-system/schematic/voting-logic.svg",
+        "description": "1-fault-tolerant voting logic for recovery deployment enables and latch/select/sense control nets.",
+        "hotspots": [
+          {
+            "id": "voting-wiki",
+            "label": "Voting Architecture",
+            "type": "wiki",
+            "target": "architecture",
+            "x": 36,
+            "y": 28,
+            "width": 32,
+            "height": 24,
+            "description": "Open the wiki architecture section for how the redundant control domains are represented."
+          }
+        ]
+      },
+      {
+        "id": "microcontrollers",
+        "title": "Microcontrollers and Sensors",
+        "file": "/content/projects/recovery-system/schematic/microcontrollers.svg",
+        "description": "Redundant microcontroller domains with SPI, JTAG, flight-computer connection, sensor interfaces, and voltage/fault feedback.",
+        "hotspots": [
+          {
+            "id": "sensors",
+            "label": "IMU / MAG / BARO",
+            "type": "note",
+            "x": 56,
+            "y": 28,
+            "width": 29,
+            "height": 21,
+            "description": "The PDF includes sensor sheets for inertial measurement, magnetometer, barometer, and thermometer interfaces."
+          }
+        ]
+      },
+      {
+        "id": "drivers",
+        "title": "Recovery Drivers",
+        "file": "/content/projects/recovery-system/schematic/recovery-drivers.svg",
+        "description": "Recovery-driver banks for deployment outputs with current limit, gain, VREF feedback, and fault behavior noted in the exported schematic.",
+        "hotspots": [
+          {
+            "id": "driver-current",
+            "label": "Constant Current Path",
+            "type": "note",
+            "x": 38,
+            "y": 24,
+            "width": 34,
+            "height": 24,
+            "description": "Driver sheet notes include 2.05 A current limit, 1 V/A gain, 1.6 kHz feedback bandwidth, 0.784 V VREF, and 1.3 A constant-current operation."
+          }
+        ]
+      }
+    ]
+  },
+  "layout": {
+    "views": [
+      {
+        "id": "top",
+        "title": "Top Layer",
+        "file": "/generated/recovery-system/layout/top.svg"
+      },
+      {
+        "id": "bottom",
+        "title": "Bottom Layer",
+        "file": "/generated/recovery-system/layout/bottom.svg"
+      }
+    ],
+    "callouts": [
+      {
+        "id": "driver-current-path",
+        "label": "Recovery Driver Current Path",
+        "view": "top",
+        "x": 60,
+        "y": 42,
+        "width": 27,
+        "height": 22,
+        "description": "High-current deployment routing region for recovery driver banks and return paths.",
+        "wikiSection": "pcb-layout-walkthrough"
+      },
+      {
+        "id": "buck-region",
+        "label": "48 V / 24 V Power Region",
+        "view": "top",
+        "x": 14,
+        "y": 21,
+        "width": 28,
+        "height": 20,
+        "description": "Power conversion area where switching-loop compactness and bulk-cap placement matter.",
+        "wikiSection": "power-architecture"
+      },
+      {
+        "id": "logic-region",
+        "label": "Voting and MCU Logic",
+        "view": "top",
+        "x": 35,
+        "y": 57,
+        "width": 27,
+        "height": 20,
+        "description": "Low-voltage control region for redundant microcontrollers, voting logic, SPI, and feedback nets.",
+        "wikiSection": "architecture"
+      },
+      {
+        "id": "connector-zone",
+        "label": "Flight / Recovery Connectors",
+        "view": "bottom",
+        "x": 10,
+        "y": 56,
+        "width": 34,
+        "height": 22,
+        "description": "Connector and harness region for flight computer, BMS, ESTOP/RBF disable, and recovery output wiring.",
+        "wikiSection": "system-context"
+      }
+    ]
+  },
+  "tests": [
+    {
+      "name": "Power Input and Rail Bring-up",
+      "purpose": "Verify VIN1/VIN2 behavior, 24 V rail, 3.3 V rail, and voltage-sense feedback before enabling recovery drivers.",
+      "setup": "Use current-limited bench supplies on each input path; probe P24V0, P3V3, 24V-VSNS, and 3V3-VSNS.",
+      "expected": "Rails sequence correctly, voltage sense nodes match divider expectations, and no abnormal current draw is observed.",
+      "actual": "Not yet documented in the provided PDF.",
+      "status": "Not Tested",
+      "evidence": ["/content/projects/recovery-system/media/power-bringup-placeholder.svg"],
+      "notes": "The portfolio should be updated with real scope captures and measured rail values after board bring-up."
+    },
+    {
+      "name": "Voting Logic Functional Check",
+      "purpose": "Confirm the 1-fault-tolerant recovery enable voting behavior before connecting deployment loads.",
+      "setup": "Drive redundant microcontroller enable combinations and monitor RECO enable, latch, select, sense, and fault outputs.",
+      "expected": "Deployment outputs only enable for valid voting combinations and remain inhibited by ESTOP/RBF disable inputs.",
+      "actual": "Not yet documented in the provided PDF.",
+      "status": "Not Tested",
+      "evidence": [],
+      "notes": "Add a truth table and logic-analyzer capture once tested."
+    },
+    {
+      "name": "Recovery Driver Current Limit",
+      "purpose": "Validate constant-current behavior and fault reporting for recovery driver channels.",
+      "setup": "Use an electronic load or representative deployment load; command each driver bank and measure current, VREF feedback, and fault pins.",
+      "expected": "Driver current behavior matches the schematic notes, including current limit, 1 V/A gain, and fault handling.",
+      "actual": "Not yet documented in the provided PDF.",
+      "status": "Not Tested",
+      "evidence": ["/content/projects/recovery-system/media/driver-test-placeholder.svg"],
+      "notes": "Document thermal behavior and channel-to-channel consistency."
+    }
+  ],
+  "revisions": [
+    {
+      "rev": "Rev 5",
+      "status": "Designed",
+      "notes": "Exported Altium schematic PDF dated 03/18/2026; portfolio page generated from public schematic hierarchy and notes."
+    }
+  ]
+}

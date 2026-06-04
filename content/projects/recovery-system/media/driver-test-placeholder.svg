@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 625" role="img" aria-label="Recovery driver test placeholder">
+  <rect width="1000" height="625" fill="#111827"/>
+  <rect x="105" y="115" width="790" height="395" rx="26" fill="#1f2937" stroke="#d48a3a" stroke-width="5"/>
+  <path d="M170 390h160l35-145 35 145h220l35-95 35 95h140" fill="none" stroke="#f0c35a" stroke-width="8"/>
+  <path d="M170 260c80 20 130 65 210 48s125-84 205-52 150 75 260 24" fill="none" stroke="#25b77f" stroke-width="8"/>
+  <text x="55" y="70" font-family="Inter, Arial" font-size="42" font-weight="700" fill="#e7edf5">Recovery Driver Test Placeholder</text>
+  <text x="55" y="585" font-family="Inter, Arial" font-size="20" fill="#cbd5e1">Replace with current-limit, VREF feedback, fault, and thermal evidence.</text>
+</svg>

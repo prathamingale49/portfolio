@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 625" role="img" aria-label="Power bring-up placeholder">
+  <rect width="1000" height="625" fill="#06120f"/>
+  <g stroke="#1f7a5b" stroke-width="1"><path d="M0 125h1000M0 250h1000M0 375h1000M0 500h1000M125 0v625M250 0v625M375 0v625M500 0v625M625 0v625M750 0v625M875 0v625"/></g>
+  <path d="M60 420h150l35-170 35 170h190l30-115 30 115h390" fill="none" stroke="#55b8ff" stroke-width="7"/>
+  <path d="M60 350c160-80 240-80 380 0s230 90 500 5" fill="none" stroke="#f0c35a" stroke-width="7"/>
+  <text x="42" y="72" font-family="Inter, Arial" font-size="42" font-weight="700" fill="#e7edf5">Power Bring-up Placeholder</text>
+  <text x="42" y="112" font-family="Inter, Arial" font-size="20" fill="#94a3b8">Add scope captures for P24V0, P3V3, VSNS, and power-good behavior.</text>
+</svg>

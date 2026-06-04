@@ -1,0 +1,1 @@
+Replace this placeholder with exported Gerber and NC drill files from the Recovery System Altium project, then create gerbers.zip from those files.

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-label="Recovery System primary schematic placeholder">
+  <rect width="1600" height="1000" fill="#f8fafc"/>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0l10 5-10 5z" fill="#334155"/></marker></defs>
+  <g fill="none" stroke="#cbd5e1" stroke-width="1"><path d="M0 100h1600M0 200h1600M0 300h1600M0 400h1600M0 500h1600M0 600h1600M0 700h1600M0 800h1600M0 900h1600"/><path d="M100 0v1000M200 0v1000M300 0v1000M400 0v1000M500 0v1000M600 0v1000M700 0v1000M800 0v1000M900 0v1000M1000 0v1000M1100 0v1000M1200 0v1000M1300 0v1000M1400 0v1000M1500 0v1000"/></g>
+  <text x="70" y="70" font-family="Inter, Arial" font-size="38" font-weight="700" fill="#0f172a">Recovery System - Primary Sheet</text>
+  <text x="70" y="110" font-family="Inter, Arial" font-size="18" fill="#475569">Derived from exported Altium schematic PDF dated 03/18/2026.</text>
+  <g font-family="Inter, Arial" stroke="#334155" stroke-width="3">
+    <rect x="110" y="140" width="430" height="180" rx="14" fill="#ecfeff"/><text x="145" y="210" font-size="31" font-weight="700" fill="#0f172a">Power</text><text x="145" y="250" font-size="20" fill="#334155">VIN1 / VIN2, P24V0, P3V3</text>
+    <rect x="640" y="130" width="380" height="185" rx="14" fill="#fefce8"/><text x="685" y="205" font-size="31" font-weight="700" fill="#0f172a">1-FT Voting</text><text x="685" y="245" font-size="20" fill="#334155">Stage 1 and Stage 2 enable gates</text>
+    <rect x="1110" y="285" width="370" height="300" rx="14" fill="#fff7ed"/><text x="1150" y="380" font-size="31" font-weight="700" fill="#0f172a">Recovery Drivers</text><text x="1150" y="422" font-size="20" fill="#334155">Banks A-E, RECO1/RECO2 outputs</text><text x="1150" y="462" font-size="18" fill="#64748b">FLT, SNS, VREF feedback</text>
+    <rect x="625" y="555" width="410" height="200" rx="14" fill="#f0fdf4"/><text x="670" y="635" font-size="31" font-weight="700" fill="#0f172a">Microcontrollers</text><text x="670" y="675" font-size="20" fill="#334155">Channels A, B, C with SPI/JTAG</text>
+    <rect x="145" y="700" width="390" height="135" rx="14" fill="#eef2ff"/><text x="185" y="760" font-size="29" font-weight="700" fill="#0f172a">Input / Output Connectors</text><text x="185" y="800" font-size="19" fill="#334155">Flight computer, BMS, RBF, ESTOP</text>
+    <rect x="1080" y="690" width="330" height="135" rx="14" fill="#fdf2f8"/><text x="1125" y="758" font-size="29" font-weight="700" fill="#0f172a">Sensors</text><text x="1125" y="798" font-size="19" fill="#334155">IMU, MAG, BARO, thermometer</text>
+    <path d="M540 230h100" marker-end="url(#arrow)"/><path d="M1020 225c120 60 135 100 120 160" marker-end="url(#arrow)"/><path d="M830 315v240" marker-end="url(#arrow)"/><path d="M1035 650h100" marker-end="url(#arrow)"/><path d="M535 765h90" marker-end="url(#arrow)"/>
+  </g>
+</svg>

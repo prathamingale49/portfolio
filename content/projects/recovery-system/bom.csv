@@ -1,0 +1,7 @@
+Designator,Quantity,Value,Description
+U1301-U1302,2,LM73100RPWR,Low-voltage eFuse / power path devices from exported PDF
+U1201-U1202,2,RT1987N-A,Power path devices from exported PDF
+L1101A-L1101B,2,22uH,24 V buck inductors from exported PDF
+D801-D804,4,SMAJ51A,TVS protection devices from exported PDF
+J701-J706,6,Molex Micro-Fit,Input and interface connectors from exported PDF
+RECOVERY_DRIVERS,5,1.3A constant current,Recovery deployment driver banks summarized from PDF notes

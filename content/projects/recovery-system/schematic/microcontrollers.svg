@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-label="Recovery System microcontrollers and sensors placeholder">
+  <rect width="1600" height="1000" fill="#f8fafc"/>
+  <text x="70" y="82" font-family="Inter, Arial" font-size="40" font-weight="700" fill="#0f172a">Microcontrollers and Sensors</text>
+  <text x="70" y="122" font-family="Inter, Arial" font-size="18" fill="#475569">Redundant control domains with SPI, JTAG, sensor, voltage-sense, and driver-feedback nets.</text>
+  <g font-family="Inter, Arial" stroke="#334155" stroke-width="3">
+    <rect x="120" y="300" width="380" height="250" rx="14" fill="#f0fdf4"/><text x="170" y="390" font-size="30" font-weight="700" fill="#0f172a">Microcontroller A/B/C</text><text x="170" y="435" font-size="20" fill="#334155">uC_MOSI, uC_MISO, uC_SCLK, uC_CS</text><text x="170" y="480" font-size="18" fill="#64748b">Stage enables, latch, select, sense</text>
+    <rect x="650" y="280" width="440" height="220" rx="14" fill="#fdf2f8"/><text x="705" y="375" font-size="30" font-weight="700" fill="#0f172a">Sensors</text><text x="705" y="420" font-size="20" fill="#334155">IMU, magnetometer, barometer, thermometer</text>
+    <rect x="650" y="605" width="440" height="150" rx="14" fill="#eef2ff"/><text x="705" y="670" font-size="28" font-weight="700" fill="#0f172a">Flight Computer SPI</text><text x="705" y="710" font-size="19" fill="#334155">MOSI / MISO / SCLK / nCS</text>
+    <rect x="1210" y="355" width="270" height="170" rx="14" fill="#fff7ed"/><text x="1250" y="430" font-size="28" font-weight="700" fill="#0f172a">Feedback</text><text x="1250" y="470" font-size="18" fill="#475569">FLT, VSNS, VREF_FB</text>
+    <path d="M500 425h150M870 500v105M1090 440h120" stroke="#334155" stroke-width="4"/>
+  </g>
+</svg>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-label="Recovery System driver placeholder">
+  <rect width="1600" height="1000" fill="#f8fafc"/>
+  <text x="70" y="82" font-family="Inter, Arial" font-size="40" font-weight="700" fill="#0f172a">Recovery Drivers</text>
+  <text x="70" y="122" font-family="Inter, Arial" font-size="18" fill="#475569">Five repeated driver banks summarized from Recovery_Drivers.SchDoc pages.</text>
+  <g font-family="Inter, Arial" stroke="#334155" stroke-width="3">
+    <rect x="120" y="345" width="300" height="190" rx="14" fill="#eef2ff"/><text x="165" y="425" font-size="29" font-weight="700" fill="#0f172a">Voting Enables</text><text x="165" y="467" font-size="19" fill="#475569">RECO1_EN / RECO2_EN</text>
+    <rect x="590" y="240" width="520" height="280" rx="14" fill="#fff7ed"/><text x="650" y="355" font-size="32" font-weight="700" fill="#0f172a">Constant-Current Driver</text><text x="650" y="402" font-size="20" fill="#334155">2.05 A current limit, 1 V/A gain</text><text x="650" y="447" font-size="18" fill="#64748b">VREF = 0.784 V, feedback bandwidth 1.6 kHz</text>
+    <rect x="1210" y="345" width="270" height="190" rx="14" fill="#fefce8"/><text x="1250" y="425" font-size="29" font-weight="700" fill="#0f172a">Recovery Load</text><text x="1250" y="467" font-size="19" fill="#475569">PWR / RTN pairs</text>
+    <rect x="630" y="650" width="430" height="120" rx="14" fill="#f0fdf4"/><text x="680" y="720" font-size="28" font-weight="700" fill="#0f172a">FLT / SNS / VREF Feedback</text>
+    <path d="M420 440h170M1110 440h100M850 520v130" stroke="#334155" stroke-width="4"/>
+  </g>
+</svg>

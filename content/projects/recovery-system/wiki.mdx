@@ -1,0 +1,107 @@
+## Purpose
+
+The Recovery System board is a rocket avionics PCB for Yellow Jacket Space Program. It controls and monitors recovery deployment paths using redundant microcontroller channels, voting logic, dual input power handling, sensors, and high-current recovery drivers.
+
+This portfolio project was created from the exported Altium schematic PDF `Recovery System.pdf`. The site does not parse or include raw `.SchDoc` or `.PcbDoc` files.
+
+## Requirements
+
+- Accept redundant input power paths and produce board-level 24 V and 3.3 V rails.
+- Interface with the flight computer over SPI and expose separate chip-select paths.
+- Include RBF tag and ESTOP disable behavior.
+- Provide redundant microcontroller domains for recovery control.
+- Gate deployment enables through voting logic before driving recovery outputs.
+- Monitor voltage sense, driver fault, sense, latch, select, and VREF feedback nets.
+- Support bring-up and validation with accessible rail, fault, and driver-test points.
+
+## System Context
+
+The board sits in the avionics stack between the flight computer, battery management system, recovery deployment outputs, and local sensor suite. The exported top-level sheet shows input connectors for VIN1/VIN2, SPI, RBF/ESTOP disable lines, flight-computer connections, and recovery output connectors.
+
+![Recovery board placeholder](/content/projects/recovery-system/media/board-photo-placeholder.svg)
+
+## Architecture
+
+The schematic hierarchy is organized around several repeated safety-critical blocks:
+
+- Dual power inputs and power-OR behavior.
+- 48 V to 24 V buck conversion and local 3.3 V generation.
+- Three microcontroller domains.
+- Stage 1 and Stage 2 voting logic.
+- Five recovery-driver banks.
+- Sensor interfaces for IMU, magnetometer, barometer, and thermometer functions.
+
+The portfolio viewer uses manually defined hotspots to approximate the Altium sheet hierarchy from the exported PDF.
+
+## Power Architecture
+
+The PDF includes `Power.SchDoc`, `24V Buck.SchDoc`, `3V3 Buck.SchDoc`, `Power Or.SchDoc`, and `LV Power Or.SchDoc`.
+
+Notable extracted design notes include:
+
+- 48 V to 24 V conversion for the recovery power rail.
+- 24 V buck output path noted around 8 A.
+- Bulk capacitance placed near recovery power output regions.
+- Low-voltage power-OR stages using eFuse / power-path behavior.
+- UVLO, OVLO, slew-rate, and power-good thresholds on the low-voltage power path.
+
+## Schematic Walkthrough
+
+The source PDF contains 24 exported schematic pages. The most useful portfolio-level sheets are:
+
+- Primary hierarchy
+- Input connectors
+- Power
+- 24 V buck
+- 3.3 V buck
+- Power OR
+- LV power OR
+- Voting logic
+- Microcontrollers
+- Sensors
+- Recovery drivers
+- Output connectors
+
+The actual PDF is stored at `/content/projects/recovery-system/schematic/recovery-system.pdf` as a source schematic artifact. The interactive viewer uses web-friendly SVG placeholders and manually defined hotspots rather than attempting to parse Altium schematic files.
+
+## PCB Layout Walkthrough
+
+The current layout page uses placeholder top/bottom board renders. Replace them with Gerber-derived SVG renders or manually supplied Altium board render SVGs when available.
+
+Important layout regions to document:
+
+- 48 V / 24 V switching converter region.
+- Recovery driver high-current paths and returns.
+- Voting and microcontroller logic region.
+- Sensor placement and SPI routing.
+- Flight computer, BMS, RBF, ESTOP, and recovery output connectors.
+- Bulk capacitance near recovery power distribution.
+
+## Bring-up Plan
+
+1. Inspect assembly, connectors, polarity, and high-current output spacing.
+2. Power VIN1 and VIN2 separately with current-limited supplies.
+3. Verify P24V0, P3V3, 24V-VSNS, and 3V3-VSNS.
+4. Confirm RBF and ESTOP disable inputs hold recovery outputs inhibited.
+5. Bring up SPI communication to each microcontroller domain.
+6. Exercise voting inputs without recovery loads attached.
+7. Validate recovery driver current limit and fault behavior with an electronic load.
+8. Repeat driver testing with thermal monitoring and documented pass/fail evidence.
+
+## Test Results
+
+The provided PDF is a design export, not a completed validation report. The test page therefore contains planned tests and placeholder evidence.
+
+![Driver test placeholder](/content/projects/recovery-system/media/driver-test-placeholder.svg)
+
+## Failures / Debugging
+
+Future bring-up notes should capture power-path issues, disable-line behavior, voting truth-table mismatches, driver current-limit behavior, unexpected thermal rise, or connector pinout corrections.
+
+## Revision History
+
+The exported schematic title block lists revision `5.0` dated `03/18/2026`. The portfolio entry records this as Rev 5 and should be updated when layout renders, Gerbers, BOM, pick-and-place files, and real test evidence are added.
+
+## What I Would Change
+
+For a stronger public case study, add final board render SVGs, a BOM CSV, pick-and-place CSV, power-tree measurements, a voting truth table, driver current-limit captures, and thermal images from sustained recovery-driver operation.
