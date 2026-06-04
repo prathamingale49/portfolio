@@ -32,6 +32,8 @@ export function LayoutViewer({ slug, views, callouts }: LayoutViewerProps) {
     [selectedViewId, views],
   );
 
+  const hasCallouts = callouts.length > 0;
+
   const activeCallouts = useMemo(
     () => callouts.filter((callout) => callout.view === selectedView?.id),
     [callouts, selectedView?.id],
@@ -61,12 +63,19 @@ export function LayoutViewer({ slug, views, callouts }: LayoutViewerProps) {
           key={view.id}
           type="button"
           onClick={() => selectView(view.id)}
-          className={`h-9 rounded border px-3 text-sm ${
+          className={`flex h-9 items-center gap-2 rounded border px-3 text-sm ${
             selectedView.id === view.id
               ? "border-copper/50 bg-copper/15 text-white"
               : "border-line-soft bg-[#0b1018] text-slate-300 hover:border-copper/40"
           }`}
         >
+          {view.color ? (
+            <span
+              className="h-3.5 w-3.5 rounded-sm border border-white/20"
+              style={{ backgroundColor: view.color }}
+              aria-hidden="true"
+            />
+          ) : null}
           {view.title}
         </button>
       ))}
@@ -74,8 +83,12 @@ export function LayoutViewer({ slug, views, callouts }: LayoutViewerProps) {
   );
 
   return (
-    <div className="grid min-h-[calc(100vh-57px)] grid-cols-1 border-y border-line-soft lg:grid-cols-[minmax(0,1fr)_22rem]">
-      <main className="min-w-0 bg-[#080b10]">
+    <div
+      className={`grid min-h-[calc(100vh-57px)] grid-cols-1 border-y border-line-soft ${
+        hasCallouts ? "lg:grid-cols-[minmax(0,1fr)_22rem]" : ""
+      }`}
+    >
+      <main className="min-w-0 bg-[#0b1018]">
         <ViewerToolbar
           zoom={zoom}
           onZoomIn={() => setZoom((value) => Math.min(value + 0.15, 2.8))}
@@ -87,7 +100,7 @@ export function LayoutViewer({ slug, views, callouts }: LayoutViewerProps) {
           extra={toolbarExtra}
         />
         <div
-          className="viewer-scrollbar schematic-grid h-[calc(100vh-113px)] cursor-grab overflow-hidden active:cursor-grabbing"
+          className="viewer-scrollbar h-[calc(100vh-113px)] cursor-grab overflow-hidden bg-[#d9e2ea] active:cursor-grabbing"
           onPointerDown={(event) => {
             dragStart.current = {
               pointerId: event.pointerId,
@@ -108,7 +121,7 @@ export function LayoutViewer({ slug, views, callouts }: LayoutViewerProps) {
           }}
         >
           <div
-            className="relative mx-auto my-8 aspect-[16/10] w-[96%] min-w-[760px] max-w-6xl origin-center rounded border border-line-soft bg-[#07110f] shadow-glow"
+            className="relative mx-auto my-8 aspect-[16/10] w-[96%] min-w-[760px] max-w-7xl origin-center rounded border border-slate-300 bg-[#f8fafc] shadow-[0_24px_70px_rgba(2,6,23,0.32)]"
             style={{ transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})` }}
           >
             {missingAsset ? (
@@ -122,26 +135,30 @@ export function LayoutViewer({ slug, views, callouts }: LayoutViewerProps) {
               <img
                 src={getAssetUrl(selectedView.file)}
                 alt={selectedView.title}
-                className="h-full w-full object-contain"
+                className="h-full w-full object-contain contrast-125"
                 draggable={false}
                 onError={() => setMissingAsset(true)}
               />
             )}
-            <HotspotOverlay
-              items={activeCallouts}
-              activeId={selectedCallout?.id}
-              onSelect={setSelectedCallout}
-              tone="copper"
-            />
+            {hasCallouts ? (
+              <HotspotOverlay
+                items={activeCallouts}
+                activeId={selectedCallout?.id}
+                onSelect={setSelectedCallout}
+                tone="copper"
+              />
+            ) : null}
           </div>
         </div>
       </main>
-      <CalloutPanel
-        slug={slug}
-        title={selectedView.title}
-        description="Gerber-derived or manually supplied board render with percentage-based layout callouts."
-        selected={selectedCallout}
-      />
+      {hasCallouts ? (
+        <CalloutPanel
+          slug={slug}
+          title={selectedView.title}
+          description="Gerber-derived or manually supplied board render with percentage-based layout callouts."
+          selected={selectedCallout}
+        />
+      ) : null}
     </div>
   );
 }

@@ -52,6 +52,7 @@ export interface LayoutView {
   id: string;
   title: string;
   file: string;
+  color?: string;
 }
 
 export interface LayoutCallout {

@@ -37,33 +37,47 @@ const copperLayerOutputs = [
     source: "PCB0_Copper_Signal_Top.gbr",
     rendered: "PCB0_Copper_Signal_Top.gbr.top.copper.svg",
     output: "copper-top.svg",
+    color: "#ff1f1f",
   },
   {
     source: "PCB0_Copper_Signal_1.gbr",
     rendered: "PCB0_Copper_Signal_1.gbr.inner.copper.svg",
     output: "copper-1.svg",
+    color: "#c99a00",
   },
   {
     source: "PCB0_Copper_Signal_2.gbr",
     rendered: "PCB0_Copper_Signal_2.gbr.inner.copper.svg",
     output: "copper-2.svg",
+    color: "#5fd3ee",
   },
   {
     source: "PCB0_Copper_Signal_3.gbr",
     rendered: "PCB0_Copper_Signal_3.gbr.inner.copper.svg",
     output: "copper-3.svg",
+    color: "#17d36b",
   },
   {
     source: "PCB0_Copper_Signal_4.gbr",
     rendered: "PCB0_Copper_Signal_4.gbr.inner.copper.svg",
     output: "copper-4.svg",
+    color: "#8b5cf6",
   },
   {
     source: "PCB0_Copper_Signal_Bot.gbr",
     rendered: "PCB0_Copper_Signal_Bot.gbr.bottom.copper.svg",
     output: "copper-bottom.svg",
+    color: "#151cff",
   },
 ];
+
+function colorizeLayerSvg(svg: string, color: string) {
+  const withoutRootColor = svg
+    .replace(/<svg\s+fill="#[0-9a-fA-F]{3,6}"\s+stroke="#[0-9a-fA-F]{3,6}"\s+/, "<svg ")
+    .replace(/<svg\s+/, `<svg fill="${color}" stroke="${color}" `);
+
+  return withoutRootColor;
+}
 
 function renderCopperLayers(slug: string, gerberDir: string, outputDir: string) {
   const copperFiles = copperLayerOutputs
@@ -101,7 +115,8 @@ function renderCopperLayers(slug: string, gerberDir: string, outputDir: string) 
   for (const layer of copperLayerOutputs) {
     const renderedPath = path.join(outputDir, layer.rendered);
     if (fs.existsSync(renderedPath)) {
-      fs.copyFileSync(renderedPath, path.join(outputDir, layer.output));
+      const svg = fs.readFileSync(renderedPath, "utf8");
+      fs.writeFileSync(path.join(outputDir, layer.output), colorizeLayerSvg(svg, layer.color));
     }
   }
 }

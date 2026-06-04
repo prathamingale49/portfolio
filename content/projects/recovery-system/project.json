@@ -7,8 +7,8 @@
   "role": "Responsible engineer and PCB layout designer; schematic design across power, microcontroller, sensor, and driver sheets",
   "dateRange": "2026",
   "tools": ["Altium Designer", "Oscilloscope", "Electronic Load", "Bench Supply"],
-  "layerCount": 4,
-  "stackup": "Mixed-signal avionics PCB with high-current recovery-driver routing and separated logic/power regions",
+  "layerCount": 6,
+  "stackup": "Six copper-layer mixed-signal avionics PCB with high-current recovery-driver routing and separated logic/power regions",
   "boardSize": "TBD from final mechanical export",
   "summary": "A rocket recovery avionics board for Yellow Jacket Space Program that combines redundant microcontroller channels, 1-fault-tolerant voting logic, dual power inputs, 48 V to 24 V conversion, 3.3 V regulation, sensor interfaces, and constant-current recovery deployment drivers.",
   "thumbnail": "/generated/recovery-system/thumbnails/card.svg",
@@ -53,81 +53,42 @@
     "views": [
       {
         "id": "copper-top",
-        "title": "Copper Top",
-        "file": "/generated/recovery-system/layout/copper-top.svg"
+        "title": "1 SIG1",
+        "file": "/generated/recovery-system/layout/copper-top.svg",
+        "color": "#ff1f1f"
       },
       {
         "id": "copper-1",
-        "title": "Copper 1",
-        "file": "/generated/recovery-system/layout/copper-1.svg"
+        "title": "2 GND1",
+        "file": "/generated/recovery-system/layout/copper-1.svg",
+        "color": "#c99a00"
       },
       {
         "id": "copper-2",
-        "title": "Copper 2",
-        "file": "/generated/recovery-system/layout/copper-2.svg"
+        "title": "3 SIG2",
+        "file": "/generated/recovery-system/layout/copper-2.svg",
+        "color": "#5fd3ee"
       },
       {
         "id": "copper-3",
-        "title": "Copper 3",
-        "file": "/generated/recovery-system/layout/copper-3.svg"
+        "title": "4 PWR",
+        "file": "/generated/recovery-system/layout/copper-3.svg",
+        "color": "#17d36b"
       },
       {
         "id": "copper-4",
-        "title": "Copper 4",
-        "file": "/generated/recovery-system/layout/copper-4.svg"
+        "title": "5 GND2",
+        "file": "/generated/recovery-system/layout/copper-4.svg",
+        "color": "#8b5cf6"
       },
       {
         "id": "copper-bottom",
-        "title": "Copper Bottom",
-        "file": "/generated/recovery-system/layout/copper-bottom.svg"
+        "title": "6 SIG3",
+        "file": "/generated/recovery-system/layout/copper-bottom.svg",
+        "color": "#151cff"
       }
     ],
-    "callouts": [
-      {
-        "id": "driver-current-path",
-        "label": "Recovery Driver Current Path",
-        "view": "copper-top",
-        "x": 60,
-        "y": 42,
-        "width": 27,
-        "height": 22,
-        "description": "High-current deployment routing region for recovery driver banks and return paths.",
-        "wikiSection": "pcb-layout-walkthrough"
-      },
-      {
-        "id": "buck-region",
-        "label": "48 V / 24 V Power Region",
-        "view": "copper-top",
-        "x": 14,
-        "y": 21,
-        "width": 28,
-        "height": 20,
-        "description": "Power conversion area where switching-loop compactness and bulk-cap placement matter.",
-        "wikiSection": "power-architecture"
-      },
-      {
-        "id": "logic-region",
-        "label": "Voting and MCU Logic",
-        "view": "copper-top",
-        "x": 35,
-        "y": 57,
-        "width": 27,
-        "height": 20,
-        "description": "Low-voltage control region for redundant microcontrollers, voting logic, SPI, and feedback nets.",
-        "wikiSection": "architecture"
-      },
-      {
-        "id": "connector-zone",
-        "label": "Flight / Recovery Connectors",
-        "view": "copper-bottom",
-        "x": 10,
-        "y": 56,
-        "width": 34,
-        "height": 22,
-        "description": "Connector and harness region for flight computer, BMS, ESTOP/RBF disable, and recovery output wiring.",
-        "wikiSection": "system-context"
-      }
-    ]
+    "callouts": []
   },
   "tests": [
     {
