@@ -52,21 +52,41 @@
   "layout": {
     "views": [
       {
-        "id": "top",
-        "title": "Top Layer",
-        "file": "/generated/recovery-system/layout/top.svg"
+        "id": "copper-top",
+        "title": "Copper Top",
+        "file": "/generated/recovery-system/layout/copper-top.svg"
       },
       {
-        "id": "bottom",
-        "title": "Bottom Layer",
-        "file": "/generated/recovery-system/layout/bottom.svg"
+        "id": "copper-1",
+        "title": "Copper 1",
+        "file": "/generated/recovery-system/layout/copper-1.svg"
+      },
+      {
+        "id": "copper-2",
+        "title": "Copper 2",
+        "file": "/generated/recovery-system/layout/copper-2.svg"
+      },
+      {
+        "id": "copper-3",
+        "title": "Copper 3",
+        "file": "/generated/recovery-system/layout/copper-3.svg"
+      },
+      {
+        "id": "copper-4",
+        "title": "Copper 4",
+        "file": "/generated/recovery-system/layout/copper-4.svg"
+      },
+      {
+        "id": "copper-bottom",
+        "title": "Copper Bottom",
+        "file": "/generated/recovery-system/layout/copper-bottom.svg"
       }
     ],
     "callouts": [
       {
         "id": "driver-current-path",
         "label": "Recovery Driver Current Path",
-        "view": "top",
+        "view": "copper-top",
         "x": 60,
         "y": 42,
         "width": 27,
@@ -77,7 +97,7 @@
       {
         "id": "buck-region",
         "label": "48 V / 24 V Power Region",
-        "view": "top",
+        "view": "copper-top",
         "x": 14,
         "y": 21,
         "width": 28,
@@ -88,7 +108,7 @@
       {
         "id": "logic-region",
         "label": "Voting and MCU Logic",
-        "view": "top",
+        "view": "copper-top",
         "x": 35,
         "y": 57,
         "width": 27,
@@ -99,7 +119,7 @@
       {
         "id": "connector-zone",
         "label": "Flight / Recovery Connectors",
-        "view": "bottom",
+        "view": "copper-bottom",
         "x": 10,
         "y": 56,
         "width": 34,

@@ -107,14 +107,25 @@ Run:
 npm run render:gerbers
 ```
 
-The script currently checks each project for `gerbers.zip`, detects whether a local `tracespace` CLI is available, and fails softly into the manual SVG fallback. The intended output paths are:
+The script checks each project for extracted Gerber/drill files in `content/projects/[slug]/layout/gerbers`, runs `@tracespace/cli`, and writes composite top/bottom board renders to:
 
 ```text
 public/generated/[slug]/layout/top.svg
 public/generated/[slug]/layout/bottom.svg
 ```
 
-Known limitation: tracespace package and CLI integration can vary by package version and Gerber ZIP contents. For the MVP, the viewer is built to work reliably with manually provided `top.svg` and `bottom.svg`.
+For projects with mapped copper filenames in `tracespace.config.js`, the script can also emit stable copper-layer views:
+
+```text
+public/generated/[slug]/layout/copper-top.svg
+public/generated/[slug]/layout/copper-1.svg
+public/generated/[slug]/layout/copper-2.svg
+public/generated/[slug]/layout/copper-3.svg
+public/generated/[slug]/layout/copper-4.svg
+public/generated/[slug]/layout/copper-bottom.svg
+```
+
+Known limitation: tracespace package and CLI integration can vary by package version and Gerber ZIP contents. The viewer still works with manually provided SVGs if automatic rendering fails.
 
 ## Sample Project
 

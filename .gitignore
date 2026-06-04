@@ -2,6 +2,7 @@
 node_modules/
 .npm-cache/
 work/
+public/generated/**/layout/PCB0*.svg
 *.tsbuildinfo
 
 # Local environment files
