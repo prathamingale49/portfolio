@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BookOpen, ClipboardCheck, Cpu, FileStack } from "lucide-react";
+import { BookOpen, Box, Cpu, FileStack } from "lucide-react";
 
 interface ProjectNavCardsProps {
   slug: string;
@@ -16,19 +16,19 @@ const cards = [
     title: "PCB Layout Viewer",
     href: "layout",
     icon: Cpu,
-    text: "Inspect Gerber-derived top and bottom SVG renders with layout callouts.",
+    text: "Inspect Gerber-derived copper-layer SVG renders.",
+  },
+  {
+    title: "3D Board Model",
+    href: "model",
+    icon: Box,
+    text: "Rotate the Altium STEP export or preview the interactive board model.",
   },
   {
     title: "Wiki / Design Notes",
     href: "wiki",
     icon: BookOpen,
     text: "Read architecture, decisions, bring-up, failures, and revision history.",
-  },
-  {
-    title: "Test Evidence",
-    href: "tests",
-    icon: ClipboardCheck,
-    text: "Review validation cases, captures, thermal images, and lab photos.",
   },
 ];
 

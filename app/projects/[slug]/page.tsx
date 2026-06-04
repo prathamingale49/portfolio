@@ -3,7 +3,8 @@ import { getProject, getProjectSlugs } from "@/lib/projects";
 import { ProjectHeader } from "@/components/ProjectHeader";
 import { ProjectNavCards } from "@/components/ProjectNavCards";
 import { ProjectStats } from "@/components/ProjectStats";
-import { RevisionTimeline } from "@/components/RevisionTimeline";
+import { FeaturedProjectSection } from "@/components/FeaturedProjectSection";
+import { BoardModelViewer } from "@/components/viewers/BoardModelViewer";
 
 export function generateStaticParams() {
   return getProjectSlugs().map((slug) => ({ slug }));
@@ -52,8 +53,15 @@ export default async function ProjectOverviewPage({ params }: { params: Promise<
             ) : null}
           </div>
         </section>
+        {project.featured ? <FeaturedProjectSection features={project.featured} /> : null}
+        {project.model3d ? (
+          <BoardModelViewer
+            title={project.model3d.title}
+            description={project.model3d.description}
+            stepFile={project.model3d.stepFile}
+          />
+        ) : null}
         <ProjectNavCards slug={project.slug} />
-        <RevisionTimeline revisions={project.revisions} />
       </div>
     </main>
   );

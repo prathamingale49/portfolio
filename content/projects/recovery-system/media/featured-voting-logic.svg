@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-labelledby="title desc">
+  <title id="title">Voting logic schematic placeholder</title>
+  <desc id="desc">Stylized schematic detail for redundant recovery voting logic.</desc>
+  <rect width="960" height="600" fill="#0a1018"/>
+  <rect x="68" y="58" width="824" height="484" rx="14" fill="#f8fafc" stroke="#cad4df" stroke-width="3"/>
+  <g stroke="#1e293b" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M134 168h148"/>
+    <path d="M134 270h148"/>
+    <path d="M134 372h148"/>
+    <path d="M422 220h118"/>
+    <path d="M422 320h118"/>
+    <path d="M656 270h164"/>
+    <path d="M282 168l86 52"/>
+    <path d="M282 270h86"/>
+    <path d="M282 372l86-52"/>
+    <path d="M540 220l94 50"/>
+    <path d="M540 320l94-50"/>
+  </g>
+  <g fill="#e2e8f0" stroke="#1e293b" stroke-width="4">
+    <rect x="284" y="122" width="136" height="92" rx="10"/>
+    <rect x="284" y="224" width="136" height="92" rx="10"/>
+    <rect x="284" y="326" width="136" height="92" rx="10"/>
+    <path d="M634 194h80c42 0 76 34 76 76s-34 76-76 76h-80c36-37 36-109 0-146z" fill="#dbeafe"/>
+  </g>
+  <g fill="#0f172a" font-family="Inter, Segoe UI, sans-serif" font-weight="700">
+    <text x="112" y="104" font-size="22">1-FAULT-TOLERANT VOTING</text>
+    <text x="318" y="174" font-size="18">MCU A</text>
+    <text x="318" y="276" font-size="18">MCU B</text>
+    <text x="318" y="378" font-size="18">MCU C</text>
+    <text x="674" y="278" font-size="20">ENABLE</text>
+  </g>
+  <g fill="#c69b3c">
+    <circle cx="134" cy="168" r="8"/>
+    <circle cx="134" cy="270" r="8"/>
+    <circle cx="134" cy="372" r="8"/>
+    <circle cx="820" cy="270" r="8"/>
+  </g>
+</svg>

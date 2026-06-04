@@ -32,7 +32,7 @@ export default function HomePage() {
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
               Case studies for board-level electrical design work, built around exported Altium artifacts:
-              schematic pages, Gerber-derived layout renders, BOMs, test evidence, and wiki-style design notes.
+              schematic pages, Gerber-derived layout renders, STEP models, BOMs, and wiki-style design notes.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link

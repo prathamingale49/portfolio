@@ -55,6 +55,19 @@ export interface LayoutView {
   color?: string;
 }
 
+export interface ProjectModel3D {
+  stepFile?: string;
+  title: string;
+  description: string;
+}
+
+export interface ProjectFeature {
+  title: string;
+  description: string;
+  image: string;
+  tag?: string;
+}
+
 export interface LayoutCallout {
   id: string;
   label: string;
@@ -103,6 +116,8 @@ export interface Project {
   keyComponents: string[];
   mainConstraints: string[];
   publicNote?: string;
+  model3d?: ProjectModel3D;
+  featured?: ProjectFeature[];
   schematic: {
     pages: SchematicPage[];
   };

@@ -9,6 +9,8 @@ const contentTypeByExtension: Record<string, string> = {
   ".jpeg": "image/jpeg",
   ".gif": "image/gif",
   ".pdf": "application/pdf",
+  ".step": "model/step",
+  ".stp": "model/step",
   ".csv": "text/csv",
   ".mdx": "text/plain",
 };

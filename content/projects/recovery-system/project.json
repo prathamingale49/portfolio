@@ -38,6 +38,31 @@
     "Accessible bring-up points for 24 V, 3.3 V, driver fault, and sensor signals"
   ],
   "publicNote": "This portfolio entry is derived from the exported Altium schematic PDF. It does not parse or include raw .SchDoc or .PcbDoc files.",
+  "model3d": {
+    "title": "Recovery Board 3D Model",
+    "description": "Interactive board model surface for the Altium STEP export. Place the exported file at content/projects/recovery-system/model/recovery-board.step.",
+    "stepFile": "/content/projects/recovery-system/model/recovery-board.step"
+  },
+  "featured": [
+    {
+      "title": "Recovery Driver Bank",
+      "description": "High-current deployment driver region with command, fault, and current feedback routing.",
+      "image": "/content/projects/recovery-system/media/featured-driver-bank.svg",
+      "tag": "Layout"
+    },
+    {
+      "title": "Voting Logic Core",
+      "description": "Redundant enable path and 1-fault-tolerant voting logic before deployment outputs.",
+      "image": "/content/projects/recovery-system/media/featured-voting-logic.svg",
+      "tag": "Schematic"
+    },
+    {
+      "title": "Dual Power Path",
+      "description": "Input protection, power-path control, and regulated rails for recovery electronics.",
+      "image": "/content/projects/recovery-system/media/featured-power-path.svg",
+      "tag": "Power"
+    }
+  ],
   "schematic": {
     "pages": [
       {
@@ -67,13 +92,13 @@
         "id": "copper-2",
         "title": "3 SIG2",
         "file": "/generated/recovery-system/layout/copper-2.svg",
-        "color": "#5fd3ee"
+        "color": "#2aa6bf"
       },
       {
         "id": "copper-3",
         "title": "4 PWR",
         "file": "/generated/recovery-system/layout/copper-3.svg",
-        "color": "#17d36b"
+        "color": "#129a55"
       },
       {
         "id": "copper-4",

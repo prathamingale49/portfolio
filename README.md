@@ -2,6 +2,10 @@
 
 A static-first Next.js portfolio for PCB case studies built from web-friendly Altium Designer exports. It does not parse raw `.SchDoc` or `.PcbDoc` files.
 
+## Creation Disclosure
+
+This website was created with the use of OpenAI Codex as a coding assistant. Project artifacts, engineering decisions, and design ownership should still be reviewed and maintained by the portfolio owner.
+
 ## Tech Stack
 
 - Next.js App Router
@@ -34,6 +38,8 @@ Open `http://localhost:3000`.
 5. Add lab images under `content/projects/[slug]/media`.
 6. Add generated layout SVGs under `public/generated/[slug]/layout`.
 7. Add a thumbnail under `public/generated/[slug]/thumbnails`.
+8. Add an optional Altium STEP export under `content/projects/[slug]/model`.
+9. Add featured schematic/layout screenshots under `content/projects/[slug]/media` and reference them in `project.json`.
 
 Hotspots and layout callouts are manually defined in `project.json` using percentage-based coordinates from `0` to `100`.
 
@@ -49,6 +55,8 @@ For each Altium PCB project, export:
 6. Board screenshots or SVG renders if Gerber rendering fails
 7. Lab/test images
 8. A `wiki.mdx` file explaining design purpose and validation
+9. Optional STEP file for the 3D board viewer
+10. Featured screenshots of circuit blocks, layout regions, and bring-up evidence
 
 This site does not parse `.SchDoc` or `.PcbDoc` files.
 
@@ -127,16 +135,58 @@ public/generated/[slug]/layout/copper-bottom.svg
 
 Known limitation: tracespace package and CLI integration can vary by package version and Gerber ZIP contents. The viewer still works with manually provided SVGs if automatic rendering fails.
 
+## 3D STEP Viewer
+
+Export a STEP model from Altium and place it in:
+
+```text
+content/projects/[slug]/model/
+```
+
+Reference it in `project.json`:
+
+```json
+"model3d": {
+  "title": "Board 3D Model",
+  "description": "Interactive board model from the Altium STEP export.",
+  "stepFile": "/content/projects/[slug]/model/board.step"
+}
+```
+
+The viewer uses Three.js and `occt-import-js` in the browser. If the STEP file is missing or cannot be loaded, the site shows an interactive placeholder board instead of breaking the page.
+
+## Featured Screenshots
+
+Add screenshots or exported images for important circuit/layout details under:
+
+```text
+content/projects/[slug]/media/
+```
+
+Reference them in `project.json`:
+
+```json
+"featured": [
+  {
+    "title": "Recovery Driver Bank",
+    "description": "High-current deployment driver region.",
+    "image": "/content/projects/[slug]/media/driver-bank.png",
+    "tag": "Layout"
+  }
+]
+```
+
 ## Sample Project
 
 The Recovery System sample includes:
 
 - Placeholder schematic SVG pages
 - The exported Altium schematic PDF as a source artifact
-- Top/bottom board render SVGs
+- Six copper-layer board render SVGs
 - BOM CSV
 - Pick-and-place CSV
-- Power bring-up, recovery driver test, and board-photo placeholders
+- Featured circuit/layout placeholders
+- Optional STEP model slot
 - A navigable MDX wiki
 
 Replace placeholders with real Altium exports as the design matures.

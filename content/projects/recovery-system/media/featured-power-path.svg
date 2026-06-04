@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-labelledby="title desc">
+  <title id="title">Dual power path placeholder</title>
+  <desc id="desc">Stylized power path block diagram for the recovery board.</desc>
+  <defs>
+    <linearGradient id="rail" x1="0" x2="1">
+      <stop offset="0" stop-color="#c69b3c"/>
+      <stop offset="1" stop-color="#f0c35a"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="600" fill="#0b1018"/>
+  <rect x="72" y="70" width="816" height="460" rx="16" fill="#111827" stroke="#283241" stroke-width="2"/>
+  <g fill="#151b28" stroke="#64748b" stroke-width="2">
+    <rect x="116" y="182" width="142" height="88" rx="10"/>
+    <rect x="116" y="330" width="142" height="88" rx="10"/>
+    <rect x="348" y="214" width="162" height="104" rx="10"/>
+    <rect x="600" y="214" width="172" height="104" rx="10"/>
+    <rect x="600" y="362" width="172" height="86" rx="10"/>
+  </g>
+  <g fill="none" stroke="url(#rail)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M258 226h90"/>
+    <path d="M258 374h72c40 0 48-42 86-42h94"/>
+    <path d="M510 266h90"/>
+    <path d="M686 318v44"/>
+    <path d="M772 266h70"/>
+  </g>
+  <g fill="none" stroke="#2aa6bf" stroke-width="5" stroke-linecap="round">
+    <path d="M430 318v86h170"/>
+    <path d="M510 236l88-74"/>
+    <path d="M686 214v-66"/>
+  </g>
+  <g fill="#e7edf5" font-family="Inter, Segoe UI, sans-serif" font-weight="700">
+    <text x="112" y="122" font-size="22">DUAL INPUT POWER PATH</text>
+    <text x="142" y="232" font-size="18">VIN 1</text>
+    <text x="142" y="380" font-size="18">VIN 2</text>
+    <text x="386" y="272" font-size="18">OR / PROTECT</text>
+    <text x="646" y="272" font-size="18">24 V BUS</text>
+    <text x="646" y="412" font-size="18">3.3 V</text>
+  </g>
+  <g fill="#0b1018" stroke="#f8fafc" stroke-width="3">
+    <circle cx="842" cy="266" r="14"/>
+    <circle cx="842" cy="412" r="14"/>
+    <circle cx="598" cy="162" r="10"/>
+  </g>
+</svg>

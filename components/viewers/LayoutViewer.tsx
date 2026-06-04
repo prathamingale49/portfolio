@@ -128,7 +128,7 @@ export function LayoutViewer({ slug, views, callouts }: LayoutViewerProps) {
           }}
         >
           <div
-            className="relative mx-auto my-8 aspect-[16/10] w-[96%] min-w-[760px] max-w-7xl origin-center rounded border border-slate-300 bg-[#f8fafc] shadow-[0_24px_70px_rgba(2,6,23,0.32)]"
+            className="relative mx-auto my-10 aspect-[16/10] w-[96%] min-w-[760px] max-w-[92rem] origin-center rounded border border-slate-300 bg-[#f8fafc] p-8 shadow-[0_24px_70px_rgba(2,6,23,0.32)] sm:p-10"
             style={{ transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})` }}
           >
             {missingAsset ? (
@@ -139,13 +139,15 @@ export function LayoutViewer({ slug, views, callouts }: LayoutViewerProps) {
                 />
               </div>
             ) : (
-              <img
-                src={selectedAssetUrl}
-                alt={selectedView.title}
-                className="h-full w-full object-contain contrast-125"
-                draggable={false}
-                onError={() => setMissingAsset(true)}
-              />
+              <div className="h-full w-full overflow-hidden rounded-sm bg-[#c7a24f]">
+                <img
+                  src={selectedAssetUrl}
+                  alt={selectedView.title}
+                  className="h-full w-full object-contain contrast-125"
+                  draggable={false}
+                  onError={() => setMissingAsset(true)}
+                />
+              </div>
             )}
             {hasCallouts ? (
               <HotspotOverlay

@@ -49,13 +49,13 @@ const copperLayerOutputs = [
     source: "PCB0_Copper_Signal_2.gbr",
     rendered: "PCB0_Copper_Signal_2.gbr.inner.copper.svg",
     output: "copper-2.svg",
-    color: "#5fd3ee",
+    color: "#2aa6bf",
   },
   {
     source: "PCB0_Copper_Signal_3.gbr",
     rendered: "PCB0_Copper_Signal_3.gbr.inner.copper.svg",
     output: "copper-3.svg",
-    color: "#17d36b",
+    color: "#129a55",
   },
   {
     source: "PCB0_Copper_Signal_4.gbr",
