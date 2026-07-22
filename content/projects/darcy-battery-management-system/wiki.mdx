@@ -1,48 +1,63 @@
-# Darcy Battery Management System
-
 ## Purpose
 
-The Darcy Battery Management System project documents a four-layer power and battery-management PCB package from exported Altium schematic and Gerber artifacts. The available PDF contains 10 pages covering top level, primary sheet, power, load switching, ADC, connector load switches, and current-loop circuitry.
+The Darcy Battery Management System is the main protected power-distribution board between a 12-cell lithium-ion battery and the vehicle avionics system.
 
-## Requirements
+At a high level, it controls downstream power outputs, generates auxiliary rails, and measures battery/load behavior so the flight system can tell what its electrical distribution network is doing.
 
-- Preserve the exported schematic PDF as the source artifact.
-- Preserve the generated Gerber-derived copper layer SVGs.
-- Preserve the Altium STEP/GLB export for the interactive 3D model.
-- Keep the project static-first and avoid raw Altium document parsing.
+## My Responsibility
 
-## System Context
-
-The board is the primary power-distribution node for Darcy avionics, drawing energy from a 12-cell lithium-ion pack and distributing protected power to vehicle subsystems. The portfolio focus is power-path decisions, load-switch channel consistency, measurement strategy, and validation planning.
+I was the Design Responsible Engineer and owned the schematic, PCB layout, bring-up, and ongoing board operation.
 
 ## Architecture
 
-The schematic package includes a top-level view, a primary sheet, a power sheet, a load-switch sheet, ADC measurement, multiple connector load-switch sheets, and a current-loop sheet. That organization suggests a design centered on controlled power distribution and monitored outputs.
+The board contains:
 
-## Schematic Walkthrough
+- Protected battery input circuitry
+- Auxiliary power regulation
+- Five controlled load-switch channels
+- Connector-level switched power outputs
+- Voltage and current telemetry
+- ADC signal conditioning
+- Current-loop sensor interfaces
+- Vehicle and debug connectors
 
-Use the schematic page to open the exported PDF. The PDF viewer preserves the Altium-generated navigation and keeps the schematic package browsable without reconstructing every sheet as a separate SVG.
+The repeated load-switch architecture makes each output easier to review, test, and control on its own.
 
-## PCB Layout Walkthrough
+## Power Distribution
 
-The layout viewer uses Gerber-derived copper-layer SVG renders for the top layer, two inner layers, and bottom layer. Replace or regenerate those SVGs as the Altium layout changes.
+The battery input needs to tolerate normal 12-cell pack voltage while keeping abnormal conditions from propagating into downstream avionics. Each load path is controlled separately so subsystems can be sequenced, disabled after a fault, or tested without energizing the whole vehicle.
 
-## Bring-up Plan
+High-current copper should be shown as an intentional distribution network rather than as generic pours. Annotated layout views should identify the battery entry point, branch paths, switches, connectors, current-sense elements, and return-current paths.
 
-- Bring up input power with current-limited supplies.
-- Verify regulated rails and load-switch enable behavior.
-- Check ADC measurement scaling before high-current testing.
-- Validate connector load-switch outputs one channel at a time.
-- Record current-loop behavior with known loads.
+## Telemetry
 
-## Test Results
+Voltage and current measurements allow the flight system to distinguish expected subsystem load from wiring faults, short circuits, or unexpected current consumption.
 
-No lab evidence has been added yet.
+The telemetry layout should demonstrate Kelvin sensing, filtering near the ADC, quiet reference routing, and separation between measurement returns and switched load current.
 
-## Revision History
+## Bring-Up Plan
 
-The current portfolio entry is based on the exported Altium schematic PDF dated March 18, 2026, revision 2.1.
+1. Inspect battery and output connector polarity.
+2. Apply current-limited input power.
+3. Validate protected-input behavior and auxiliary rails.
+4. Check ADC scaling with known voltages and currents.
+5. Enable each load path individually into a controlled load.
+6. Verify output voltage, current, thermal behavior, and disable response.
+7. Test current-loop interfaces with known stimulus values.
+8. Repeat with representative harness and subsystem loads.
 
-## What I Would Change
+## Validation Evidence to Add
 
-Add board renders, a STEP model, BOM-derived component tables, and featured screenshots for the power path and repeated load-switch channel structure.
+The strongest public evidence to add next would be:
+
+- Input turn-on waveform
+- Protection-threshold testing
+- Load-switch voltage drop
+- Current-measurement accuracy
+- Channel-to-channel consistency
+- Sustained thermal test
+- Fault shutdown and recovery behavior
+
+## Next Revision
+
+Add clearer separation between power-return and measurement-return annotations, dedicated test points for every switched channel, and a published channel-level validation table.

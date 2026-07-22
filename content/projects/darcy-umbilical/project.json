@@ -1,22 +1,22 @@
 {
   "slug": "darcy-umbilical",
   "title": "Darcy Umbilical",
-  "subtitle": "Compact vehicle-side umbilical interface for ground power, Ethernet, and abort/safing signals",
+  "subtitle": "Protected vehicle-side interface for ground power, Ethernet, ESTOP, and hardware safing",
   "category": ["Avionics", "Embedded Systems", "Test / HITL"],
   "status": "Designed",
-  "role": "Responsible Engineer",
+  "role": "Design Responsible Engineer",
   "tools": ["Altium", "Bench Supply", "Oscilloscope"],
   "layerCount": 4,
   "stackup": "Four copper-layer vehicle-side umbilical PCB exported from Altium Gerbers",
   "boardSize": "TBD from mechanical export",
-  "summary": "Vehicle-side umbilical PCB for launch and ground operations, carrying high-voltage/power, Ethernet, ESTOP, and RBF/safing signals through a compact connector boundary with ESD/TVS protection and keyed interfaces to reduce integration error.",
+  "summary": "A compact four-layer vehicle-side umbilical PCB connecting launch and ground-support equipment to the Darcy avionics system. The board carries power, Ethernet, ESTOP, and RBF/safing signals across a mechanically constrained connector boundary while incorporating transient protection and keyed interfaces to reduce wiring and operator errors.",
   "thumbnail": "/generated/recovery-system/thumbnails/card.svg",
   "tags": ["Umbilical", "Avionics", "Ground Support", "Vehicle Interface", "Altium"],
   "highlights": [
-    { "label": "Schematic Pages", "value": "1" },
-    { "label": "Signals", "value": "Power / Ethernet / ESTOP" },
-    { "label": "Copper Layers", "value": "4" },
-    { "label": "Revision", "value": "1.0" }
+    { "label": "Ground Interfaces", "value": "Power + Ethernet" },
+    { "label": "Safing Signals", "value": "ESTOP + RBF" },
+    { "label": "Protection", "value": "TVS / ESD" },
+    { "label": "Copper Layers", "value": "4" }
   ],
   "keyComponents": [
     "Vehicle-side umbilical connector interface",
@@ -26,10 +26,11 @@
     "RBF and safing signal routing"
   ],
   "mainConstraints": [
-    "Keep power, Ethernet, ESTOP, and RBF signals auditable across connectors",
-    "Use connector orientation and polarity choices to reduce operator error",
-    "Add TVS/ESD protection for hardware handled during integration and launch operations",
-    "Preserve a compact board outline while meeting vehicle-side mechanical constraints"
+    "Keep every vehicle-to-ground signal easy to trace and audit",
+    "Protect externally handled interfaces against ESD and transient events",
+    "Preserve Ethernet impedance and reference continuity through the connector boundary",
+    "Separate power and high-energy paths from communication and safing signals",
+    "Use connector keying, polarity, and labeling to reduce integration mistakes"
   ],
   "publicNote": "This project is derived from exported Altium schematic and Gerber artifacts. Raw .SchDoc and .PcbDoc files are not parsed by this portfolio.",
   "model3d": {
@@ -47,7 +48,7 @@
         "id": "pdf",
         "title": "Exported Schematic PDF",
         "file": "/content/projects/darcy-umbilical/schematic/darcy-umbilical.pdf",
-        "description": "Exported Altium schematic PDF dated 3/18/2026, revision 1.0. The PDF shows the vehicle-side umbilical interface for power, Ethernet, ESTOP, RBF/safing signals, and ESD/TVS protection.",
+        "description": "Exported Altium schematic PDF showing the vehicle-side umbilical interface for power, Ethernet, ESTOP, RBF/safing signals, and ESD/TVS protection.",
         "hotspots": []
       }
     ]

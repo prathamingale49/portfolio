@@ -1,40 +1,39 @@
 {
   "slug": "recovery-system",
   "title": "Recovery System",
-  "subtitle": "Mixed-signal recovery avionics board with redundant safing, voting, sensing, and ignition-driver control",
+  "subtitle": "Fault-tolerant recovery avionics with triple-MCU voting and ten high-current deployment channels",
   "category": ["Avionics", "Embedded Systems", "Power Electronics", "High Current"],
   "status": "Designed",
-  "role": "Responsible Engineer",
+  "role": "Design Responsible Engineer",
   "tools": ["Altium", "Oscilloscope", "Electronic Load", "Bench Supply"],
   "layerCount": 6,
   "stackup": "Six copper-layer mixed-signal avionics PCB with high-current recovery-driver routing and separated logic/power regions",
   "boardSize": "TBD from final mechanical export",
-  "summary": "A Yellow Jacket Space Program recovery PCB with dual-harness battery feeds, redundant STM32 flight channels, SPI IMU/barometer sensing, discrete median voting, four independent safing paths, buck-converter power stages, and ten ignition-driver channels for deployment control.",
+  "summary": "A six-layer mixed-signal recovery controller for fault-tolerant rocket deployment. The board combines dual input power paths, four regulated power stages, three independent STM32 control domains, discrete median-voting logic, redundant hardware safing, inertial and environmental sensing, and ten 24 V ignition channels.",
   "thumbnail": "/generated/recovery-system/thumbnails/card.svg",
   "tags": ["Avionics", "Recovery", "Voting Logic", "Redundant Control", "High Current", "Altium"],
   "highlights": [
-    { "label": "Ignition Channels", "value": "10" },
-    { "label": "Microcontroller Domains", "value": "3" },
-    { "label": "Safing Paths", "value": "4" },
-    { "label": "Schematic Pages", "value": "24" }
+    { "label": "Deployment Channels", "value": "10" },
+    { "label": "Independent MCU Domains", "value": "3" },
+    { "label": "Simultaneous Load Step", "value": "300 W" },
+    { "label": "3.3 V Peak Reduced", "value": "8.2 to 3.9 V" }
   ],
   "keyComponents": [
-    "Recovery_Board.PrjPcb",
+    "Triple STM32 control architecture",
+    "Discrete median-voting logic",
+    "Dual protected input power paths",
     "48 V to 24 V buck converters",
     "3.3 V buck converters",
-    "LM73100RPWR eFuse / power path",
-    "RT1987N-A power path",
-    "IMU",
-    "Magnetometer",
-    "Barometer / thermometer",
-    "Constant-current recovery drivers"
+    "Ten constant-current ignition drivers",
+    "IMU, barometer, and magnetometer interfaces",
+    "Hardware RBF, ESTOP, and abort paths"
   ],
   "mainConstraints": [
-    "Maintain redundant-domain isolation across three STM32/EKF channels",
-    "Minimize high di/dt hot-loop and return-path inductance around buck converters and ignition drivers",
-    "Separate high-current switching regions from low-voltage control and sensing circuitry",
-    "Preserve four independent safing paths through RBF, ESTOP, and software controls",
-    "Validate deployment loads, rail transients, voting behavior, and sensor interfaces during bring-up"
+    "Preserve fault independence across redundant power, compute, and deployment paths",
+    "Minimize high di/dt loop area through the ignition switches, connectors, and return paths",
+    "Isolate low-voltage sensing and voting logic from high-current deployment circuitry",
+    "Maintain deterministic hardware inhibition through RBF, ESTOP, abort, and software-controlled enables",
+    "Keep power-distribution impedance low enough to support simultaneous deployment without resetting control electronics"
   ],
   "publicNote": "This portfolio entry is derived from the exported Altium schematic PDF. It does not parse or include raw .SchDoc or .PcbDoc files.",
   "model3d": {
@@ -53,19 +52,19 @@
   "featured": [
     {
       "title": "Recovery Driver Bank",
-      "description": "High-current deployment driver region with command, fault, and current feedback routing.",
+      "description": "Deployment switches, local capacitance, output connectors, and return paths arranged to constrain high di/dt current loops while maintaining separation between control and power regions.",
       "image": "/content/projects/recovery-system/media/featured-driver-bank.svg",
       "tag": "Layout"
     },
     {
       "title": "Voting Logic Core",
-      "description": "Redundant enable path and 1-fault-tolerant voting logic before deployment outputs.",
+      "description": "Three independent control domains feed discrete voting logic before any deployment command reaches the output drivers. Separate RBF, ESTOP, abort, and software enables keep deployment inhibited during integration and flight operations.",
       "image": "/content/projects/recovery-system/media/featured-voting-logic.svg",
       "tag": "Schematic"
     },
     {
       "title": "Dual Power Path",
-      "description": "Input protection, power-path control, and regulated rails for recovery electronics.",
+      "description": "Dual protected input paths and regulated power stages sized for simultaneous deployment transients without resetting downstream control electronics.",
       "image": "/content/projects/recovery-system/media/featured-power-path.svg",
       "tag": "Power"
     }
@@ -76,7 +75,7 @@
         "id": "pdf",
         "title": "Exported Schematic PDF",
         "file": "/content/projects/recovery-system/schematic/recovery-system.pdf",
-        "description": "Exported Altium schematic PDF dated 7/22/2026, revision 5.0. Use the embedded browser PDF viewer and the PDF's own sheet links to browse input connectors, power, microcontrollers, voting logic, sensors, and recovery drivers.",
+        "description": "Exported Altium schematic PDF. Use the embedded browser PDF viewer and the PDF's own sheet links to browse input connectors, power, microcontrollers, voting logic, sensors, and recovery drivers.",
         "hotspots": []
       }
     ]
@@ -122,43 +121,6 @@
     ],
     "callouts": []
   },
-  "tests": [
-    {
-      "name": "Power Input and Rail Bring-up",
-      "purpose": "Verify VIN1/VIN2 behavior, 24 V rail, 3.3 V rail, and voltage-sense feedback before enabling recovery drivers.",
-      "setup": "Use current-limited bench supplies on each input path; probe P24V0, P3V3, 24V-VSNS, and 3V3-VSNS.",
-      "expected": "Rails sequence correctly, voltage sense nodes match divider expectations, and no abnormal current draw is observed.",
-      "actual": "Not yet documented in the provided PDF.",
-      "status": "Not Tested",
-      "evidence": ["/content/projects/recovery-system/media/power-bringup-placeholder.svg"],
-      "notes": "The portfolio should be updated with real scope captures and measured rail values after board bring-up."
-    },
-    {
-      "name": "Voting Logic Functional Check",
-      "purpose": "Confirm the 1-fault-tolerant recovery enable voting behavior before connecting deployment loads.",
-      "setup": "Drive redundant microcontroller enable combinations and monitor RECO enable, latch, select, sense, and fault outputs.",
-      "expected": "Deployment outputs only enable for valid voting combinations and remain inhibited by ESTOP/RBF disable inputs.",
-      "actual": "Not yet documented in the provided PDF.",
-      "status": "Not Tested",
-      "evidence": [],
-      "notes": "Add a truth table and logic-analyzer capture once tested."
-    },
-    {
-      "name": "Recovery Driver Current Limit",
-      "purpose": "Validate constant-current behavior and fault reporting for recovery driver channels.",
-      "setup": "Use an electronic load or representative deployment load; command each driver bank and measure current, VREF feedback, and fault pins.",
-      "expected": "Driver current behavior matches the schematic notes, including current limit, 1 V/A gain, and fault handling.",
-      "actual": "Not yet documented in the provided PDF.",
-      "status": "Not Tested",
-      "evidence": ["/content/projects/recovery-system/media/driver-test-placeholder.svg"],
-      "notes": "Document thermal behavior and channel-to-channel consistency."
-    }
-  ],
-  "revisions": [
-    {
-      "rev": "Rev 5",
-      "status": "Designed",
-      "notes": "Exported Altium schematic PDF dated 07/22/2026; portfolio page generated from public schematic hierarchy and notes."
-    }
-  ]
+  "tests": [],
+  "revisions": []
 }

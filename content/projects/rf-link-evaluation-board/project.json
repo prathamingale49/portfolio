@@ -1,37 +1,39 @@
 {
   "slug": "rf-link-evaluation-board",
   "title": "RF Link Evaluation Board",
-  "subtitle": "Layout in progress; board for RF telemetry path evaluation, power measurement, and CM5-based logging",
+  "subtitle": "Layout in progress; 2.4 GHz mixed-signal evaluation platform for RF-path characterization, VSWR measurement, and automated telemetry logging",
   "category": ["RF / Telemetry", "Avionics", "Embedded Systems", "Test / HITL"],
   "status": "Designed",
-  "role": "Responsible Engineer",
+  "role": "Design Responsible Engineer",
   "tools": ["Altium", "VNA", "Spectrum Analyzer", "Oscilloscope"],
   "layerCount": 4,
   "stackup": "Four-layer RF and mixed-signal PCB stackup to be finalized from Altium exports",
   "boardSize": "TBD from mechanical export",
-  "summary": "An RF link evaluation board for LoRa and telemetry characterization, including switched RF paths, directional-coupler power measurement, detector telemetry, current sensing, and CM5 logging. Layout is in progress and will be updated with exported layer renders.",
+  "summary": "A 2.4 GHz mixed-signal RF evaluation board for characterizing a LoRa telemetry transceiver under controlled transmit, receive, and mismatch conditions. The board combines switched RF test paths, forward and reverse power measurement, detector telemetry, current and temperature sensing, a 12-bit SAR ADC, and Compute Module 5 control and data logging.",
   "thumbnail": "/generated/recovery-system/thumbnails/card.svg",
   "tags": ["RF", "Telemetry", "LoRa", "Directional Coupler", "CM5", "Layout In Progress", "Altium"],
   "highlights": [
-    { "label": "RF Path", "value": "Switched telemetry" },
-    { "label": "Measurement", "value": "Forward / reverse power" },
-    { "label": "Control", "value": "CM5 logging" },
-    { "label": "Layout", "value": "In progress" }
+    { "label": "RF Band", "value": "2.4 GHz" },
+    { "label": "TX Range", "value": "0-12 dBm" },
+    { "label": "Target VSWR", "value": "1.1:1-3:1" },
+    { "label": "Telemetry ADC", "value": "8 ch / 12 bit" }
   ],
   "keyComponents": [
-    "LoRa radio",
-    "Directional coupler",
-    "Log detector",
-    "RF switches",
+    "2.4 GHz LoRa transceiver",
+    "29.2 dB directional coupler",
+    "ADL5519 dual-channel logarithmic detector",
+    "Switched RF test paths",
     "Raspberry Pi CM5",
-    "SAR ADC telemetry",
-    "Current-sense shunts"
+    "TLA2518 eight-channel, 12-bit SAR ADC",
+    "Kelvin-shunt current monitoring",
+    "1.15 V telemetry calibration reference"
   ],
   "mainConstraints": [
-    "Maintain controlled-impedance RF feedlines and clean return paths",
-    "Keep coupler and detector ranges bounded for expected transmit power",
-    "Separate RF, power, and digital logging regions",
-    "Provide clear test access for VNA, spectrum, power, and telemetry validation"
+    "Maintain controlled-impedance RF paths with continuous reference planes and minimal discontinuities",
+    "Measure forward and reflected power without overdriving the log detector",
+    "Bound measurement uncertainty introduced by directional-coupler directivity",
+    "Keep detector and ADC signals isolated from digital, USB, Ethernet, and switching-power noise",
+    "Provide flexible RF access for VNA, spectrum-analyzer, conducted-power, and antenna-mismatch testing"
   ],
   "publicNote": "Layout is in progress. Add exported copper SVGs, screenshots, and RF measurement evidence as the board matures.",
   "model3d": {

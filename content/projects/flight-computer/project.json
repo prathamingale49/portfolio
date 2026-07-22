@@ -1,7 +1,7 @@
 {
   "slug": "flight-computer",
   "title": "Flight Computer",
-  "subtitle": "Black box and central flight-computer board for sensing, telemetry, storage, and recovery coordination",
+  "subtitle": "Central flight-compute and black-box avionics board for sensing, storage, telemetry, and recovery coordination",
   "category": ["Avionics", "Embedded Systems", "RF / Telemetry"],
   "status": "Designed",
   "role": "Test Engineer",
@@ -9,29 +9,32 @@
   "layerCount": 4,
   "stackup": "Four copper-layer flight computer PCB exported from Altium Gerbers",
   "boardSize": "TBD from mechanical export",
-  "summary": "Primary avionics compute board for the flight stack, organized around power regulation, input connectors, ADC measurement, IMU/barometer/magnetometer sensing, flash storage, current-loop interfacing, telemetry, USB, and recovery-system connectivity.",
+  "summary": "The central compute and data-recording board for the flight avionics stack. It integrates power regulation, environmental and inertial sensors, ADC acquisition, onboard flash storage, current-loop interfaces, telemetry, USB, and recovery-system connectivity. I supported portions of schematic/layout review, then led system bring-up, interface validation, debugging, and continued board operation.",
   "thumbnail": "/generated/recovery-system/thumbnails/card.svg",
   "tags": ["Flight Computer", "Avionics", "Sensors", "Telemetry", "Embedded", "Altium"],
   "highlights": [
-    { "label": "Schematic Pages", "value": "11" },
-    { "label": "Sensors", "value": "IMU / baro / mag" },
-    { "label": "Copper Layers", "value": "4" },
-    { "label": "Revision", "value": "4.0" }
+    { "label": "Sensor Suite", "value": "IMU / baro / mag" },
+    { "label": "Flight Data", "value": "Onboard flash" },
+    { "label": "External Interfaces", "value": "Telemetry / USB" },
+    { "label": "Ownership", "value": "Bring-up / test" }
   ],
   "keyComponents": [
-    "Microcontroller or compute module",
+    "Primary compute and control",
     "IMU",
     "Barometer",
     "Magnetometer",
+    "ADC acquisition",
+    "Onboard flash storage",
     "Telemetry interface",
     "Recovery system interface",
     "Power regulation"
   ],
   "mainConstraints": [
-    "Keep precision sensor, ADC, and reference routing reviewable for state-estimation quality",
-    "Separate telemetry, storage, and digital interfaces from sensitive measurement paths",
-    "Make recovery-system and current-loop interfaces auditable at schematic and test level",
-    "Provide accessible bring-up points for rails, buses, sensors, and external connectors"
+    "Stage bring-up of power, compute, sensing, storage, and communication subsystems",
+    "Verify sensor polarity, scaling, communication, and plausibility before vehicle integration",
+    "Keep low-level ADC and reference routing isolated from digital and telemetry activity",
+    "Validate recovery-system and current-loop interfaces at schematic and system level",
+    "Maintain reliable board operation through repeated bench, integration, and vehicle testing"
   ],
   "publicNote": "Layout Gerbers, 3D model, and exported schematic PDF are connected. Add BOM, pick-and-place, and lab evidence as the design package matures.",
   "model3d": {
@@ -53,7 +56,7 @@
         "id": "pdf",
         "title": "Exported Schematic PDF",
         "file": "/content/projects/flight-computer/schematic/flight-computer.pdf",
-        "description": "Exported Altium schematic PDF dated 7/22/2026, revision 4.0. The PDF covers connectors, power, ADCs, sensors, flash, current-loop, telemetry, USB, recovery-system interface, and layout notes.",
+        "description": "Exported Altium schematic PDF covering connectors, power, ADCs, sensors, flash, current-loop, telemetry, USB, recovery-system interface, and layout notes.",
         "hotspots": []
       }
     ]

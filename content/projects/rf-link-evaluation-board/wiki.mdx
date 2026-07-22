@@ -1,17 +1,58 @@
-# RF Link Evaluation Board
-
 ## Purpose
 
-Template page for the RF link evaluation board. Layout is in progress; use this page to document RF architecture, measurements, layout decisions, and test results.
+The RF Link Evaluation Board is a 2.4 GHz characterization board for a LoRa telemetry transceiver, its RF path, and the mixed-signal telemetry around it.
 
-## Architecture
+The point of the board is to answer practical questions that are hard to settle from a transceiver datasheet alone: conducted transmit power, reflected power under antenna mismatch, current consumption, board temperature, insertion loss through switched paths, and the real accuracy limits of the VSWR measurement chain.
 
-Document the RF path, switched measurement paths, directional coupler, detector telemetry, current sensing, and CM5 logging path.
+## My Responsibility
 
-## PCB Layout Walkthrough
+I architected the board and owned the RF measurement chain, analog telemetry front end, schematic design, component selection, error analysis, and PCB implementation.
 
-Add controlled-impedance traces, via fences, RF launch details, ground stitching, and analog/digital separation notes when layout exports are available.
+## RF Architecture
 
-## Test Results
+The transceiver connects to a switched network that supports normal antenna operation and conducted test access. A directional coupler samples forward and reverse traveling waves without interrupting the primary RF path.
 
-Add VNA, spectrum, forward/reverse power, current, and telemetry evidence.
+The coupled signals feed an ADL5519 logarithmic detector. For a 0-12 dBm transmitter and the selected 29.2 dB coupler, the forward detector input is approximately -30 to -17 dBm. Across an intended mismatch range of approximately 1.1:1 to 3:1 VSWR, the reverse detector input is approximately -56 to -23 dBm.
+
+Those levels keep the detector in a usable measurement region without letting the normal transmit signal overdrive the analog chain.
+
+## Measurement Accuracy
+
+At low reflected-power levels, directional-coupler directivity is more important than detector resolution. Leakage from the forward wave into the reverse-coupled port can approach or exceed the true reflected signal, establishing a measurement floor.
+
+So the analysis keeps detector accuracy, ADC accuracy, coupler coupling tolerance, insertion loss, and coupler directivity separate. That keeps the board from claiming more return-loss accuracy than the RF hardware can actually support.
+
+## Telemetry Architecture
+
+An eight-channel, 12-bit TLA2518 SAR ADC records forward and reverse detector outputs, current, voltage, temperature, and a 1.15 V calibration reference.
+
+The current channels use Kelvin-connected shunts for approximately 0-100 mA measurement. Analog channels include approximately 340 Hz anti-alias filtering. Source resistance, acquisition time, sampling capacitance, and channel-to-channel voltage steps were analyzed to estimate multiplexer charge-sharing error. The worst analyzed case was approximately 0.10 LSB.
+
+A Compute Module 5 controls the board and records data over Ethernet and USB.
+
+## PCB Layout
+
+The RF path should be shown separately from the digital and power regions. The important layout callouts are:
+
+- Controlled-impedance transceiver-to-switch routing
+- Directional-coupler orientation
+- RF-switch and connector transitions
+- Ground-via fencing
+- Continuous reference planes
+- Detector isolation from digital interfaces
+- Kelvin-shunt routing
+- ADC filtering and reference placement
+
+## Validation Plan
+
+1. VNA measurement of each passive and switched RF path.
+2. Conducted transmit-power measurement across commanded power levels.
+3. Detector calibration against an external RF power meter.
+4. Known mismatch testing with calibrated terminations or an impedance tuner.
+5. Current and temperature telemetry calibration.
+6. ADC settling verification during worst-case channel switching.
+7. End-to-end data logging through the CM5.
+
+## Current Status
+
+Schematic design and analysis are complete. PCB layout and physical RF validation should stay as separate milestones so simulated and measured performance do not get mixed together.

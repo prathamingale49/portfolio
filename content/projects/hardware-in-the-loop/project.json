@@ -1,7 +1,7 @@
 {
   "slug": "hardware-in-the-loop",
   "title": "Hardware In The Loop",
-  "subtitle": "Layout in progress; HITL avionics board for sensor, actuator, power, and communication emulation",
+  "subtitle": "Layout in progress; multi-domain HITL platform for programmable sensor, actuator, power, and communication emulation",
   "category": ["Avionics", "Test / HITL", "Embedded Systems", "Power Electronics"],
   "status": "Designed",
   "role": "Schematic Designer",
@@ -9,13 +9,13 @@
   "layerCount": 0,
   "stackup": "Stackup to be added from the Altium layer stack manager or fabrication package",
   "boardSize": "TBD from mechanical export",
-  "summary": "A layout-in-progress hardware-in-the-loop PCB project for Yellow Jacket Space Program that combines power conversion, CM5-based control, communications, ADC/DAC signal paths, sensor emulation, valve outputs, detonator interfaces, and switched power outputs.",
+  "summary": "A hardware-in-the-loop platform designed to electrically emulate the sensors, actuators, and interfaces used by the flight avionics system. The board combines programmable RTD, thermocouple, pressure-transducer, current-loop, and differential-sensor channels with valve and deployment-load interfaces, ADC and DAC conversion, multi-rail power, Compute Module 5 control, and wired communication interfaces.",
   "thumbnail": "/generated/recovery-system/thumbnails/card.svg",
   "tags": ["HITL", "Avionics", "Sensor Emulation", "CM5", "Layout In Progress", "Altium"],
   "highlights": [
-    { "label": "Schematic Pages", "value": "30" },
     { "label": "Power Domains", "value": "48 V / 24 V / 5 V / 3.3 V" },
-    { "label": "Signal Domains", "value": "ADC / DAC / GPIO" },
+    { "label": "Analog I/O", "value": "ADC + DAC" },
+    { "label": "Sensor Emulation", "value": "RTD / TC / PT" },
     { "label": "Layout", "value": "In progress" }
   ],
   "keyComponents": [
@@ -29,9 +29,10 @@
     "Valve and detonator interfaces"
   ],
   "mainConstraints": [
-    "Emulate multiple avionics sensor and actuator interfaces from one board",
-    "Keep power conversion and low-level analog measurement paths understandable during bring-up",
-    "Expose communication paths including Ethernet, USB, CAN, RS-485, and SPI",
+    "Reproduce the electrical behavior of multiple flight sensors from one configurable platform",
+    "Generate low-noise analog outputs across several signal ranges and interface types",
+    "Keep switching-power and actuator circuitry from coupling into precision emulation channels",
+    "Support both automated test control and direct bench access",
     "Document the design from exported Altium artifacts without parsing raw schematic or PCB files"
   ],
   "publicNote": "This project is derived from the exported Altium schematic PDF only. Raw .SchDoc and .PcbDoc files are not parsed by this portfolio.",

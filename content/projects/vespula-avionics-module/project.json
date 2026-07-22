@@ -1,22 +1,22 @@
 {
   "slug": "vespula-avionics-module",
   "title": "Vespula Avionics Module",
-  "subtitle": "Flight System Avionics Module for engine actuation, sensing, and vehicle control",
+  "subtitle": "Redesign and validation of a 48 V flight engine controller for valve actuation, ignition, and sensor acquisition",
   "category": ["Avionics", "Embedded Systems", "Power Electronics"],
   "status": "Designed",
-  "role": "Responsible Engineer",
+  "role": "Revision Responsible Engineer",
   "tools": ["Altium", "Oscilloscope", "Bench Supply"],
   "layerCount": 6,
   "stackup": "Six copper-layer avionics module PCB exported from Altium Gerbers",
   "boardSize": "TBD from mechanical export",
-  "summary": "Lead electrical design for the Flight System Avionics Module, the flight engine controller responsible for actuation and sensing across the rocket's 48 V avionics bus. The board drives solenoid valves and ignitors while reading differential sensors, RTDs, and pressure transducers for engine start and shutdown control.",
+  "summary": "A six-layer flight engine controller operating from the vehicle's 48 V avionics bus. The board commands solenoid valves and ignitors while acquiring differential sensors, RTDs, and pressure transducers used during engine start and shutdown. After major first-revision faults were found, I owned the electrical and PCB revision, led bring-up, and became the board's day-to-day operational owner.",
   "thumbnail": "/generated/recovery-system/thumbnails/card.svg",
   "tags": ["Avionics", "Embedded", "Sensors", "Power", "Vehicle Interface", "Altium"],
   "highlights": [
-    { "label": "Bus", "value": "48 V" },
-    { "label": "Sensor Types", "value": "RTD / PT / differential" },
-    { "label": "Outputs", "value": "Valves / ignitors" },
-    { "label": "Copper Layers", "value": "6" }
+    { "label": "Vehicle Bus", "value": "48 V" },
+    { "label": "Control Pins Remapped", "value": "15+" },
+    { "label": "Actuation Outputs", "value": "Valves / ignitors" },
+    { "label": "Sensor Interfaces", "value": "RTD / PT / differential" }
   ],
   "keyComponents": [
     "BeagleBone control interface",
@@ -28,11 +28,11 @@
     "Power conversion and compensation network"
   ],
   "mainConstraints": [
-    "Correct inherited schematic faults including driven boot pins and flipped ADC signals",
-    "Restore stable ignitor power and converter compensation",
-    "Rework BeagleBone pin mapping while preserving vehicle control interfaces",
+    "Audit and correct inherited schematic and pin-mapping errors",
+    "Restore stable ignitor power by correcting converter behavior and compensation",
+    "Correct ADC signal polarity and digital boot-state conflicts",
     "Separate high-current actuation paths from low-level sensor acquisition",
-    "Validate reliable ignition, valve, and sensor operation after redesign"
+    "Verify the revised board behaves predictably during engine-control operations"
   ],
   "publicNote": "Layout Gerbers and 3D model are connected. Add exported schematic PDF/SVG pages, BOM, pick-and-place, and lab evidence as the design package matures.",
   "model3d": {

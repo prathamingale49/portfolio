@@ -1,48 +1,78 @@
-# Hardware In The Loop
-
 ## Purpose
 
-This project is a hardware-in-the-loop avionics board built around exported Altium schematic artifacts. The available PDF contains 30 schematic pages covering the top-level architecture, input power, load switching, boost conversion, CM5 control, ADC/DAC paths, sensor emulation, valve outputs, detonator interfaces, and output power.
+The Hardware-in-the-Loop platform reproduces the electrical behavior of flight sensors, actuators, power rails, and communication interfaces so avionics hardware can be tested without a complete vehicle.
 
-## Requirements
+The point is repeatability. It can test fault conditions, sensor trajectories, actuator commands, and electrical interfaces that would otherwise require hazardous or expensive vehicle-level equipment.
 
-- Present the exported schematic PDF directly so its internal sheet links remain usable.
-- Add Gerber-derived layout renders when the fabrication outputs are available.
-- Add the Altium STEP export when the 3D board model is ready.
-- Keep the portfolio page static-first and avoid parsing raw Altium project files.
+## My Responsibility
 
-## System Context
-
-The board sits in a test and validation context for avionics hardware. It appears to combine power rails, compute/control, communications, analog conversion, and emulated loads or sensor interfaces so flight electronics can be exercised before full system integration.
+I designed major analog, power, and interface sections of the schematic, selected components, and built circuit simulations for the programmable sensor and actuator-emulation paths.
 
 ## Architecture
 
-The schematic PDF includes sheets for input power, input load switching, 48 V boost conversion, 5 V and 3.3 V regulation, CM5 main control, temperature sensing, communication, GPIO, ADC, DAC, differential sensors, thermocouple, current loop, RTD, valve, detonator, RBF tag, signal connectors, and output load switching.
+The board combines:
 
-## Schematic Walkthrough
+- Raspberry Pi Compute Module 5 control
+- ADC measurement
+- DAC stimulus generation
+- RTD emulation
+- Thermocouple emulation
+- Pressure-transducer and differential-sensor emulation
+- Current-loop interfaces
+- Valve outputs
+- Deployment or detonator interfaces
+- Input and output load switching
+- 48 V, 24 V, 5 V, and 3.3 V power domains
+- Ethernet, USB, CAN, SPI, and GPIO
 
-Use the schematic page to open the exported PDF. The embedded viewer preserves the native PDF navigation generated from Altium, so sheet links can be followed without manually recreating hotspots in the portfolio.
+The architecture separates the control software from the electrical interface layer. The CM5 commands DACs and switches, while analog circuitry turns those commands into the voltage, current, or resistance behavior expected by the flight hardware.
 
-## PCB Layout Walkthrough
+## Sensor Emulation
 
-Layout renders have not been added yet. Add Gerber-derived SVGs under `public/generated/hardware-in-the-loop/layout` or define manual layout image paths in `project.json`.
+Different sensors need fundamentally different emulation methods.
 
-## Bring-up Plan
+Voltage-output and differential sensors can be reproduced using DACs and precision amplifier stages. Current-loop sensors require controlled current generation. RTDs require programmable resistance behavior. Thermocouples require low-level differential voltages with careful offset and noise control.
 
-- Bring up input power with current limits enabled.
-- Verify intermediate rails before loading sensitive digital or analog devices.
-- Validate communication links before closing control loops.
-- Exercise ADC/DAC channels with known references.
-- Test each emulated sensor/actuator path against expected electrical behavior.
+Each channel should eventually be documented with:
 
-## Test Results
+- Electrical interface being emulated
+- Input command range
+- Output range
+- Transfer function
+- Expected accuracy
+- Bandwidth
+- Protection limits
+- Validation method
 
-No lab evidence has been added yet. Add scope captures, thermal images, and board photos under the project media folder as validation progresses.
+## Power Architecture
 
-## Revision History
+The platform includes multiple switching and linear regulators to provide vehicle-like and logic-level voltage domains. Power conversion must support representative loads without allowing converter noise to contaminate low-level sensor emulation.
 
-The current portfolio entry is based on the exported Altium schematic PDF dated March 18, 2026.
+Power-stage layouts should make the switching loops, bulk capacitance, current return paths, thermal spreading, and separation from low-noise analog circuitry easy to see.
 
-## What I Would Change
+## Control and Communications
 
-Add board render SVGs, a STEP model, BOM-derived component summaries, and focused screenshots of the most interesting analog and power sections.
+The CM5 provides the high-level test interface. Ethernet, USB, CAN, SPI, and GPIO support control, data logging, and hardware-interface emulation.
+
+This lets automated tests command a stimulus, observe the hardware response, compare it against expected behavior, and save a reproducible test record.
+
+## Validation Plan
+
+1. Bring up every power rail independently.
+2. Verify CM5 boot and communication.
+3. Exercise ADC channels with precision references.
+4. Verify DAC outputs unloaded.
+5. Validate each amplifier and sensor-emulation transfer function.
+6. Test current-loop compliance across representative loads.
+7. Check RTD and thermocouple emulation against calibrated instrumentation.
+8. Exercise valve and deployment interfaces with safe loads.
+9. Measure channel noise and crosstalk.
+10. Run automated end-to-end tests against representative flight hardware.
+
+## Current Status
+
+The schematic architecture is substantially developed, while PCB layout and physical validation remain in progress. The portfolio should clearly separate calculated, simulated, and measured results as the project advances.
+
+## Next Revision
+
+Add per-channel calibration storage, clearer analog-ground partitioning documentation, automated self-test loops, and a standardized connector scheme for rapidly swapping flight-hardware configurations.

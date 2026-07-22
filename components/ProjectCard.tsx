@@ -84,17 +84,25 @@ export function ProjectCard({ project, compact = false, simple = false }: Projec
         </div>
 
         {simple ? null : (
-          <dl className={compact ? "grid grid-cols-2 gap-3 text-sm" : "grid grid-cols-2 gap-3 text-sm xl:grid-cols-4"}>
+          <dl
+            className={
+              compact
+                ? "grid grid-cols-2 gap-3 text-sm"
+                : "grid gap-3 text-sm sm:grid-cols-[minmax(13.5rem,1.25fr)_minmax(5rem,0.55fr)] xl:grid-cols-[minmax(15rem,1.25fr)_minmax(5rem,0.55fr)_minmax(0,2fr)]"
+            }
+          >
             <div>
               <dt className="text-xs uppercase tracking-wide text-slate-500">Role</dt>
-              <dd className="mt-1 line-clamp-2 text-slate-300">{project.role}</dd>
+              <dd className={`mt-1 text-slate-300 ${compact ? "line-clamp-2" : "sm:whitespace-nowrap"}`}>
+                {project.role}
+              </dd>
             </div>
             <div>
               <dt className="text-xs uppercase tracking-wide text-slate-500">Board</dt>
               <dd className="mt-1 text-slate-300">{layerLabel}</dd>
             </div>
             {!compact ? (
-              <div className="xl:col-span-2">
+              <div className="sm:col-span-2 xl:col-span-1">
                 <dt className="text-xs uppercase tracking-wide text-slate-500">Tools</dt>
                 <dd className="mt-1 text-slate-300">{project.tools.join(", ")}</dd>
               </div>

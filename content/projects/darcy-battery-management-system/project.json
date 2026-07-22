@@ -1,21 +1,21 @@
 {
   "slug": "darcy-battery-management-system",
   "title": "Darcy Battery Management System",
-  "subtitle": "Four-layer battery management and power-distribution board for Darcy avionics",
+  "subtitle": "Protected 12-cell battery interface and monitored power-distribution node for vehicle avionics",
   "category": ["Avionics", "Power Electronics", "Embedded Systems", "High Current"],
   "status": "Designed",
-  "role": "Responsible Engineer",
+  "role": "Design Responsible Engineer",
   "tools": ["Altium", "Bench Supply", "Oscilloscope", "Electronic Load"],
   "layerCount": 4,
   "stackup": "Four copper-layer battery management PCB exported from Altium Gerbers",
   "boardSize": "TBD from mechanical export",
-  "summary": "Battery management PCB for the Darcy rocket, acting as the primary power-distribution node from a 12-cell lithium-ion pack to vehicle avionics. The design includes regulated power, five load-switch paths, current and voltage telemetry, connector load-switch circuitry, and current-loop sensor interfacing.",
+  "summary": "A four-layer battery-management and power-distribution PCB connecting a 12-cell lithium-ion pack to the Darcy avionics system. The board combines protected battery input handling, regulated auxiliary power, five controlled load outputs, connector-level load switching, current and voltage telemetry, and current-loop sensor interfacing.",
   "thumbnail": "/generated/recovery-system/thumbnails/card.svg",
   "tags": ["BMS", "Power", "Load Switches", "ADC", "Current Loop", "Altium"],
   "highlights": [
-    { "label": "Schematic Pages", "value": "10" },
-    { "label": "Load Switch Sheets", "value": "5" },
-    { "label": "Battery Pack", "value": "12S Li-ion" },
+    { "label": "Battery Source", "value": "12S Li-ion" },
+    { "label": "Controlled Load Paths", "value": "5" },
+    { "label": "Power Telemetry", "value": "Current + voltage" },
     { "label": "Copper Layers", "value": "4" }
   ],
   "keyComponents": [
@@ -27,10 +27,11 @@
     "Current-loop sensor interface"
   ],
   "mainConstraints": [
-    "Deliver protected power from the battery pack to avionics subsystems",
-    "Keep the five load-switch paths consistent, reviewable, and bring-up friendly",
-    "Route current and voltage telemetry cleanly for ADC-based validation",
-    "Maintain effective grounding and low-EMI power distribution in a compact four-layer PCB"
+    "Protect the vehicle power bus against input faults and abnormal battery conditions",
+    "Keep repeated load-switch channels electrically consistent and easy to validate",
+    "Route high-current distribution paths with low resistance and controlled return geometry",
+    "Prevent switching-current paths from contaminating ADC and current-loop measurements",
+    "Expose sufficient test access for staged power-up and channel-by-channel validation"
   ],
   "publicNote": "This project is derived from exported Altium schematic and Gerber artifacts. Raw .SchDoc and .PcbDoc files are not parsed by this portfolio.",
   "model3d": {
@@ -52,7 +53,7 @@
         "id": "pdf",
         "title": "Exported Schematic PDF",
         "file": "/content/projects/darcy-battery-management-system/schematic/darcy-bms.pdf",
-        "description": "Exported Altium schematic PDF dated 3/18/2026, revision 2.1. The PDF covers top level, primary sheet, power, load switching, ADC measurement, connector load switches, and current-loop sensor interfacing.",
+        "description": "Exported Altium schematic PDF covering top level, primary sheet, power, load switching, ADC measurement, connector load switches, and current-loop sensor interfacing.",
         "hotspots": []
       }
     ]

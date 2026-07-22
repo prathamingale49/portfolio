@@ -1,57 +1,52 @@
-# Vespula Avionics Module
-
 ## Purpose
 
-The Vespula Avionics Module documents the Flight System Avionics Module, the flight engine controller responsible for actuation and sensing throughout the rocket's 48 V avionics bus.
+The Vespula Avionics Module is the flight engine controller for vehicle actuation and engine-related sensing. It runs from the 48 V avionics bus, commands solenoid valves and ignitors, and reads RTDs, pressure transducers, and differential sensors used during engine start and shutdown.
 
-The board drives solenoid valves and ignitors while reading differential sensors, RTDs, and pressure transducers. Its role is to provide vehicle control during engine start and shutdown sequences.
+## My Responsibility
 
-## Requirements
+I was the Revision Responsible Engineer. I inherited the first revision, audited the schematic and interfaces, found critical design faults, implemented the schematic and PCB revision, led bring-up, and became the board's day-to-day operational owner.
 
-- Drive solenoid valve and ignitor outputs from the flight engine controller.
-- Read differential sensors, RTDs, and pressure transducers.
-- Maintain reliable control behavior on the 48 V avionics bus.
-- Keep power conversion, actuation, and sensor acquisition paths reviewable in layout.
-- Preserve exported Altium artifacts without parsing raw schematic or PCB source files.
+## Initial Design Problems
 
-## Architecture
+Review and bring-up of the inherited design exposed a few real issues:
 
-The board combines engine-control outputs, sensor acquisition interfaces, power conversion, vehicle connectors, and debug paths. It sits in the avionics stack as the controller for engine actuation and sensor feedback during start and shutdown operations.
+- Controller boot pins were actively driven into invalid states.
+- Multiple ADC signals had reversed polarity or mapping.
+- More than fifteen BeagleBone control and interface pins required reassignment.
+- The ignitor power stage did not regulate reliably.
+- Actuation and sensor behavior could not be validated consistently in the original configuration.
 
-## Redesign Notes
+These were system-level problems, not isolated assembly defects, so fixing them meant coordinating schematic, pin-map, firmware-interface, and PCB changes together.
 
-After major faults were found in the first revision of the Flight SAM, including driven boot pins, flipped ADC signals, and unstable ignitor power, the board went through a rapid redesign.
+## Revision Strategy
 
-The update rewired more than 15 BeagleBone pins, fixed converter compensation, and restored reliable ignition and sensor operation.
+The redesign started by rebuilding signal ownership at the controller and vehicle connectors. Boot-sensitive pins were removed from conflicting functions, ADC polarity was corrected, and the controller pin map was brought back in line with the intended engine-control interfaces.
 
-## PCB Layout Walkthrough
+The ignitor converter and its compensation were revised to restore stable power behavior. High-current output paths and low-level sensor interfaces were then reviewed together to ensure that the electrical changes remained valid in the PCB layout.
 
-The layout viewer uses Gerber-derived copper-layer SVG renders for SIG1, GND1, SIG2, PWR, GND2, and SIG3. Replace or regenerate those SVGs as the Altium layout changes.
+## PCB Layout
 
-Key layout areas to document:
+The six-layer layout separates valve and ignitor current paths from RTD, pressure-transducer, and differential-sensor circuitry. The power layer supports actuation-current distribution, while adjacent reference planes provide return continuity for sensor and controller signals.
 
-- High-current ignitor and valve-driver routing.
-- Sensor acquisition routing for differential sensors, RTDs, and pressure transducers.
-- Power conversion compensation and return paths.
-- BeagleBone pin mapping and connector interfaces.
-- Separation between actuation power and low-level measurement circuitry.
+Featured layout callouts should identify:
 
-## Bring-Up Plan
+- Ignitor current path
+- Solenoid-driver region
+- Converter switching loop
+- Sensor acquisition area
+- BeagleBone interface
+- Vehicle connector boundary
 
-- Verify regulated rails and converter compensation behavior.
-- Confirm corrected BeagleBone pin mapping.
-- Validate ADC signal polarity and sensor-channel readings.
-- Exercise valve-driver and ignitor-output paths with safe loads.
-- Record ignition, sensor, and engine-control interface validation results.
+## Bring-Up
 
-## Test Results
+Bring-up started with controller boot behavior and regulated rails before progressing to ADC polarity, sensor scaling, valve outputs, and ignitor operation.
 
-Add oscilloscope captures, rail measurements, load tests, and sensor sanity-check data as hardware validation artifacts become available.
+The corrected revision restored reliable controller startup, valid sensor acquisition, and repeatable actuation behavior. That was the important milestone: the board became usable flight and test hardware, not just a schematic cleanup.
 
-## Revision History
+## Engineering Lesson
 
-This case study describes the redesign after first-revision Flight SAM faults were identified and corrected.
+The most important part of the project was not any one circuit correction. It was building a disciplined way to audit an inherited design across schematic intent, processor pin behavior, PCB routing, firmware assumptions, and actual bench measurements.
 
-## What I Would Change
+## Next Revision
 
-Add final schematic PDF exports, BOM tables, featured screenshots of the corrected converter and sensor sections, and validation evidence for ignition and sensor operation.
+Future work should add more explicit converter-loop test access, improve labeling around boot-sensitive signals, and capture controller pin ownership in a single interface-control table shared between electrical and firmware teams.

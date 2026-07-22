@@ -1,107 +1,45 @@
 ## Purpose
 
-The Recovery System board is a rocket avionics PCB for Yellow Jacket Space Program. It controls and monitors recovery deployment paths using redundant microcontroller channels, voting logic, dual input power handling, sensors, and high-current recovery drivers.
+At a high level, the Recovery System is the board that decides when the rocket is allowed to deploy recovery. It combines redundant compute, hardware voting, safing interfaces, local sensing, protected power conversion, and ten high-current ignition channels on a single six-layer PCB.
 
-This portfolio project was created from the exported Altium schematic PDF `Recovery System.pdf`. The site does not parse or include raw `.SchDoc` or `.PcbDoc` files.
+The goal was not just to fire deployment loads. The board had to stay inhibited during integration, tolerate a single control-domain fault, survive the simultaneous firing transient, and keep running without resetting its microcontrollers or corrupting sensor data.
 
-## Requirements
+## My Responsibility
 
-- Accept redundant input power paths and produce board-level 24 V and 3.3 V rails.
-- Interface with the flight computer over SPI and expose separate chip-select paths.
-- Include RBF tag and ESTOP disable behavior.
-- Provide redundant microcontroller domains for recovery control.
-- Gate deployment enables through voting logic before driving recovery outputs.
-- Monitor voltage sense, driver fault, sense, latch, select, and VREF feedback nets.
-- Support bring-up and validation with accessible rail, fault, and driver-test points.
-
-## System Context
-
-The board sits in the avionics stack between the flight computer, battery management system, recovery deployment outputs, and local sensor suite. The exported top-level sheet shows input connectors for VIN1/VIN2, SPI, RBF/ESTOP disable lines, flight-computer connections, and recovery output connectors.
-
-![Recovery board placeholder](/content/projects/recovery-system/media/board-photo-placeholder.svg)
+I was the Design Responsible Engineer for the board. I owned the system architecture, schematic, PCB layout, design reviews, bring-up, debugging, validation, and day-to-day board operation.
 
 ## Architecture
 
-The schematic hierarchy is organized around several repeated safety-critical blocks:
+Two protected battery feeds enter independent power paths before supplying the board's deployment and logic rails. Four buck converters generate the required 24 V and low-voltage domains.
 
-- Dual power inputs and power-OR behavior.
-- 48 V to 24 V buck conversion and local 3.3 V generation.
-- Three microcontroller domains.
-- Stage 1 and Stage 2 voting logic.
-- Five recovery-driver banks.
-- Sensor interfaces for IMU, magnetometer, barometer, and thermometer functions.
+Three STM32 control domains independently process local sensor data and receive flight-computer commands. Their deployment commands pass through discrete voting logic before reaching the driver banks. Hardware RBF, ESTOP, abort, and software-enable paths provide multiple independent mechanisms for preventing an unintended deployment.
 
-The schematic viewer embeds the actual exported PDF so the browser's PDF viewer can preserve Altium's internal sheet navigation links.
+Ten output channels drive 24 V deployment loads. Each channel provides command, current-control, sensing, and fault-feedback behavior.
 
-## Power Architecture
+## Fault-Tolerant Design
 
-The PDF includes `Power.SchDoc`, `24V Buck.SchDoc`, `3V3 Buck.SchDoc`, `Power Or.SchDoc`, and `LV Power Or.SchDoc`.
+The control, power, and deployment architecture is split up so one MCU or local power fault cannot directly command an output. Redundant command paths stay separated until the voting stage, and safing inputs can inhibit the deployment path without relying on flight software.
 
-Notable extracted design notes include:
+The PCB routing follows the same fault-domain boundaries. Signals belonging to separate control channels are kept physically distinct where practical, and shared circuitry is limited to intentionally centralized functions.
 
-- 48 V to 24 V conversion for the recovery power rail.
-- 24 V buck output path noted around 8 A.
-- Bulk capacitance placed near recovery power output regions.
-- Low-voltage power-OR stages using eFuse / power-path behavior.
-- UVLO, OVLO, slew-rate, and power-good thresholds on the low-voltage power path.
+## PCB Layout
 
-## Schematic Walkthrough
+The layout problem that mattered most was the transient current path during deployment. Switching devices, output connectors, bulk capacitance, and return paths were placed to keep the current loop tight and reduce parasitic inductance.
 
-The source PDF contains 24 exported schematic pages. The most useful portfolio-level sheets are:
+Low-level sensing, MCU, and voting circuitry were separated from the driver banks and switching nodes. The six-layer stackup provides two ground-reference layers, a dedicated power layer, and three signal layers to support low-impedance current paths and predictable signal references.
 
-- Primary hierarchy
-- Input connectors
-- Power
-- 24 V buck
-- 3.3 V buck
-- Power OR
-- LV power OR
-- Voting logic
-- Microcontrollers
-- Sensors
-- Recovery drivers
-- Output connectors
+## Bring-Up and Validation
 
-The actual PDF is stored at `/content/projects/recovery-system/schematic/recovery-system.pdf` and embedded directly on the schematic page. This keeps the Altium-exported click-through behavior without attempting to parse raw Altium schematic files.
+Bring-up moved in stages: isolated power-path checks, regulated-rail validation, MCU communication, sensor interfaces, voting behavior, safing inputs, and finally deployment testing.
 
-## PCB Layout Walkthrough
+The maximum-load test fired ten e-match loads simultaneously, creating an approximately 300 W transient. Initial testing produced an 8.2 V peak on the 3.3 V rail and a 32.5 V peak on the 24 V rail.
 
-The layout viewer uses Gerber-derived copper-layer SVG renders for SIG1, GND1, SIG2, PWR, GND2, and SIG3. Replace or regenerate those SVGs as the Altium layout changes.
+The issue came from insufficient upstream transient response. Increasing the 48 V-to-24 V converter crossover frequency from 22.6 kHz to 49.7 kHz reduced the 3.3 V peak from 8.2 V to 3.9 V and the 24 V peak from 32.5 V to 26.9 V. That change eliminated the MCU overvoltage condition during simultaneous deployment.
 
-Important layout regions to document:
+## Key Result
 
-- 48 V / 24 V switching converter region.
-- Recovery driver high-current paths and returns.
-- Voting and microcontroller logic region.
-- Sensor placement and SPI routing.
-- Flight computer, BMS, RBF, ESTOP, and recovery output connectors.
-- Bulk capacitance near recovery power distribution.
+The final design demonstrated simultaneous operation of all ten deployment channels without resetting or overstressing the downstream control electronics.
 
-## Bring-up Plan
+## Next Revision
 
-1. Inspect assembly, connectors, polarity, and high-current output spacing.
-2. Power VIN1 and VIN2 separately with current-limited supplies.
-3. Verify P24V0, P3V3, 24V-VSNS, and 3V3-VSNS.
-4. Confirm RBF and ESTOP disable inputs hold recovery outputs inhibited.
-5. Bring up SPI communication to each microcontroller domain.
-6. Exercise voting inputs without recovery loads attached.
-7. Validate recovery driver current limit and fault behavior with an electronic load.
-8. Repeat driver testing with thermal monitoring and documented pass/fail evidence.
-
-## Test Results
-
-The provided PDF is a design export, not a completed validation report. Bring-up captures, thermal images, and load-test results should be added after hardware validation.
-
-![Driver test placeholder](/content/projects/recovery-system/media/driver-test-placeholder.svg)
-
-## Failures / Debugging
-
-Future bring-up notes should capture power-path issues, disable-line behavior, voting truth-table mismatches, driver current-limit behavior, unexpected thermal rise, or connector pinout corrections.
-
-## Revision History
-
-The exported schematic title block lists revision `5.0` dated `07/22/2026`. The portfolio entry records this as Rev 5 and should be updated when BOM, pick-and-place files, and real test evidence are added.
-
-## What I Would Change
-
-For a stronger public case study, add final board render SVGs, a BOM CSV, pick-and-place CSV, power-tree measurements, a voting truth table, driver current-limit captures, and thermal images from sustained recovery-driver operation.
+A future revision would add more high-bandwidth rail-monitoring test points, improve separation between some shared support circuitry and redundant domains, and put the validation setup directly into the production test docs.

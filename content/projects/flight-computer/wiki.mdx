@@ -1,20 +1,75 @@
-# Flight Computer
-
 ## Purpose
 
-The Flight Computer project documents the black-box and central compute board for the avionics stack. The exported schematic PDF contains 11 pages covering connectors, power, ADCs, sensors, flash, current-loop circuitry, telemetry, USB, recovery-system interface, and layout notes.
+The Flight Computer is the central compute, sensing, telemetry, and data-recording board in the flight avionics stack. It talks to the vehicle sensor suite, onboard storage, telemetry system, recovery controller, current-loop sensors, and external debug equipment.
 
-## Requirements
+## My Responsibility
 
-- Preserve the exported Altium schematic PDF as the source artifact.
-- Keep power, sensing, telemetry, storage, and recovery interfaces reviewable.
-- Preserve the generated Gerber-derived copper layer SVGs and the Altium 3D model export.
-- Document rail bring-up, bus enumeration, sensor checks, and recovery-interface validation.
+I supported portions of the schematic and PCB layout and participated in design reviews. After fabrication, I led board bring-up, system-level debugging, interface validation, and day-to-day operation.
 
-## PCB Layout Walkthrough
+That distinction matters. This project shows real hardware ownership without implying that I was the sole original schematic or PCB designer.
 
-The layout viewer uses Gerber-derived copper-layer SVG renders for the top layer, two inner layers, and bottom layer. Add callouts for sensor placement, ADC/reference routing, telemetry, storage, and recovery-interface regions as validation notes mature.
+## Architecture
 
-## Bring-Up Plan
+The board combines:
 
-Document rail bring-up, bus enumeration, sensor sanity checks, telemetry checks, flash/storage checks, and recovery-interface tests.
+- Primary compute and control
+- Power regulation
+- IMU, barometer, and magnetometer sensing
+- ADC-based measurement
+- Onboard flash storage
+- Current-loop sensor interfaces
+- Telemetry
+- USB
+- Recovery-system communication
+- Flight-stack connectors
+
+Together, those functions make the board both the central controller and the primary flight-data recorder.
+
+## Design Review Focus
+
+My schematic and layout review focused on:
+
+- Rail sequencing and accessible measurement points
+- Sensor supply and reference integrity
+- ADC filtering and signal polarity
+- Digital-bus connectivity
+- Flash and telemetry interfaces
+- Recovery-system signal ownership
+- Connector pinout consistency
+- Return-path continuity around sensitive measurements
+
+## Bring-Up Strategy
+
+Bring-up was split into functional stages:
+
+1. Assembly inspection and resistance checks
+2. Current-limited rail bring-up
+3. Processor boot and debug access
+4. Digital-bus enumeration
+5. Sensor identity and sanity checks
+6. ADC scaling and reference checks
+7. Flash read/write verification
+8. Telemetry and USB communication
+9. Recovery-system interface testing
+10. Integrated flight-stack operation
+
+This sequence kept failures in one subsystem from being hidden by the activity of the complete board.
+
+## Operations Ownership
+
+After initial validation, I stayed responsible for keeping the board operational during subsystem tests and integrated vehicle work. That included reproducing failures, figuring out whether faults came from the board or an external interface, coordinating fixes, and maintaining a known-good test setup.
+
+## Featured Evidence
+
+The page should eventually prioritize:
+
+- A labeled board image showing functional regions
+- Rail bring-up captures
+- Sensor enumeration or telemetry evidence
+- A flight-stack interface diagram
+- One concrete debug story
+- A photo of the integrated avionics stack
+
+## Next Revision
+
+Add dedicated interface-test documentation for every external connector and record a baseline set of known-good waveforms and telemetry values for rapid regression testing.

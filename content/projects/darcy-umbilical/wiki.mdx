@@ -1,47 +1,53 @@
-# Darcy Umbilical
-
 ## Purpose
 
-The Darcy Umbilical project documents the vehicle-side connector boundary for ground power, Ethernet, ESTOP, and RBF/safing signals. The available Altium export contains one vehicle-side schematic page.
+The Darcy Umbilical is the vehicle-side electrical boundary between ground-support equipment and the flight avionics system.
 
-## Requirements
+It carries ground power, Ethernet, ESTOP, and RBF/safing signals through a compact connector interface used during integration, testing, and launch operations.
 
-- Preserve the exported PDF as the schematic source for portfolio browsing.
-- Keep umbilical power, Ethernet, ESTOP, and RBF/safing responsibilities easy to audit.
-- Preserve Gerber-derived copper layer renders and 3D model exports.
-- Do not parse raw Altium schematic or PCB documents.
+## My Responsibility
+
+I was the Design Responsible Engineer and owned the schematic, PCB layout, interface definition, and validation of the vehicle-side board.
 
 ## System Context
 
-Umbilical hardware is a high-visibility interface in test and launch operations. The useful portfolio story here is pinout clarity, signal ownership, connector strategy, ESD/TVS protection, and how the board supports safe integration between ground equipment and vehicle electronics.
+Even though it is electrically simpler than a flight computer or power converter, the umbilical is still a safety-critical integration interface. A connector mistake can prevent communication, defeat a safing function, damage vehicle electronics, or create inconsistent ground-test behavior.
 
-## Architecture
+So the design prioritizes clear signal ownership, connector keying, transient protection, and auditable routing over circuit complexity.
 
-The schematic shows power and high-voltage connector protection, Ethernet and ESTOP connector paths, RBF/safing signal routing, and ESD/TVS protection devices on the vehicle-side umbilical board.
+## Interface Architecture
 
-## Schematic Walkthrough
+The board keeps four functional groups separated:
 
-Open the schematic page to view the embedded PDF. The PDF itself is the exported Altium artifact and should be treated as the source of truth until manually defined hotspots or additional SVG pages are added.
+- Vehicle and ground power
+- Ethernet
+- ESTOP
+- RBF and hardware safing
 
-## PCB Layout Walkthrough
+TVS and ESD devices are placed near the connector boundary to prevent externally introduced transient current from propagating into the flight wiring.
 
-The layout viewer uses Gerber-derived copper-layer SVG renders for the top layer, two inner layers, and bottom layer. Replace or regenerate those SVGs as the Altium layout changes.
+Connector orientation, polarity, keying, and labeling reduce the probability of an integration error.
 
-## Bring-up Plan
+## PCB Layout
 
-- Verify connector pinout continuity against the schematic.
-- Check vehicle-side signal naming before harness integration.
-- Validate any critical interlocks or launch-support lines with current-limited equipment.
-- Document final pinout checks with lab photos or continuity tables.
+The power path is routed independently from Ethernet and low-energy safing signals. Ethernet differential pairs preserve pair symmetry and reference-plane continuity through the board.
 
-## Test Results
+Safing signals are routed as explicit point-to-point paths that can be traced visually in both the schematic and PCB viewer. Protection-device returns are kept short so surge current is diverted at the interface instead of flowing through the rest of the board.
 
-No test evidence has been added yet.
+## Validation
 
-## Revision History
+Validation should include:
 
-The current portfolio entry is based on the exported Altium schematic PDF dated March 18, 2026, revision 1.0.
+1. Schematic-to-layout pinout audit
+2. End-to-end continuity testing
+3. Adjacent-pin short inspection
+4. Connector polarity and keying verification
+5. Ethernet link and packet testing
+6. ESTOP continuity and state validation
+7. RBF insertion/removal behavior
+8. Power-path voltage-drop measurement
+9. ESD/TVS orientation inspection
+10. Harness-integrated regression test
 
-## What I Would Change
+## Engineering Lesson
 
-Add pinout tables, harness photos, board renders, and a focused featured screenshot for the connector region.
+Small interface boards can get less design attention than central avionics boards, even though they are exposed to frequent handling and integration errors. The main engineering value here is making a complex vehicle-to-ground boundary hard to connect incorrectly and straightforward to validate.

@@ -42,6 +42,12 @@ export default async function WikiPage({ params }: { params: Promise<{ slug: str
       </aside>
       <article className="prose prose-invert max-w-none prose-headings:scroll-mt-24 prose-headings:text-white prose-a:text-signal prose-strong:text-slate-100 prose-img:rounded-lg prose-img:border prose-img:border-line-soft">
         <h1>{project.title} Wiki</h1>
+        <div className="not-prose mb-6 rounded border border-amber-400/35 bg-amber-400/10 px-4 py-3">
+          <p className="text-xs font-medium uppercase tracking-[0.14em] text-amber-200">Under construction</p>
+          <p className="mt-1 text-sm leading-6 text-slate-300">
+            These notes are being tightened as final screenshots, measurements, and layout callouts are added.
+          </p>
+        </div>
         <MDXContent source={source} />
       </article>
     </main>
