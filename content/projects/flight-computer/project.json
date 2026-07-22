@@ -8,7 +8,6 @@
   "tools": ["Altium", "Oscilloscope", "Bench Supply"],
   "layerCount": 4,
   "stackup": "Four copper-layer flight computer PCB exported from Altium Gerbers",
-  "boardSize": "TBD from mechanical export",
   "summary": "The central compute and data-recording board for the flight avionics stack. It integrates power regulation, environmental and inertial sensors, ADC acquisition, onboard flash storage, current-loop interfaces, telemetry, USB, and recovery-system connectivity. I supported portions of schematic/layout review, then led system bring-up, interface validation, debugging, and continued board operation.",
   "thumbnail": "/generated/recovery-system/thumbnails/card.svg",
   "tags": ["Flight Computer", "Avionics", "Sensors", "Telemetry", "Embedded", "Altium"],
