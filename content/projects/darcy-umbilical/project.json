@@ -32,7 +32,7 @@
     "Separate power and high-energy paths from communication and safing signals",
     "Use connector keying, polarity, and labeling to reduce integration mistakes"
   ],
-  "publicNote": "This project is derived from exported Altium schematic and Gerber artifacts. Raw .SchDoc and .PcbDoc files are not parsed by this portfolio.",
+  "publicNote": "This case study is under construction; public validation notes are focused on the vehicle-side interface and safing behavior.",
   "model3d": {
     "title": "Darcy Umbilical 3D Model",
     "description": "Interactive 3D board model from the Altium STEP export.",

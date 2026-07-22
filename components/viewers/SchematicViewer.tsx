@@ -38,7 +38,7 @@ export function SchematicViewer({ slug, pages }: SchematicViewerProps) {
     return (
       <EmptyState
         title="No schematic pages"
-        message="Add exported Altium schematic SVG or PDF-derived pages under content/projects/[slug]/schematic and list them in project.json."
+        message="A public schematic package is not available for this project yet."
       />
     );
   }
@@ -210,7 +210,7 @@ export function SchematicViewer({ slug, pages }: SchematicViewerProps) {
                   <div className="grid h-full place-items-center bg-[#111827] p-8 text-center">
                     <EmptyState
                       title="Schematic export missing"
-                      message="Place the exported Altium schematic SVG or a PDF-derived SVG at the file path listed in project.json."
+                      message="This schematic sheet is not available in the public project package yet."
                     />
                   </div>
                 ) : (

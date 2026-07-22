@@ -42,7 +42,7 @@ export default async function ProjectModelPage({ params }: { params: Promise<{ s
         ) : null}
         <BoardModelViewer
           title={model?.title ?? "3D Board Model"}
-          description={model?.description ?? "Add an Altium GLB or STEP export to show the board model."}
+          description={model?.description ?? "A public 3D board model is not available for this project yet."}
           glbFile={model?.glbFile}
           stepFile={model?.stepFile}
           rotation={model?.rotation}

@@ -35,7 +35,7 @@
     "Maintain deterministic hardware inhibition through RBF, ESTOP, abort, and software-controlled enables",
     "Keep power-distribution impedance low enough to support simultaneous deployment without resetting control electronics"
   ],
-  "publicNote": "This portfolio entry is derived from the exported Altium schematic PDF. It does not parse or include raw .SchDoc or .PcbDoc files.",
+  "publicNote": "This case study is under construction while final lab images and measurement evidence are prepared for public release.",
   "model3d": {
     "title": "Recovery Board 3D Model",
     "description": "Interactive 3D board model from the Altium STEP export.",

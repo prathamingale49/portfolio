@@ -36,7 +36,7 @@
     "Validate recovery-system and current-loop interfaces at schematic and system level",
     "Maintain reliable board operation through repeated bench, integration, and vehicle testing"
   ],
-  "publicNote": "Layout Gerbers, 3D model, and exported schematic PDF are connected. Add BOM, pick-and-place, and lab evidence as the design package matures.",
+  "publicNote": "This case study is under construction; bring-up and interface-validation evidence will be added as public artifacts are cleared.",
   "model3d": {
     "title": "Flight Computer 3D Model",
     "description": "Interactive 3D board model from the Altium STEP export.",

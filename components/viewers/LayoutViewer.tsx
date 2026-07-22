@@ -60,7 +60,7 @@ export function LayoutViewer({ slug, views, callouts }: LayoutViewerProps) {
     return (
       <EmptyState
         title="No layout views"
-        message="Add generated copper SVGs under public/generated/[slug]/layout or list your own board exports in project.json."
+        message="A public PCB layout render is not available for this project yet."
       />
     );
   }
@@ -280,7 +280,7 @@ export function LayoutViewer({ slug, views, callouts }: LayoutViewerProps) {
               <div className="absolute inset-6 grid place-items-center">
                 <EmptyState
                   title="No rendered PCB view selected"
-                  message="Enable at least one copper layer, or add generated SVGs under public/generated/[slug]/layout."
+                  message="Enable at least one copper layer to view the board render."
                 />
               </div>
             ) : (

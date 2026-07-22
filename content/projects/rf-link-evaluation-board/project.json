@@ -35,10 +35,10 @@
     "Keep detector and ADC signals isolated from digital, USB, Ethernet, and switching-power noise",
     "Provide flexible RF access for VNA, spectrum-analyzer, conducted-power, and antenna-mismatch testing"
   ],
-  "publicNote": "Layout is in progress. Add exported copper SVGs, screenshots, and RF measurement evidence as the board matures.",
+  "publicNote": "Layout is in progress; RF validation results will be separated from schematic analysis as measurements become available.",
   "model3d": {
     "title": "RF Link Evaluation Board 3D Model",
-    "description": "Add the Altium STEP export under content/projects/rf-link-evaluation-board/model.",
+    "description": "A public 3D board model is not available for this project yet.",
     "rotation": { "x": 0, "y": 0, "z": 0 },
     "position": { "x": 0, "y": 0, "z": 0 },
     "zoom": 1
@@ -49,7 +49,7 @@
         "id": "pdf",
         "title": "Exported Schematic PDF",
         "file": "/content/projects/rf-link-evaluation-board/schematic/rf-link-evaluation-board.pdf",
-        "description": "Place the exported Altium schematic PDF here when available.",
+        "description": "Schematic package is not currently published for this project.",
         "hotspots": []
       }
     ]

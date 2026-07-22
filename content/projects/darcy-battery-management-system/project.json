@@ -33,7 +33,7 @@
     "Prevent switching-current paths from contaminating ADC and current-loop measurements",
     "Expose sufficient test access for staged power-up and channel-by-channel validation"
   ],
-  "publicNote": "This project is derived from exported Altium schematic and Gerber artifacts. Raw .SchDoc and .PcbDoc files are not parsed by this portfolio.",
+  "publicNote": "This case study is under construction; validation evidence and final layout annotations are still being prepared.",
   "model3d": {
     "title": "Darcy BMS 3D Model",
     "description": "Interactive 3D board model from the Altium STEP export.",

@@ -33,12 +33,12 @@
     "Generate low-noise analog outputs across several signal ranges and interface types",
     "Keep switching-power and actuator circuitry from coupling into precision emulation channels",
     "Support both automated test control and direct bench access",
-    "Document the design from exported Altium artifacts without parsing raw schematic or PCB files"
+    "Keep the architecture readable enough for another engineer to follow the validation path quickly"
   ],
-  "publicNote": "This project is derived from the exported Altium schematic PDF only. Raw .SchDoc and .PcbDoc files are not parsed by this portfolio.",
+  "publicNote": "Layout is in progress; this page currently focuses on schematic architecture and planned validation flow.",
   "model3d": {
     "title": "Hardware In The Loop 3D Model",
-    "description": "Add an Altium STEP export under content/projects/hardware-in-the-loop/model to replace the interactive placeholder.",
+    "description": "A public 3D board model is not available while layout remains in progress.",
     "rotation": { "x": 0, "y": 0, "z": 0 },
     "position": { "x": 0, "y": 0, "z": 0 },
     "zoom": 1

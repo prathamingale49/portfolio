@@ -34,7 +34,7 @@
     "Separate high-current actuation paths from low-level sensor acquisition",
     "Verify the revised board behaves predictably during engine-control operations"
   ],
-  "publicNote": "Layout Gerbers and 3D model are connected. Add exported schematic PDF/SVG pages, BOM, pick-and-place, and lab evidence as the design package matures.",
+  "publicNote": "This case study is under construction; public evidence is focused on the revision story, layout, and 3D board view.",
   "model3d": {
     "title": "Vespula Avionics Module 3D Model",
     "description": "Interactive 3D board model from the Altium STEP export.",
@@ -54,7 +54,7 @@
         "id": "pdf",
         "title": "Exported Schematic PDF",
         "file": "/content/projects/vespula-avionics-module/schematic/vespula-avionics-module.pdf",
-        "description": "Place the exported Altium schematic PDF here when available.",
+        "description": "Schematic package is not currently published for this project.",
         "hotspots": []
       }
     ]
