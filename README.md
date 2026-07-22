@@ -1,6 +1,6 @@
-# Altium PCB Portfolio
+# PCB Portfolio
 
-A static-first Next.js portfolio for PCB case studies built from web-friendly Altium Designer exports. It does not parse raw `.SchDoc` or `.PcbDoc` files.
+A static-first Next.js portfolio for PCB case studies built from web-friendly Altium exports. It is meant to present engineering work, schematic PDFs, Gerber-derived layout renders, 3D board models, and MDX design notes. It does not parse raw `.SchDoc` or `.PcbDoc` files.
 
 ## Creation Disclosure
 
@@ -12,8 +12,21 @@ This website was created with the use of OpenAI Codex as a coding assistant. Pro
 - TypeScript
 - Tailwind CSS
 - MDX project wiki pages
+- Three.js board model viewer
 - Static project content in `content/projects/[slug]`
-- Generated/static assets in `public/generated/[slug]`
+- Generated layout assets in `public/generated/[slug]`
+
+## Current Projects
+
+All project pages are currently marked under construction while final descriptions, screenshots, and board exports are being refined.
+
+- Recovery System
+- RF Link Evaluation Board
+- Vespula Avionics Module
+- Darcy Battery Management System
+- Flight Computer
+- Darcy Umbilical
+- Hardware in the Loop
 
 ## Install
 
@@ -29,17 +42,23 @@ npm run dev
 
 Open `http://localhost:3000`.
 
+## Validate
+
+```bash
+npm run lint
+npm run build
+```
+
 ## Add A New Altium Project
 
 1. Create `content/projects/[slug]/project.json`.
 2. Create `content/projects/[slug]/wiki.mdx`.
-3. Add exported schematic pages under `content/projects/[slug]/schematic`.
-4. Add BOM and pick-and-place CSVs if useful.
-5. Add lab images under `content/projects/[slug]/media`.
-6. Add generated layout SVGs under `public/generated/[slug]/layout`.
-7. Add a thumbnail under `public/generated/[slug]/thumbnails`.
-8. Add an optional Altium STEP export under `content/projects/[slug]/model`.
-9. Add featured schematic/layout screenshots under `content/projects/[slug]/media` and reference them in `project.json`.
+3. Add exported schematic PDFs or SVG pages under `content/projects/[slug]/schematic`.
+4. Add Gerbers, NC drill files, BOM CSV, and pick-and-place CSVs under `content/projects/[slug]/layout`.
+5. Add generated layout SVGs under `public/generated/[slug]/layout`.
+6. Add GLB and optional STEP models under `content/projects/[slug]/model`.
+7. Add screenshots, lab photos, oscilloscope captures, or thermal images under `content/projects/[slug]/media`.
+8. Reference all public-facing assets in `project.json`.
 
 Hotspots and layout callouts are manually defined in `project.json` using percentage-based coordinates from `0` to `100`.
 
@@ -48,23 +67,36 @@ Hotspots and layout callouts are manually defined in `project.json` using percen
 For each Altium PCB project, export:
 
 1. Schematic PDF and/or SVG pages
-2. Gerber files + NC drill files as a ZIP
+2. Gerber files + NC drill files as a ZIP or extracted folder
 3. BOM CSV
 4. Pick-and-place CSV if useful
 5. Stackup screenshot or text description
 6. Board screenshots or SVG renders if Gerber rendering fails
-7. Lab/test images
-8. A `wiki.mdx` file explaining design purpose and validation
-9. Optional STEP file for the 3D board viewer
-10. Featured screenshots of circuit blocks, layout regions, and bring-up evidence
+7. GLB model for fast browser previews
+8. STEP model as an optional source/download artifact
+9. Lab/test images
+10. A `wiki.mdx` file explaining design purpose and validation
 
 This site does not parse `.SchDoc` or `.PcbDoc` files.
 
-Interactive schematic navigation is created using exported schematic pages plus manually defined hotspots in `project.json`.
+Interactive schematic navigation is created using exported schematic PDFs/SVGs plus manually defined hotspots in `project.json`. When a schematic PDF already has internal sheet links, the schematic viewer can embed the PDF directly and let the browser PDF viewer handle those links.
 
-PCB viewing is created using Gerber-derived or manually supplied SVGs.
+PCB viewing is created using Gerber-derived SVGs or manually supplied SVGs. Altium-like full net/component cross-probing is a future feature, not MVP.
 
-Altium-like full net/component cross-probing is a future feature, not MVP.
+## Project Metadata
+
+Each project uses a typed `project.json` file. The main fields are:
+
+- `slug`, `title`, `subtitle`, `summary`
+- `category`, `role`, `tools`, `tags`
+- `layerCount`, `stackup`, `boardSize`
+- `keyComponents`, `mainConstraints`, `highlights`
+- `model3d` for GLB/STEP model assets and default camera/orientation values
+- `schematic.pages` for schematic PDFs or SVG sheets
+- `layout.views` for top, bottom, and copper layer SVGs
+- `featured` for highlighted circuit/layout screenshots
+
+Project dates are intentionally not shown in the project cards or project pages.
 
 ## Schematic Viewer
 
@@ -77,33 +109,48 @@ content/projects/[slug]/schematic/
 Reference those files from `project.json` with paths such as:
 
 ```json
-"/content/projects/[slug]/schematic/top-level.svg"
+"/content/projects/[slug]/schematic/schematic.pdf"
 ```
 
-Each hotspot can:
+For SVG sheets, hotspots can:
 
 - Switch to another schematic page with `type: "page"`.
 - Jump to a wiki section with `type: "wiki"`.
-- Open the right-side note panel with `type: "note"`.
+- Open a note panel with `type: "note"`.
+
+For PDF schematics, the viewer hides the custom sidebar by default and relies on the embedded PDF's own page links when available.
 
 ## PCB Layout Viewer
 
-Manual fallback files belong here:
+Generated or manually supplied layout files belong here:
 
 ```text
 public/generated/[slug]/layout/top.svg
 public/generated/[slug]/layout/bottom.svg
+public/generated/[slug]/layout/copper-top.svg
+public/generated/[slug]/layout/copper-1.svg
+public/generated/[slug]/layout/copper-2.svg
+public/generated/[slug]/layout/copper-bottom.svg
 ```
 
-Reference those generated files from `project.json` with paths such as:
+Six-layer boards can also include:
 
-```json
-"/generated/[slug]/layout/top.svg"
+```text
+public/generated/[slug]/layout/copper-3.svg
+public/generated/[slug]/layout/copper-4.svg
 ```
+
+The layout viewer supports pan, toolbar zoom, scroll-wheel zoom, reset, top/bottom views, individual copper-layer views, and optional callouts from `project.json`.
 
 ## Gerber Rendering
 
-Put the Gerber and NC drill ZIP here:
+Put Gerber and NC drill exports here:
+
+```text
+content/projects/[slug]/layout/gerbers/
+```
+
+or keep a ZIP such as:
 
 ```text
 content/projects/[slug]/layout/gerbers.zip
@@ -115,14 +162,14 @@ Run:
 npm run render:gerbers
 ```
 
-The script checks each project for extracted Gerber/drill files in `content/projects/[slug]/layout/gerbers`, runs `@tracespace/cli`, and writes composite top/bottom board renders to:
+The script checks each project for Gerber/drill files, runs `@tracespace/cli`, and writes composite top/bottom board renders to:
 
 ```text
 public/generated/[slug]/layout/top.svg
 public/generated/[slug]/layout/bottom.svg
 ```
 
-For projects with mapped copper filenames in `tracespace.config.js`, the script can also emit stable copper-layer views:
+It can also emit stable copper-layer views when the project's copper filenames are mapped by the render pipeline:
 
 ```text
 public/generated/[slug]/layout/copper-top.svg
@@ -133,27 +180,39 @@ public/generated/[slug]/layout/copper-4.svg
 public/generated/[slug]/layout/copper-bottom.svg
 ```
 
-Known limitation: tracespace package and CLI integration can vary by package version and Gerber ZIP contents. The viewer still works with manually provided SVGs if automatic rendering fails.
+Known limitation: tracespace output depends on Gerber naming, drill exports, and package behavior. The app is designed to keep working when you manually provide `top.svg`, `bottom.svg`, and copper-layer SVGs directly.
 
-## 3D STEP Viewer
+## 3D Board Models
 
-Export a STEP model from Altium and place it in:
+Use GLB files for the default browser preview because they load much faster than STEP files.
+
+Place model exports here:
 
 ```text
 content/projects/[slug]/model/
 ```
 
-Reference it in `project.json`:
+Reference them in `project.json`:
 
 ```json
 "model3d": {
   "title": "Board 3D Model",
-  "description": "Interactive board model from the Altium STEP export.",
-  "stepFile": "/content/projects/[slug]/model/board.step"
+  "description": "Interactive 3D board model from Altium exports.",
+  "glbFile": "/content/projects/[slug]/model/board.glb",
+  "stepFile": "/content/projects/[slug]/model/board.step",
+  "rotation": { "x": 0, "y": 0, "z": 0 },
+  "position": { "x": 0, "y": 0, "z": 0 },
+  "zoom": 1
 }
 ```
 
-The viewer uses Three.js and `occt-import-js` in the browser. If the STEP file is missing or cannot be loaded, the site shows an interactive placeholder board instead of breaking the page.
+The home page and project cards use the GLB preview first. The project model page includes a STEP download link when `stepFile` is present. The viewer also has a debug mode:
+
+```text
+http://localhost:3000/?modelDebug=1
+```
+
+Use debug mode to rotate, pan, and zoom a model, then copy the generated `model3d` JSON values back into `project.json`.
 
 ## Featured Screenshots
 
@@ -176,17 +235,10 @@ Reference them in `project.json`:
 ]
 ```
 
-## Sample Project
+## Known Limitations
 
-The Recovery System sample includes:
-
-- Placeholder schematic SVG pages
-- The exported Altium schematic PDF as a source artifact
-- Six copper-layer board render SVGs
-- BOM CSV
-- Pick-and-place CSV
-- Featured circuit/layout placeholders
-- Optional STEP model slot
-- A navigable MDX wiki
-
-Replace placeholders with real Altium exports as the design matures.
+- No authentication, database, CMS, or upload flow.
+- No raw Altium `.SchDoc` or `.PcbDoc` parsing.
+- No automatic net/component cross-probing yet.
+- Gerber rendering may need manual SVG fallback for some Altium output sets.
+- Project pages are intentionally marked under construction until final assets and descriptions are complete.
