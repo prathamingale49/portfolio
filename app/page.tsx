@@ -46,9 +46,9 @@ const experience = [
     location: "Woodinville, WA",
     icon: Satellite,
     bullets: [
-      "Increased AC/DC input EMI-filter power capability from 400 W to 550 W by identifying magnetic saturation limits, redesigning the filter, and validating full-load hardware performance.",
-      "Led bring-up of a radiation-test coupon spanning 8 buck-converter variants, including loop-gain, efficiency, ripple, protection-threshold, and startup characterization.",
-      "Isolated temperature and load-dependent diode leakage as the root cause of high-temperature shutdowns, extending operation from 90 s at 90 C to more than 3 hr at 115 C.",
+      "Increase AC/DC input EMI-filter power capability from 400 W to 550 W by identifying magnetic saturation limits, redesigning the filter, and validating full-load hardware performance.",
+      "Lead bring-up of a radiation-test coupon spanning 8 buck-converter variants, including loop-gain, efficiency, ripple, protection-threshold, and startup characterization.",
+      "Isolate temperature and load-dependent diode leakage as the root cause of high-temperature shutdowns, extending operation from 90 s at 90 C to more than 3 hr at 115 C.",
     ],
   },
   {

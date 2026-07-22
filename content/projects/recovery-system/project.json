@@ -49,26 +49,6 @@
       "target": { "x": 47.848, "y": 44.249, "z": 71.836 }
     }
   },
-  "featured": [
-    {
-      "title": "Recovery Driver Bank",
-      "description": "Deployment switches, local capacitance, output connectors, and return paths arranged to constrain high di/dt current loops while maintaining separation between control and power regions.",
-      "image": "/content/projects/recovery-system/media/featured-driver-bank.svg",
-      "tag": "Layout"
-    },
-    {
-      "title": "Voting Logic Core",
-      "description": "Three independent control domains feed discrete voting logic before any deployment command reaches the output drivers. Separate RBF, ESTOP, abort, and software enables keep deployment inhibited during integration and flight operations.",
-      "image": "/content/projects/recovery-system/media/featured-voting-logic.svg",
-      "tag": "Schematic"
-    },
-    {
-      "title": "Dual Power Path",
-      "description": "Dual protected input paths and regulated power stages sized for simultaneous deployment transients without resetting downstream control electronics.",
-      "image": "/content/projects/recovery-system/media/featured-power-path.svg",
-      "tag": "Power"
-    }
-  ],
   "schematic": {
     "pages": [
       {
