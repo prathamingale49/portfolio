@@ -8,7 +8,6 @@
   "tools": ["Altium", "Oscilloscope", "Bench Supply"],
   "layerCount": 0,
   "stackup": "Stackup to be added from the Altium layer stack manager or fabrication package",
-  "boardSize": "TBD from mechanical export",
   "summary": "A hardware-in-the-loop platform designed to electrically emulate the sensors, actuators, and interfaces used by the flight avionics system. The board combines programmable RTD, thermocouple, pressure-transducer, current-loop, and differential-sensor channels with valve and deployment-load interfaces, ADC and DAC conversion, multi-rail power, Compute Module 5 control, and wired communication interfaces.",
   "thumbnail": "/generated/recovery-system/thumbnails/card.svg",
   "tags": ["HITL", "Avionics", "Sensor Emulation", "CM5", "Layout In Progress", "Altium"],

@@ -8,7 +8,6 @@
   "tools": ["Altium", "Bench Supply", "Oscilloscope", "Electronic Load"],
   "layerCount": 4,
   "stackup": "Four copper-layer battery management PCB exported from Altium Gerbers",
-  "boardSize": "TBD from mechanical export",
   "summary": "A four-layer battery-management and power-distribution PCB connecting a 12-cell lithium-ion pack to the Darcy avionics system. The board combines protected battery input handling, regulated auxiliary power, five controlled load outputs, connector-level load switching, current and voltage telemetry, and current-loop sensor interfacing.",
   "thumbnail": "/generated/recovery-system/thumbnails/card.svg",
   "tags": ["BMS", "Power", "Load Switches", "ADC", "Current Loop", "Altium"],

@@ -89,7 +89,7 @@ Each project uses a typed `project.json` file. The main fields are:
 
 - `slug`, `title`, `subtitle`, `summary`
 - `category`, `role`, `tools`, `tags`
-- `layerCount`, `stackup`, `boardSize`
+- `layerCount`, `stackup`
 - `keyComponents`, `mainConstraints`, `highlights`
 - `model3d` for GLB/STEP model assets and default camera/orientation values
 - `schematic.pages` for schematic PDFs or SVG sheets

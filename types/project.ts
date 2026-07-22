@@ -131,7 +131,6 @@ export interface Project {
   tools: string[];
   layerCount: number;
   stackup: string;
-  boardSize?: string;
   summary: string;
   thumbnail: string;
   tags: string[];

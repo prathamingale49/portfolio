@@ -8,7 +8,6 @@
   "tools": ["Altium", "Bench Supply", "Oscilloscope"],
   "layerCount": 4,
   "stackup": "Four copper-layer vehicle-side umbilical PCB exported from Altium Gerbers",
-  "boardSize": "TBD from mechanical export",
   "summary": "A compact four-layer vehicle-side umbilical PCB connecting launch and ground-support equipment to the Darcy avionics system. The board carries power, Ethernet, ESTOP, and RBF/safing signals across a mechanically constrained connector boundary while incorporating transient protection and keyed interfaces to reduce wiring and operator errors.",
   "thumbnail": "/generated/recovery-system/thumbnails/card.svg",
   "tags": ["Umbilical", "Avionics", "Ground Support", "Vehicle Interface", "Altium"],

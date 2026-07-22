@@ -8,7 +8,6 @@
   "tools": ["Altium", "Oscilloscope", "Bench Supply"],
   "layerCount": 6,
   "stackup": "Six copper-layer avionics module PCB exported from Altium Gerbers",
-  "boardSize": "TBD from mechanical export",
   "summary": "A six-layer flight engine controller operating from the vehicle's 48 V avionics bus. The board commands solenoid valves and igniters while acquiring differential sensors, RTDs, and pressure transducers used during engine start and shutdown. After major first-revision faults were found, I owned the electrical and PCB revision, led bring-up, and became the board's day-to-day operational owner.",
   "thumbnail": "/generated/recovery-system/thumbnails/card.svg",
   "tags": ["Avionics", "Embedded", "Sensors", "Power", "Vehicle Interface", "Altium"],
