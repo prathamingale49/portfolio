@@ -1,0 +1,566 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 9em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD25\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">10/12/2025</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">6:52:36 PM</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:01</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc" class="file"><acronym title="C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc">C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">6</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Waived Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">41</td></tr>
+</table>
+</td>
+</table><a name="IDU3WH0N5WF3YYGKSYHJ5V5U4AUCKXFBYVDPDNVLOLW4TX4GM1CZLP"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDNKTOPFQ1UFGE4ANRW2DLKXQCNVCCUXJQUSCBTB0UJDGLZU1KBZL">Clearance Constraint (Gap=4mil) (All),(All)</a></td>
+<td class="column2">3</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID2540ITE2OL0ZJYJHXRMN3VODMGWB1I5HKEMUXNJB4YPFBTUTWQLC">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">3</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDMGWEZTPES5KPENHMI32MZM30HS0RERJNTER32CHY5J5WYZ2II0O">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDP05ORTOZRTTNKE0U52NAQLXFFG2R4HBSB2LBANC2Z2SPG4SNLWMP">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDRHJQBGI33WLWEI2BXN3EABQZUNAM5OMAAGP5NZCZMSGV2BHZO11N">Width Constraint (Min=5.984mil) (Max=71497.938mil) (Preferred=10mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDODMV5N0L5FL2I1WBWY3QJTRPMISTB0JKQ0QVH1PNVNSHUG42OWAJ">Width Constraint (Min=10mil) (Max=500mil) (Preferred=145mil) (InNetClass('pwr_5A'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID0IRPHN3HUHVNJWGP2G45OOEOMGHFBG0W2AOGG3EZPZYCSYEQO1AH">Width Constraint (Min=5.984mil) (Max=13.325mil) (Preferred=10mil) (InNetClass('sig_50'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDRWVVMBC14JO2OWV4YDAA3BXJ2CLBROBGNM5WLFCIDDTZGOM5KQ1D">Routing Layers(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDRCHAQYUW50AOC11YNSX1CCZ0QLM4L3MSOMV1EFHGNH4PB2AF3LEC">Routing Via (MinHoleWidth=7.874mil) (MaxHoleWidth=248.031mil) (PreferredHoleWidth=7.874mil) (MinWidth=17.716mil) (MaxWidth=257.874mil) (PreferedWidth=17.716mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDYVGF04LWROV1OAUWSEK1HEAXCUCNU1TUOAGHCB2ZR0CFDDPRR2M">Differential Pairs Uncoupled Length using the Gap Constraints (Min=4mil) (Max=4mil) (Prefered=4mil)  and Width Constraints (Min=4mil) (Max=71497.938mil) (Prefered=4mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID31GIISE0P0Y3HII4JNO24DLNMHHBRRTFZVAWYXC53WGCL3PB232D">Power Plane Connect Rule(Direct Connect )(Expansion=20mil) (Conductor Width=10mil) (Air Gap=10mil) (Entries=4) (InPadClass('PowerPads'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDALPPA12J1ZDKKYF0O4OMCBHEKD1YFGPCALQS5DELVIZOYAK2BAWE">Power Plane Connect Rule(Relief Connect )(Expansion=11.811mil) (Conductor Width=4mil) (Air Gap=4mil) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDJH4YVLGDKXHHDIQVALZDR5SVBPE5XFUIIIYNMEOOJKXDCOIYKS4M">Minimum Annular Ring (Minimum=3mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDK0M0BRJ2D5SYFT0EK4HY02A3LJXMM2OJRZHXDTFEXYKYY25ZBXLK">Hole Size Constraint (Min=7.874mil) (Max=248.031mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDS3QTRID0HPZDQNJYCOWKOAEDLAX5BJB0UN2I0NJXR05MPVRJCSJ">Pads and Vias to follow the Drill pairs settings</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDARMAZWPCKLCUMCMWIZ0XDRNVLHJTQZAOTNAZ0DKLMK3BDRIHMHHK">Hole To Hole Clearance (Gap=9.842mil) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDNAZXE5N304B1ISLBMTP4J2YKGPBWZITGGNFTJQKMGUQ3ZERZ2NYC">Minimum Solder Mask Sliver (Gap=0mil) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDM4AVUAYPL4PEJQ4ZSFX5CMVHUC0XMXJ4B3VTNLP05YD0UTKXSDHF">Net Antennae (Tolerance=0mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDIYKVMRSYHYTVCCCYDZSEJHAHADDDMINIYRY2V5GV5WCSO0NTPV3">Board Clearance Constraint (Gap=0mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDDTWNQEFJQG3FBZEBYAN5F3L3JF5YAF5YYRTXQN5GIBWMSJWMXUG">Component Clearance Constraint ( Horizontal Gap = 4mil, Vertical Gap = 4mil ) (All),(All) </a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDFFPKYWLZB2KPMMFOWGJH3DS4WBHLBTBRBYZSKMEQZZTZTIALVURB">Height Constraint (Min=0mil) (Max=71497.938mil) (Prefered=500mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">6</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Waived Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDDFZ245FK2XTFJNMWL4Y1HG2DSDKEOE0TNEWIL0JSMV4T4HFMYDZN">Clearance Constraint (Gap=4mil) (All),(All)</a></td>
+<td class="column2">8</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDTVIS5DHSPEAHHN4OAMVIJA2CFR2NTRBBHIWJACATB0B3HVIZNPL">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">5</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDHITRHF5MSCDJGUQET4ZDDD4CTJ1BUHPKJXZI1JBK2BPCOW2AMCIL">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">6</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDBRVM1SHN5IEZCLZ4MUJ3PDGOVNJ0JQKUXZZEB3K3I4F1AY11C1RI">Net Antennae (Tolerance=0mil) (All)</a></td>
+<td class="column2">3</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDOBSKJKOJLWVIJJ025AIPGK55NWNRJ30DIQVCFLF1K1LDJQN3BKC">Board Clearance Constraint (Gap=0mil) (All)</a></td>
+<td class="column2">18</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDGF4ZMZNUICOGOMRDH2N4WLMMXFMNML4VJYH5SICCIGC3ZIJT2D1C">Component Clearance Constraint ( Horizontal Gap = 4mil, Vertical Gap = 4mil ) (All),(All) </a></td>
+<td class="column2">1</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">41</td>
+</tr>
+</table><br><a name="IDFIBHSWZHM103MDKZCU44QA2LCMVPRJY1W250F1BRXHUKXLBDQZO"><h2>Rule Violations</h2></a><a name="IDNKTOPFQ1UFGE4ANRW2DLKXQCNVCCUXJQUSCBTB0UJDGLZU1KBZL"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Clearance Constraint (Gap=4mil) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11940.272mil|Location2.X=11943.939mil|Location1.Y=7474.404mil|Location2.Y=7478.071mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11940.272mil|Location2.X=11943.939mil|Location1.Y=7474.404mil|Location2.Y=7478.071mil|Absolute=True">Clearance Constraint: (Collision &lt; 4mil) Between Pad NT1-1(3045.96mil,3049.238mil) on SIG1 And Track (3045.96mil,3049.238mil)(3116.826mil,3049.238mil) on SIG1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11870.814mil|Location2.X=11874.48mil|Location1.Y=7557.454mil|Location2.Y=7561.121mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11870.814mil|Location2.X=11874.48mil|Location1.Y=7557.454mil|Location2.Y=7561.121mil|Absolute=True">Clearance Constraint: (Collision &lt; 4mil) Between Pad NT2-1(2976.502mil,3112.603mil) on SIG1 And Track (2976.502mil,3045.05mil)(2976.502mil,3112.603mil) on SIG1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11732.389mil|Location2.X=11736.056mil|Location1.Y=7474.995mil|Location2.Y=7478.662mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11732.389mil|Location2.X=11736.056mil|Location1.Y=7474.995mil|Location2.Y=7478.662mil|Absolute=True">Clearance Constraint: (Collision &lt; 4mil) Between Pad NT3-2(2838.077mil,3049.829mil) on SIG1 And Track (2838.077mil,3049.829mil)(2838.077mil,3120.695mil) on SIG1 </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="ID2540ITE2OL0ZJYJHXRMN3VODMGWB1I5HKEMUXNJB4YPFBTUTWQLC"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Short-Circuit Constraint (Allowed=No) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11912.699mil|Location2.X=11971.512mil|Location1.Y=7446.831mil|Location2.Y=7505.644mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11912.699mil|Location2.X=11971.512mil|Location1.Y=7446.831mil|Location2.Y=7505.644mil|Absolute=True">Short-Circuit Constraint: Between Pad NT1-1(3045.96mil,3049.238mil) on SIG1 And Track (3045.96mil,3049.238mil)(3116.826mil,3049.238mil) on SIG1 Location : [X = 11942.105mil][Y = 7476.238mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11843.241mil|Location2.X=11902.053mil|Location1.Y=7510.197mil|Location2.Y=7569.009mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11843.241mil|Location2.X=11902.053mil|Location1.Y=7510.197mil|Location2.Y=7569.009mil|Absolute=True">Short-Circuit Constraint: Between Pad NT2-1(2976.502mil,3112.603mil) on SIG1 And Track (2976.502mil,3045.05mil)(2976.502mil,3112.603mil) on SIG1 Location : [X = 11872.647mil][Y = 7539.603mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11704.816mil|Location2.X=11763.629mil|Location1.Y=7447.423mil|Location2.Y=7506.235mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11704.816mil|Location2.X=11763.629mil|Location1.Y=7447.423mil|Location2.Y=7506.235mil|Absolute=True">Short-Circuit Constraint: Between Pad NT3-2(2838.077mil,3049.829mil) on SIG1 And Track (2838.077mil,3049.829mil)(2838.077mil,3120.695mil) on SIG1 Location : [X = 11734.222mil][Y = 7476.829mil]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDLKL3IIMWL4NFMBR3LC5TPPCMUOKUN40HF1NK3LOBYDKP3ZIHGCE"><h2>Waived Violations</h2></a><a name="IDDFZ245FK2XTFJNMWL4Y1HG2DSDKEOE0TNEWIL0JSMV4T4HFMYDZN"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="waived">Clearance Constraint (Gap=4mil) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11853.043mil|Location2.X=11861.028mil|Location1.Y=7551.957mil|Location2.Y=7560.013mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11853.043mil|Location2.X=11861.028mil|Location1.Y=7551.957mil|Location2.Y=7560.013mil|Absolute=True">Clearance Constraint: (5.826mil &lt; 6mil) Between Track (2940mil,3149.105mil)(2954.927mil,3134.178mil) on SIG1 And Track (2976.502mil,3045.05mil)(2976.502mil,3112.603mil) on SIG1 </acronym></a><br>Waived by Cody Kaminsky at 8/8/2024 12:36:43 PM</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11852.165mil|Location2.X=11860.009mil|Location1.Y=7547.452mil|Location2.Y=7555.657mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11852.165mil|Location2.X=11860.009mil|Location1.Y=7547.452mil|Location2.Y=7555.657mil|Absolute=True">Clearance Constraint: (1.413mil &lt; 6mil) Between Track (2954.927mil,3127.288mil)(2954.927mil,3134.178mil) on SIG1 And Track (2976.502mil,3045.05mil)(2976.502mil,3112.603mil) on SIG1 </acronym></a><br>Waived by Cody Kaminsky at 8/8/2024 12:36:43 PM</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11870.147mil|Location2.X=11875.147mil|Location1.Y=7537.103mil|Location2.Y=7542.103mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11870.147mil|Location2.X=11875.147mil|Location1.Y=7537.103mil|Location2.Y=7542.103mil|Absolute=True">Clearance Constraint: (Collision &lt; 6mil) Between Track (2954.927mil,3127.288mil)(2969.612mil,3112.603mil) on SIG1 And Track (2976.502mil,3045.05mil)(2976.502mil,3112.603mil) on SIG1 </acronym></a><br>Waived by Cody Kaminsky at 8/8/2024 12:36:43 PM</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11870.147mil|Location2.X=11875.147mil|Location1.Y=7537.103mil|Location2.Y=7542.103mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11870.147mil|Location2.X=11875.147mil|Location1.Y=7537.103mil|Location2.Y=7542.103mil|Absolute=True">Clearance Constraint: (Collision &lt; 6mil) Between Track (2969.612mil,3112.603mil)(2976.502mil,3112.603mil) on SIG1 And Track (2976.502mil,3045.05mil)(2976.502mil,3112.603mil) on SIG1 </acronym></a><br>Waived by Cody Kaminsky at 8/8/2024 12:36:43 PM</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11870.147mil|Location2.X=11875.147mil|Location1.Y=7537.103mil|Location2.Y=7542.103mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11870.147mil|Location2.X=11875.147mil|Location1.Y=7537.103mil|Location2.Y=7542.103mil|Absolute=True">Clearance Constraint: (Collision &lt; 6mil) Between Track (2976.502mil,3045.05mil)(2976.502mil,3112.603mil) on SIG1 And Track (2976.502mil,3112.603mil)(2983.392mil,3112.603mil) on SIG1 </acronym></a><br>Waived by Cody Kaminsky at 8/8/2024 12:36:43 PM</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11890.454mil|Location2.X=11897.704mil|Location1.Y=7541.756mil|Location2.Y=7549.006mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11890.454mil|Location2.X=11897.704mil|Location1.Y=7541.756mil|Location2.Y=7549.006mil|Absolute=True">Clearance Constraint: (5.024mil &lt; 6mil) Between Track (2976.502mil,3045.05mil)(2976.502mil,3112.603mil) on SIG1 And Track (3005.187mil,3120.337mil)(3052.632mil,3120.337mil) on SIG1 </acronym></a><br>Waived by Cody Kaminsky at 8/8/2024 12:36:43 PM</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11939.605mil|Location2.X=11944.605mil|Location1.Y=7473.738mil|Location2.Y=7478.738mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11939.605mil|Location2.X=11944.605mil|Location1.Y=7473.738mil|Location2.Y=7478.738mil|Absolute=True">Clearance Constraint: (Collision &lt; 6mil) Between Track (3045.96mil,3049.238mil)(3045.96mil,3056.128mil) on SIG1 And Track (3045.96mil,3049.238mil)(3116.826mil,3049.238mil) on SIG1 </acronym></a><br>Waived by Cody Kaminsky at 8/8/2024 12:36:43 PM</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11939.605mil|Location2.X=11944.605mil|Location1.Y=7473.738mil|Location2.Y=7478.738mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11939.605mil|Location2.X=11944.605mil|Location1.Y=7473.738mil|Location2.Y=7478.738mil|Absolute=True">Clearance Constraint: (Collision &lt; 6mil) Between Track (3045.96mil,3049.238mil)(3116.826mil,3049.238mil) on SIG1 And Track (3045.96mil,3056.128mil)(3077.746mil,3087.913mil) on SIG1 </acronym></a><br>Waived by Cody Kaminsky at 8/8/2024 12:36:43 PM</td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDTVIS5DHSPEAHHN4OAMVIJA2CFR2NTRBBHIWJACATB0B3HVIZNPL"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="waived">Short-Circuit Constraint (Allowed=No) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11847.795mil|Location2.X=11876.643mil|Location1.Y=7529.695mil|Location2.Y=7558.543mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11847.795mil|Location2.X=11876.643mil|Location1.Y=7529.695mil|Location2.Y=7558.543mil|Absolute=True">Short-Circuit Constraint: Between Track (2954.927mil,3127.288mil)(2969.612mil,3112.603mil) on SIG1 And Track (2976.502mil,3045.05mil)(2976.502mil,3112.603mil) on SIG1 Location : [X = 11862.219mil][Y = 7544.119mil]</acronym></a><br>Waived by Cody Kaminsky at 8/4/2024 6:00:19 PM</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11857.754mil|Location2.X=11880.651mil|Location1.Y=7528.154mil|Location2.Y=7551.051mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11857.754mil|Location2.X=11880.651mil|Location1.Y=7528.154mil|Location2.Y=7551.051mil|Absolute=True">Short-Circuit Constraint: Between Track (2969.612mil,3112.603mil)(2976.502mil,3112.603mil) on SIG1 And Track (2976.502mil,3045.05mil)(2976.502mil,3112.603mil) on SIG1 Location : [X = 11869.202mil][Y = 7539.603mil]</acronym></a><br>Waived by Cody Kaminsky at 8/4/2024 6:00:19 PM</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11864.644mil|Location2.X=11887.54mil|Location1.Y=7528.154mil|Location2.Y=7551.051mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11864.644mil|Location2.X=11887.54mil|Location1.Y=7528.154mil|Location2.Y=7551.051mil|Absolute=True">Short-Circuit Constraint: Between Track (2976.502mil,3045.05mil)(2976.502mil,3112.603mil) on SIG1 And Track (2976.502mil,3112.603mil)(2983.392mil,3112.603mil) on SIG1 Location : [X = 11876.092mil][Y = 7539.603mil]</acronym></a><br>Waived by Cody Kaminsky at 8/4/2024 6:00:19 PM</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11930.657mil|Location2.X=11953.554mil|Location1.Y=7468.234mil|Location2.Y=7491.131mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11930.657mil|Location2.X=11953.554mil|Location1.Y=7468.234mil|Location2.Y=7491.131mil|Absolute=True">Short-Circuit Constraint: Between Track (3045.96mil,3049.238mil)(3045.96mil,3056.128mil) on SIG1 And Track (3045.96mil,3049.238mil)(3116.826mil,3049.238mil) on SIG1 Location : [X = 11942.105mil][Y = 7479.682mil]</acronym></a><br>Waived by Cody Kaminsky at 8/4/2024 6:00:19 PM</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11932.626mil|Location2.X=11966.586mil|Location1.Y=7470.043mil|Location2.Y=7504.003mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11932.626mil|Location2.X=11966.586mil|Location1.Y=7470.043mil|Location2.Y=7504.003mil|Absolute=True">Short-Circuit Constraint: Between Track (3045.96mil,3049.238mil)(3116.826mil,3049.238mil) on SIG1 And Track (3045.96mil,3056.128mil)(3077.746mil,3087.913mil) on SIG1 Location : [X = 11949.606mil][Y = 7487.024mil]</acronym></a><br>Waived by Cody Kaminsky at 8/4/2024 6:00:19 PM</td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDHITRHF5MSCDJGUQET4ZDDD4CTJ1BUHPKJXZI1JBK2BPCOW2AMCIL"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="waived">Un-Routed Net Constraint ( (All) )</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9251.145mil|Location2.X=10781.401mil|Location1.Y=8238.815mil|Location2.Y=7529.517mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9251.145mil|Location2.X=10781.401mil|Location1.Y=8238.815mil|Location2.Y=7529.517mil|Absolute=True">Un-Routed Net Constraint: Net CGND Between Track (451.841mil,3908.657mil)(455mil,3911.816mil) on SIG1 And Pad C10-1(1785.256mil,3002.517mil) on SIG1 </acronym></a><br>Waived by Pratham Ingale at 10/8/2025 9:50:36 PM<br>Chassis is connected through MH</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13296.374mil|Location2.X=13497.358mil|Location1.Y=5060.351mil|Location2.Y=4680.957mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13296.374mil|Location2.X=13497.358mil|Location1.Y=5060.351mil|Location2.Y=4680.957mil|Absolute=True">Un-Routed Net Constraint: Net CGND Between Pad C5-2(4500.228mil,733.351mil) on SIG1 And Track (4500.228mil,154.942mil)(4501.213mil,153.957mil) on SIG1 </acronym></a><br>Waived by Pratham Ingale at 10/8/2025 9:51:16 PM<br>Chassis is connected through MH</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13500.24mil|Location2.X=13762.051mil|Location1.Y=5157.984mil|Location2.Y=6358.771mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13500.24mil|Location2.X=13762.051mil|Location1.Y=5157.984mil|Location2.Y=6358.771mil|Absolute=True">Un-Routed Net Constraint: Net CGND Between Pad MH7-1(4735mil,861.89mil) on Multi-Layer And Pad MH2-1(4735mil,1800.866mil) on Multi-Layer </acronym></a><br>Waived by Pratham Ingale at 10/8/2025 9:51:59 PM<br>Chassis is connected through MH</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10776.145mil|Location2.X=13751.094mil|Location1.Y=7176.999mil|Location2.Y=6577.769mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10776.145mil|Location2.X=13751.094mil|Location1.Y=7176.999mil|Location2.Y=6577.769mil|Absolute=True">Un-Routed Net Constraint: Net CGND Between Track (1893.422mil,2850mil)(1980mil,2850mil) on SIG1 And Track (4753.212mil,2052.507mil)(4754.949mil,2050.77mil) on SIG1 </acronym></a><br>Waived by Cody Kaminsky at 8/10/2024 1:51:45 PM</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9481.342mil|Location2.X=13497.358mil|Location1.Y=4469.322mil|Location2.Y=4680.957mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9481.342mil|Location2.X=13497.358mil|Location1.Y=4469.322mil|Location2.Y=4680.957mil|Absolute=True">Un-Routed Net Constraint: Net CGND Between Track (685.197mil,142.323mil)(685.197mil,150mil) on SIG1 And Track (4500.228mil,154.942mil)(4501.213mil,153.957mil) on SIG1 </acronym></a><br>Waived by Cody Kaminsky at 8/10/2024 1:51:45 PM</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13533.783mil|Location2.X=13751.094mil|Location1.Y=8444.637mil|Location2.Y=6577.769mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13533.783mil|Location2.X=13751.094mil|Location1.Y=8444.637mil|Location2.Y=6577.769mil|Absolute=True">Un-Routed Net Constraint: Net CGND Between Track (4735mil,4117.638mil)(4737.638mil,4117.638mil) on SIG1 And Track (4753.212mil,2052.507mil)(4754.949mil,2050.77mil) on SIG1 </acronym></a><br>Waived by Cody Kaminsky at 8/10/2024 1:51:45 PM</td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDBRVM1SHN5IEZCLZ4MUJ3PDGOVNJ0JQKUXZZEB3K3I4F1AY11C1RI"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="waived">Net Antennae (Tolerance=0mil) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11711.037mil|Location2.X=11766.594mil|Location1.Y=7453.644mil|Location2.Y=7541.349mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11711.037mil|Location2.X=11766.594mil|Location1.Y=7453.644mil|Location2.Y=7541.349mil|Absolute=True">Net Antennae: Track (2838.077mil,3049.829mil)(2838.077mil,3120.695mil) on SIG1 </acronym></a><br>Waived by Cody Kaminsky at 8/4/2024 6:01:01 PM</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11849.462mil|Location2.X=11905.019mil|Location1.Y=7516.418mil|Location2.Y=7604.123mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11849.462mil|Location2.X=11905.019mil|Location1.Y=7516.418mil|Location2.Y=7604.123mil|Absolute=True">Net Antennae: Track (2976.502mil,3045.05mil)(2976.502mil,3112.603mil) on SIG1 </acronym></a><br>Waived by Cody Kaminsky at 8/4/2024 6:01:01 PM</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11918.92mil|Location2.X=11974.477mil|Location1.Y=7453.053mil|Location2.Y=7540.758mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11918.92mil|Location2.X=11974.477mil|Location1.Y=7453.053mil|Location2.Y=7540.758mil|Absolute=True">Net Antennae: Track (3045.96mil,3049.238mil)(3116.826mil,3049.238mil) on SIG1 </acronym></a><br>Waived by Cody Kaminsky at 8/4/2024 6:01:01 PM</td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDOBSKJKOJLWVIJJ025AIPGK55NWNRJ30DIQVCFLF1K1LDJQN3BKC"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="waived">Board Clearance Constraint (Gap=0mil) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9319.297mil|Location2.X=9325.546mil|Location1.Y=4522.773mil|Location2.Y=4529.022mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9319.297mil|Location2.X=9325.546mil|Location1.Y=4522.773mil|Location2.Y=4529.022mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 7.874mil) Between Arc (455mil,127.638mil) on Bottom Overlay And Board Edge </acronym></a><br>Waived by Cody Kaminsky at 8/11/2024 10:01:04 AM</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9319.297mil|Location2.X=9325.546mil|Location1.Y=4522.773mil|Location2.Y=4529.022mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9319.297mil|Location2.X=9325.546mil|Location1.Y=4522.773mil|Location2.Y=4529.022mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 7.874mil) Between Arc (455mil,127.638mil) on Top Overlay And Board Edge </acronym></a><br>Waived by Cody Kaminsky at 8/11/2024 10:01:04 AM</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9319.285mil|Location2.X=9325.534mil|Location1.Y=8570.252mil|Location2.Y=8576.502mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9319.285mil|Location2.X=9325.534mil|Location1.Y=8570.252mil|Location2.Y=8576.502mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 7.874mil) Between Arc (455mil,4117.638mil) on Bottom Overlay And Board Edge </acronym></a><br>Waived by Cody Kaminsky at 8/11/2024 10:01:04 AM</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9319.285mil|Location2.X=9325.534mil|Location1.Y=8570.252mil|Location2.Y=8576.502mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9319.285mil|Location2.X=9325.534mil|Location1.Y=8570.252mil|Location2.Y=8576.502mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 7.874mil) Between Arc (455mil,4117.638mil) on Top Overlay And Board Edge </acronym></a><br>Waived by Cody Kaminsky at 8/11/2024 10:01:04 AM</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13656.745mil|Location2.X=13662.994mil|Location1.Y=4522.793mil|Location2.Y=4529.042mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13656.745mil|Location2.X=13662.994mil|Location1.Y=4522.793mil|Location2.Y=4529.042mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 7.874mil) Between Arc (4735mil,127.638mil) on Bottom Overlay And Board Edge </acronym></a><br>Waived by Cody Kaminsky at 8/11/2024 10:01:04 AM</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13656.745mil|Location2.X=13662.994mil|Location1.Y=4522.793mil|Location2.Y=4529.042mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13656.745mil|Location2.X=13662.994mil|Location1.Y=4522.793mil|Location2.Y=4529.042mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 7.874mil) Between Arc (4735mil,127.638mil) on Top Overlay And Board Edge </acronym></a><br>Waived by Cody Kaminsky at 8/11/2024 10:01:04 AM</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13656.745mil|Location2.X=13662.994mil|Location1.Y=6196.021mil|Location2.Y=6202.27mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13656.745mil|Location2.X=13662.994mil|Location1.Y=6196.021mil|Location2.Y=6202.27mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 7.874mil) Between Arc (4735mil,1800.866mil) on Bottom Overlay And Board Edge </acronym></a><br>Waived by Cody Kaminsky at 8/11/2024 10:01:04 AM</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13656.745mil|Location2.X=13662.994mil|Location1.Y=6196.021mil|Location2.Y=6202.27mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13656.745mil|Location2.X=13662.994mil|Location1.Y=6196.021mil|Location2.Y=6202.27mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 7.874mil) Between Arc (4735mil,1800.866mil) on Top Overlay And Board Edge </acronym></a><br>Waived by Cody Kaminsky at 8/11/2024 10:01:04 AM</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13656.756mil|Location2.X=13663.005mil|Location1.Y=8570.232mil|Location2.Y=8576.481mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13656.756mil|Location2.X=13663.005mil|Location1.Y=8570.232mil|Location2.Y=8576.481mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 7.874mil) Between Arc (4735mil,4117.638mil) on Bottom Overlay And Board Edge </acronym></a><br>Waived by Cody Kaminsky at 8/11/2024 10:01:04 AM</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13656.756mil|Location2.X=13663.005mil|Location1.Y=8570.232mil|Location2.Y=8576.481mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13656.756mil|Location2.X=13663.005mil|Location1.Y=8570.232mil|Location2.Y=8576.481mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 7.874mil) Between Arc (4735mil,4117.638mil) on Top Overlay And Board Edge </acronym></a><br>Waived by Cody Kaminsky at 8/11/2024 10:01:04 AM</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13656.756mil|Location2.X=13663.005mil|Location1.Y=5314.484mil|Location2.Y=5320.734mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13656.756mil|Location2.X=13663.005mil|Location1.Y=5314.484mil|Location2.Y=5320.734mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 7.874mil) Between Arc (4735mil,861.89mil) on Bottom Overlay And Board Edge </acronym></a><br>Waived by Cody Kaminsky at 8/11/2024 10:01:04 AM</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13656.756mil|Location2.X=13663.005mil|Location1.Y=5314.484mil|Location2.Y=5320.734mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13656.756mil|Location2.X=13663.005mil|Location1.Y=5314.484mil|Location2.Y=5320.734mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 7.874mil) Between Arc (4735mil,861.89mil) on Top Overlay And Board Edge </acronym></a><br>Waived by Cody Kaminsky at 8/11/2024 10:01:04 AM</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9297.588mil|Location2.X=9303.837mil|Location1.Y=4501.022mil|Location2.Y=4507.272mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9297.588mil|Location2.X=9303.837mil|Location1.Y=4501.022mil|Location2.Y=4507.272mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 7.874mil) Between Board Edge And Pad MH1-1(455mil,127.638mil) on Multi-Layer </acronym></a><br>Waived by Pratham Ingale at 10/8/2025 9:52:47 PM<br>MH defines board edge</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13678.453mil|Location2.X=13684.702mil|Location1.Y=6174.324mil|Location2.Y=6180.573mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13678.453mil|Location2.X=13684.702mil|Location1.Y=6174.324mil|Location2.Y=6180.573mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 7.874mil) Between Board Edge And Pad MH2-1(4735mil,1800.866mil) on Multi-Layer </acronym></a><br>Waived by Pratham Ingale at 10/8/2025 9:53:13 PM<br>MH defines board edge</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13678.495mil|Location2.X=13684.744mil|Location1.Y=8591.93mil|Location2.Y=8598.179mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13678.495mil|Location2.X=13684.744mil|Location1.Y=8591.93mil|Location2.Y=8598.179mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 7.874mil) Between Board Edge And Pad MH4-1(4735mil,4117.638mil) on Multi-Layer </acronym></a><br>Waived by Pratham Ingale at 10/8/2025 9:53:00 PM<br>MH defines board edge</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13678.453mil|Location2.X=13684.702mil|Location1.Y=4501.096mil|Location2.Y=4507.345mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13678.453mil|Location2.X=13684.702mil|Location1.Y=4501.096mil|Location2.Y=4507.345mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 7.874mil) Between Board Edge And Pad MH5-1(4735mil,127.638mil) on Multi-Layer </acronym></a><br>Waived by Pratham Ingale at 10/8/2025 9:53:25 PM<br>MH defines board edge</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9297.546mil|Location2.X=9303.795mil|Location1.Y=8592.003mil|Location2.Y=8598.252mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9297.546mil|Location2.X=9303.795mil|Location1.Y=8592.003mil|Location2.Y=8598.252mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 7.874mil) Between Board Edge And Pad MH6-1(455mil,4117.638mil) on Multi-Layer </acronym></a><br>Waived by Pratham Ingale at 10/8/2025 9:52:54 PM<br>MH defines board edge</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13678.495mil|Location2.X=13684.744mil|Location1.Y=5336.182mil|Location2.Y=5342.431mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13678.495mil|Location2.X=13684.744mil|Location1.Y=5336.182mil|Location2.Y=5342.431mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 7.874mil) Between Board Edge And Pad MH7-1(4735mil,861.89mil) on Multi-Layer </acronym></a><br>Waived by Pratham Ingale at 10/8/2025 9:52:27 PM<br>MH defines board edge</td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDGF4ZMZNUICOGOMRDH2N4WLMMXFMNML4VJYH5SICCIGC3ZIJT2D1C"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="waived">Component Clearance Constraint ( Horizontal Gap = 4mil, Vertical Gap = 4mil ) (All),(All) </th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11908.688mil|Location2.X=11913.938mil|Location1.Y=7511.014mil|Location2.Y=7516.264mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11908.688mil|Location2.X=11913.938mil|Location1.Y=7511.014mil|Location2.Y=7516.264mil|Absolute=True">Component Clearance Constraint: (Collision &lt; 4mil) Between SMT Small Component NT1-NET-TIE_0805 (3081.393mil,3049.238mil) on SIG1 And SMT Small Component NT2-NET-TIE_0805 (2976.502mil,3077.17mil) on SIG1 </acronym></a><br>Waived by Cody Kaminsky at 8/11/2024 10:02:03 AM</td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>

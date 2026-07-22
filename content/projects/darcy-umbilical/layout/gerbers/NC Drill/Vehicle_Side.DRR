@@ -1,0 +1,19 @@
+----------------------------------------------------------------------------------------------------------------------------------
+NCDrill File Report For: Vehicle_Side.PcbDoc   7/22/2026  7:36:46 AM
+----------------------------------------------------------------------------------------------------------------------------------
+
+Layer Pair : Top Layer to Bottom Layer
+ASCII RoundHoles File : Vehicle_Side.TXT
+
+Tool       Hole Size               Hole Tolerance               Hole Type       Hole Count   Plated         Tool Travel
+----------------------------------------------------------------------------------------------------------------------------------
+T1      10mil (0.254mm)                                           Round             63        PTH        8.47inch (215.17mm)
+T2      28mil (0.708mm)                                           Round             8         PTH        0.70inch (17.78mm)
+T3      36mil (0.91mm)                                            Round             8         PTH        0.70inch (17.78mm)
+T4      40mil (1.02mm)                                            Round             16        PTH        2.52inch (64.01mm)
+T5      138mil (3.5mm)                                            Round             4         PTH        2.56inch (65.07mm)
+T6      40mil (1.02mm)                                            Round             2         NPTH       0.35inch (9.00mm)
+----------------------------------------------------------------------------------------------------------------------------------
+Totals                                                                              101
+
+Total Processing Time (hh:mm:ss) : 00:00:00

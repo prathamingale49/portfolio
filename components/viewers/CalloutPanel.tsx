@@ -21,7 +21,6 @@ export function CalloutPanel({ title, description, selected, page, slug }: Callo
     <aside className="h-full border-l border-line-soft bg-panel p-5">
       <div className="space-y-5">
         <div>
-          <p className="text-xs uppercase tracking-wide text-slate-500">Context</p>
           <h2 className="mt-2 text-lg font-semibold text-white">{title}</h2>
           <p className="mt-2 text-sm leading-6 text-slate-400">{description}</p>
         </div>

@@ -1,0 +1,137 @@
+Protel Design System Design Rule Check
+PCB File : C:\Users\Public\Documents\Altium\Flight_System_Avionics_Module\PCB1.PcbDoc
+Date     : 10/12/2025
+Time     : 6:52:36 PM
+
+Processing Rule : Clearance Constraint (Gap=4mil) (All),(All)
+   Violation between Clearance Constraint: (Collision < 4mil) Between Pad NT1-1(3045.96mil,3049.238mil) on SIG1 And Track (3045.96mil,3049.238mil)(3116.826mil,3049.238mil) on SIG1 
+   Violation between Clearance Constraint: (Collision < 4mil) Between Pad NT2-1(2976.502mil,3112.603mil) on SIG1 And Track (2976.502mil,3045.05mil)(2976.502mil,3112.603mil) on SIG1 
+   Violation between Clearance Constraint: (Collision < 4mil) Between Pad NT3-2(2838.077mil,3049.829mil) on SIG1 And Track (2838.077mil,3049.829mil)(2838.077mil,3120.695mil) on SIG1 
+Rule Violations :3
+
+Processing Rule : Short-Circuit Constraint (Allowed=No) (All),(All)
+   Violation between Short-Circuit Constraint: Between Pad NT1-1(3045.96mil,3049.238mil) on SIG1 And Track (3045.96mil,3049.238mil)(3116.826mil,3049.238mil) on SIG1 Location : [X = 11942.105mil][Y = 7476.238mil]
+   Violation between Short-Circuit Constraint: Between Pad NT2-1(2976.502mil,3112.603mil) on SIG1 And Track (2976.502mil,3045.05mil)(2976.502mil,3112.603mil) on SIG1 Location : [X = 11872.647mil][Y = 7539.603mil]
+   Violation between Short-Circuit Constraint: Between Pad NT3-2(2838.077mil,3049.829mil) on SIG1 And Track (2838.077mil,3049.829mil)(2838.077mil,3120.695mil) on SIG1 Location : [X = 11734.222mil][Y = 7476.829mil]
+Rule Violations :3
+
+Processing Rule : Un-Routed Net Constraint ( (All) )
+Rule Violations :0
+
+Processing Rule : Modified Polygon (Allow modified: No), (Allow shelved: No)
+Rule Violations :0
+
+Processing Rule : Width Constraint (Min=5.984mil) (Max=71497.938mil) (Preferred=10mil) (All)
+Rule Violations :0
+
+Processing Rule : Width Constraint (Min=10mil) (Max=500mil) (Preferred=145mil) (InNetClass('pwr_5A'))
+Rule Violations :0
+
+Processing Rule : Width Constraint (Min=5.984mil) (Max=13.325mil) (Preferred=10mil) (InNetClass('sig_50'))
+Rule Violations :0
+
+Processing Rule : Routing Layers(All)
+Rule Violations :0
+
+Processing Rule : Routing Via (MinHoleWidth=7.874mil) (MaxHoleWidth=248.031mil) (PreferredHoleWidth=7.874mil) (MinWidth=17.716mil) (MaxWidth=257.874mil) (PreferedWidth=17.716mil) (All)
+Rule Violations :0
+
+Processing Rule : Differential Pairs Uncoupled Length using the Gap Constraints (Min=4mil) (Max=4mil) (Prefered=4mil)  and Width Constraints (Min=4mil) (Max=71497.938mil) (Prefered=4mil) (All)
+Rule Violations :0
+
+Processing Rule : Power Plane Connect Rule(Direct Connect )(Expansion=20mil) (Conductor Width=10mil) (Air Gap=10mil) (Entries=4) (InPadClass('PowerPads'))
+Rule Violations :0
+
+Processing Rule : Power Plane Connect Rule(Relief Connect )(Expansion=11.811mil) (Conductor Width=4mil) (Air Gap=4mil) (Entries=4) (All)
+Rule Violations :0
+
+Processing Rule : Minimum Annular Ring (Minimum=3mil) (All)
+Rule Violations :0
+
+Processing Rule : Hole Size Constraint (Min=7.874mil) (Max=248.031mil) (All)
+Rule Violations :0
+
+Processing Rule : Pads and Vias to follow the Drill pairs settings
+Rule Violations :0
+
+Processing Rule : Hole To Hole Clearance (Gap=9.842mil) (All),(All)
+Rule Violations :0
+
+Processing Rule : Minimum Solder Mask Sliver (Gap=0mil) (All),(All)
+Rule Violations :0
+
+Processing Rule : Net Antennae (Tolerance=0mil) (All)
+Rule Violations :0
+
+Processing Rule : Board Clearance Constraint (Gap=0mil) (All)
+Rule Violations :0
+
+Processing Rule : Component Clearance Constraint ( Horizontal Gap = 4mil, Vertical Gap = 4mil ) (All),(All) 
+Rule Violations :0
+
+Processing Rule : Height Constraint (Min=0mil) (Max=71497.938mil) (Prefered=500mil) (All)
+Rule Violations :0
+
+Waived Violations Of Rule : Clearance Constraint (Gap=4mil) (All),(All)
+   Waived Violation between Clearance Constraint: (5.826mil < 6mil) Between Track (2940mil,3149.105mil)(2954.927mil,3134.178mil) on SIG1 And Track (2976.502mil,3045.05mil)(2976.502mil,3112.603mil) on SIG1 Waived by Cody Kaminsky at 8/8/2024 12:36:43 PM
+   Waived Violation between Clearance Constraint: (1.413mil < 6mil) Between Track (2954.927mil,3127.288mil)(2954.927mil,3134.178mil) on SIG1 And Track (2976.502mil,3045.05mil)(2976.502mil,3112.603mil) on SIG1 Waived by Cody Kaminsky at 8/8/2024 12:36:43 PM
+   Waived Violation between Clearance Constraint: (Collision < 6mil) Between Track (2954.927mil,3127.288mil)(2969.612mil,3112.603mil) on SIG1 And Track (2976.502mil,3045.05mil)(2976.502mil,3112.603mil) on SIG1 Waived by Cody Kaminsky at 8/8/2024 12:36:43 PM
+   Waived Violation between Clearance Constraint: (Collision < 6mil) Between Track (2969.612mil,3112.603mil)(2976.502mil,3112.603mil) on SIG1 And Track (2976.502mil,3045.05mil)(2976.502mil,3112.603mil) on SIG1 Waived by Cody Kaminsky at 8/8/2024 12:36:43 PM
+   Waived Violation between Clearance Constraint: (Collision < 6mil) Between Track (2976.502mil,3045.05mil)(2976.502mil,3112.603mil) on SIG1 And Track (2976.502mil,3112.603mil)(2983.392mil,3112.603mil) on SIG1 Waived by Cody Kaminsky at 8/8/2024 12:36:43 PM
+   Waived Violation between Clearance Constraint: (5.024mil < 6mil) Between Track (2976.502mil,3045.05mil)(2976.502mil,3112.603mil) on SIG1 And Track (3005.187mil,3120.337mil)(3052.632mil,3120.337mil) on SIG1 Waived by Cody Kaminsky at 8/8/2024 12:36:43 PM
+   Waived Violation between Clearance Constraint: (Collision < 6mil) Between Track (3045.96mil,3049.238mil)(3045.96mil,3056.128mil) on SIG1 And Track (3045.96mil,3049.238mil)(3116.826mil,3049.238mil) on SIG1 Waived by Cody Kaminsky at 8/8/2024 12:36:43 PM
+   Waived Violation between Clearance Constraint: (Collision < 6mil) Between Track (3045.96mil,3049.238mil)(3116.826mil,3049.238mil) on SIG1 And Track (3045.96mil,3056.128mil)(3077.746mil,3087.913mil) on SIG1 Waived by Cody Kaminsky at 8/8/2024 12:36:43 PM
+Waived Violations :8
+
+Waived Violations Of Rule : Short-Circuit Constraint (Allowed=No) (All),(All)
+   Waived Violation between Short-Circuit Constraint: Between Track (2954.927mil,3127.288mil)(2969.612mil,3112.603mil) on SIG1 And Track (2976.502mil,3045.05mil)(2976.502mil,3112.603mil) on SIG1 Location : [X = 11862.219mil][Y = 7544.119mil]Waived by Cody Kaminsky at 8/4/2024 6:00:19 PM
+   Waived Violation between Short-Circuit Constraint: Between Track (2969.612mil,3112.603mil)(2976.502mil,3112.603mil) on SIG1 And Track (2976.502mil,3045.05mil)(2976.502mil,3112.603mil) on SIG1 Location : [X = 11869.202mil][Y = 7539.603mil]Waived by Cody Kaminsky at 8/4/2024 6:00:19 PM
+   Waived Violation between Short-Circuit Constraint: Between Track (2976.502mil,3045.05mil)(2976.502mil,3112.603mil) on SIG1 And Track (2976.502mil,3112.603mil)(2983.392mil,3112.603mil) on SIG1 Location : [X = 11876.092mil][Y = 7539.603mil]Waived by Cody Kaminsky at 8/4/2024 6:00:19 PM
+   Waived Violation between Short-Circuit Constraint: Between Track (3045.96mil,3049.238mil)(3045.96mil,3056.128mil) on SIG1 And Track (3045.96mil,3049.238mil)(3116.826mil,3049.238mil) on SIG1 Location : [X = 11942.105mil][Y = 7479.682mil]Waived by Cody Kaminsky at 8/4/2024 6:00:19 PM
+   Waived Violation between Short-Circuit Constraint: Between Track (3045.96mil,3049.238mil)(3116.826mil,3049.238mil) on SIG1 And Track (3045.96mil,3056.128mil)(3077.746mil,3087.913mil) on SIG1 Location : [X = 11949.606mil][Y = 7487.024mil]Waived by Cody Kaminsky at 8/4/2024 6:00:19 PM
+Waived Violations :5
+
+Waived Violations Of Rule : Un-Routed Net Constraint ( (All) )
+   Waived Violation between Un-Routed Net Constraint: Net CGND Between Track (451.841mil,3908.657mil)(455mil,3911.816mil) on SIG1 And Pad C10-1(1785.256mil,3002.517mil) on SIG1 Waived by Pratham Ingale at 10/8/2025 9:50:36 PMChassis is connected through MH
+   Waived Violation between Un-Routed Net Constraint: Net CGND Between Pad C5-2(4500.228mil,733.351mil) on SIG1 And Track (4500.228mil,154.942mil)(4501.213mil,153.957mil) on SIG1 Waived by Pratham Ingale at 10/8/2025 9:51:16 PMChassis is connected through MH
+   Waived Violation between Un-Routed Net Constraint: Net CGND Between Pad MH7-1(4735mil,861.89mil) on Multi-Layer And Pad MH2-1(4735mil,1800.866mil) on Multi-Layer Waived by Pratham Ingale at 10/8/2025 9:51:59 PMChassis is connected through MH
+   Waived Violation between Un-Routed Net Constraint: Net CGND Between Track (1893.422mil,2850mil)(1980mil,2850mil) on SIG1 And Track (4753.212mil,2052.507mil)(4754.949mil,2050.77mil) on SIG1 Waived by Cody Kaminsky at 8/10/2024 1:51:45 PM
+   Waived Violation between Un-Routed Net Constraint: Net CGND Between Track (685.197mil,142.323mil)(685.197mil,150mil) on SIG1 And Track (4500.228mil,154.942mil)(4501.213mil,153.957mil) on SIG1 Waived by Cody Kaminsky at 8/10/2024 1:51:45 PM
+   Waived Violation between Un-Routed Net Constraint: Net CGND Between Track (4735mil,4117.638mil)(4737.638mil,4117.638mil) on SIG1 And Track (4753.212mil,2052.507mil)(4754.949mil,2050.77mil) on SIG1 Waived by Cody Kaminsky at 8/10/2024 1:51:45 PM
+Waived Violations :6
+
+Waived Violations Of Rule : Net Antennae (Tolerance=0mil) (All)
+   Waived Violation between Net Antennae: Track (2838.077mil,3049.829mil)(2838.077mil,3120.695mil) on SIG1 Waived by Cody Kaminsky at 8/4/2024 6:01:01 PM
+   Waived Violation between Net Antennae: Track (2976.502mil,3045.05mil)(2976.502mil,3112.603mil) on SIG1 Waived by Cody Kaminsky at 8/4/2024 6:01:01 PM
+   Waived Violation between Net Antennae: Track (3045.96mil,3049.238mil)(3116.826mil,3049.238mil) on SIG1 Waived by Cody Kaminsky at 8/4/2024 6:01:01 PM
+Waived Violations :3
+
+Waived Violations Of Rule : Board Clearance Constraint (Gap=0mil) (All)
+   Waived Violation between Board Outline Clearance(Outline Edge): (Collision < 7.874mil) Between Arc (455mil,127.638mil) on Bottom Overlay And Board Edge Waived by Cody Kaminsky at 8/11/2024 10:01:04 AM
+   Waived Violation between Board Outline Clearance(Outline Edge): (Collision < 7.874mil) Between Arc (455mil,127.638mil) on Top Overlay And Board Edge Waived by Cody Kaminsky at 8/11/2024 10:01:04 AM
+   Waived Violation between Board Outline Clearance(Outline Edge): (Collision < 7.874mil) Between Arc (455mil,4117.638mil) on Bottom Overlay And Board Edge Waived by Cody Kaminsky at 8/11/2024 10:01:04 AM
+   Waived Violation between Board Outline Clearance(Outline Edge): (Collision < 7.874mil) Between Arc (455mil,4117.638mil) on Top Overlay And Board Edge Waived by Cody Kaminsky at 8/11/2024 10:01:04 AM
+   Waived Violation between Board Outline Clearance(Outline Edge): (Collision < 7.874mil) Between Arc (4735mil,127.638mil) on Bottom Overlay And Board Edge Waived by Cody Kaminsky at 8/11/2024 10:01:04 AM
+   Waived Violation between Board Outline Clearance(Outline Edge): (Collision < 7.874mil) Between Arc (4735mil,127.638mil) on Top Overlay And Board Edge Waived by Cody Kaminsky at 8/11/2024 10:01:04 AM
+   Waived Violation between Board Outline Clearance(Outline Edge): (Collision < 7.874mil) Between Arc (4735mil,1800.866mil) on Bottom Overlay And Board Edge Waived by Cody Kaminsky at 8/11/2024 10:01:04 AM
+   Waived Violation between Board Outline Clearance(Outline Edge): (Collision < 7.874mil) Between Arc (4735mil,1800.866mil) on Top Overlay And Board Edge Waived by Cody Kaminsky at 8/11/2024 10:01:04 AM
+   Waived Violation between Board Outline Clearance(Outline Edge): (Collision < 7.874mil) Between Arc (4735mil,4117.638mil) on Bottom Overlay And Board Edge Waived by Cody Kaminsky at 8/11/2024 10:01:04 AM
+   Waived Violation between Board Outline Clearance(Outline Edge): (Collision < 7.874mil) Between Arc (4735mil,4117.638mil) on Top Overlay And Board Edge Waived by Cody Kaminsky at 8/11/2024 10:01:04 AM
+   Waived Violation between Board Outline Clearance(Outline Edge): (Collision < 7.874mil) Between Arc (4735mil,861.89mil) on Bottom Overlay And Board Edge Waived by Cody Kaminsky at 8/11/2024 10:01:04 AM
+   Waived Violation between Board Outline Clearance(Outline Edge): (Collision < 7.874mil) Between Arc (4735mil,861.89mil) on Top Overlay And Board Edge Waived by Cody Kaminsky at 8/11/2024 10:01:04 AM
+   Waived Violation between Board Outline Clearance(Outline Edge): (Collision < 7.874mil) Between Board Edge And Pad MH1-1(455mil,127.638mil) on Multi-Layer Waived by Pratham Ingale at 10/8/2025 9:52:47 PMMH defines board edge
+   Waived Violation between Board Outline Clearance(Outline Edge): (Collision < 7.874mil) Between Board Edge And Pad MH2-1(4735mil,1800.866mil) on Multi-Layer Waived by Pratham Ingale at 10/8/2025 9:53:13 PMMH defines board edge
+   Waived Violation between Board Outline Clearance(Outline Edge): (Collision < 7.874mil) Between Board Edge And Pad MH4-1(4735mil,4117.638mil) on Multi-Layer Waived by Pratham Ingale at 10/8/2025 9:53:00 PMMH defines board edge
+   Waived Violation between Board Outline Clearance(Outline Edge): (Collision < 7.874mil) Between Board Edge And Pad MH5-1(4735mil,127.638mil) on Multi-Layer Waived by Pratham Ingale at 10/8/2025 9:53:25 PMMH defines board edge
+   Waived Violation between Board Outline Clearance(Outline Edge): (Collision < 7.874mil) Between Board Edge And Pad MH6-1(455mil,4117.638mil) on Multi-Layer Waived by Pratham Ingale at 10/8/2025 9:52:54 PMMH defines board edge
+   Waived Violation between Board Outline Clearance(Outline Edge): (Collision < 7.874mil) Between Board Edge And Pad MH7-1(4735mil,861.89mil) on Multi-Layer Waived by Pratham Ingale at 10/8/2025 9:52:27 PMMH defines board edge
+Waived Violations :18
+
+Waived Violations Of Rule : Component Clearance Constraint ( Horizontal Gap = 4mil, Vertical Gap = 4mil ) (All),(All) 
+   Waived Violation between Component Clearance Constraint: (Collision < 4mil) Between SMT Small Component NT1-NET-TIE_0805 (3081.393mil,3049.238mil) on SIG1 And SMT Small Component NT2-NET-TIE_0805 (2976.502mil,3077.17mil) on SIG1 Waived by Cody Kaminsky at 8/11/2024 10:02:03 AM
+Waived Violations :1
+
+
+Violations Detected : 6
+Waived Violations : 41
+Time Elapsed        : 00:00:01

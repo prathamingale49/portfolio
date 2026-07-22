@@ -1,0 +1,61 @@
+{
+  "slug": "rf-link-evaluation-board",
+  "title": "RF Link Evaluation Board",
+  "subtitle": "Layout in progress; board for RF telemetry path evaluation, power measurement, and CM5-based logging",
+  "category": ["RF / Telemetry", "Avionics", "Embedded Systems", "Test / HITL"],
+  "status": "Designed",
+  "role": "Responsible Engineer",
+  "tools": ["Altium", "VNA", "Spectrum Analyzer", "Oscilloscope"],
+  "layerCount": 4,
+  "stackup": "Four-layer RF and mixed-signal PCB stackup to be finalized from Altium exports",
+  "boardSize": "TBD from mechanical export",
+  "summary": "An RF link evaluation board for LoRa and telemetry characterization, including switched RF paths, directional-coupler power measurement, detector telemetry, current sensing, and CM5 logging. Layout is in progress and will be updated with exported layer renders.",
+  "thumbnail": "/generated/recovery-system/thumbnails/card.svg",
+  "tags": ["RF", "Telemetry", "LoRa", "Directional Coupler", "CM5", "Layout In Progress", "Altium"],
+  "highlights": [
+    { "label": "RF Path", "value": "Switched telemetry" },
+    { "label": "Measurement", "value": "Forward / reverse power" },
+    { "label": "Control", "value": "CM5 logging" },
+    { "label": "Layout", "value": "In progress" }
+  ],
+  "keyComponents": [
+    "LoRa radio",
+    "Directional coupler",
+    "Log detector",
+    "RF switches",
+    "Raspberry Pi CM5",
+    "SAR ADC telemetry",
+    "Current-sense shunts"
+  ],
+  "mainConstraints": [
+    "Maintain controlled-impedance RF feedlines and clean return paths",
+    "Keep coupler and detector ranges bounded for expected transmit power",
+    "Separate RF, power, and digital logging regions",
+    "Provide clear test access for VNA, spectrum, power, and telemetry validation"
+  ],
+  "publicNote": "Layout is in progress. Add exported copper SVGs, screenshots, and RF measurement evidence as the board matures.",
+  "model3d": {
+    "title": "RF Link Evaluation Board 3D Model",
+    "description": "Add the Altium STEP export under content/projects/rf-link-evaluation-board/model.",
+    "rotation": { "x": 0, "y": 0, "z": 0 },
+    "position": { "x": 0, "y": 0, "z": 0 },
+    "zoom": 1
+  },
+  "schematic": {
+    "pages": [
+      {
+        "id": "pdf",
+        "title": "Exported Schematic PDF",
+        "file": "/content/projects/rf-link-evaluation-board/schematic/rf-link-evaluation-board.pdf",
+        "description": "Place the exported Altium schematic PDF here when available.",
+        "hotspots": []
+      }
+    ]
+  },
+  "layout": {
+    "views": [],
+    "callouts": []
+  },
+  "tests": [],
+  "revisions": []
+}

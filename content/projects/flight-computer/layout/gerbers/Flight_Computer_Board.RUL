@@ -1,0 +1,8 @@
+DRC Rules Export File for PCB: c:\programdata\altium\vaultserverdata\arkservice\60ffacbf-13a1-4991-9151-c6174b71e71e\s\e\Flight_Computer_Board.PcbDoc
+RuleKind=Clearance|RuleName=Clearance_Chassis|Scope=Board|Minimum=39.37
+RuleKind=Clearance|RuleName=Stitching GND|Scope=Board|Minimum=20.00
+RuleKind=MinimumAnnularRing|RuleName=MinimumAnnularRing|Scope=Board|Minimum=2.00
+RuleKind=ShortCircuit|RuleName=ShortCircuit|Scope=Board|Allowed=0
+RuleKind=SolderMaskExpansion|RuleName=SolderMaskExpansion|Scope=Board|Minimum=3.94
+RuleKind=Width|RuleName=Width|Scope=Board|Minimum=7.87
+RuleKind=Clearance|RuleName=Clearance|Scope=Board|Minimum=7.87

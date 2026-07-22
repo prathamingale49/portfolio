@@ -1,0 +1,57 @@
+# Vespula Avionics Module
+
+## Purpose
+
+The Vespula Avionics Module documents the Flight System Avionics Module, the flight engine controller responsible for actuation and sensing throughout the rocket's 48 V avionics bus.
+
+The board drives solenoid valves and ignitors while reading differential sensors, RTDs, and pressure transducers. Its role is to provide vehicle control during engine start and shutdown sequences.
+
+## Requirements
+
+- Drive solenoid valve and ignitor outputs from the flight engine controller.
+- Read differential sensors, RTDs, and pressure transducers.
+- Maintain reliable control behavior on the 48 V avionics bus.
+- Keep power conversion, actuation, and sensor acquisition paths reviewable in layout.
+- Preserve exported Altium artifacts without parsing raw schematic or PCB source files.
+
+## Architecture
+
+The board combines engine-control outputs, sensor acquisition interfaces, power conversion, vehicle connectors, and debug paths. It sits in the avionics stack as the controller for engine actuation and sensor feedback during start and shutdown operations.
+
+## Redesign Notes
+
+After major faults were found in the first revision of the Flight SAM, including driven boot pins, flipped ADC signals, and unstable ignitor power, the board went through a rapid redesign.
+
+The update rewired more than 15 BeagleBone pins, fixed converter compensation, and restored reliable ignition and sensor operation.
+
+## PCB Layout Walkthrough
+
+The layout viewer uses Gerber-derived copper-layer SVG renders for SIG1, GND1, SIG2, PWR, GND2, and SIG3. Replace or regenerate those SVGs as the Altium layout changes.
+
+Key layout areas to document:
+
+- High-current ignitor and valve-driver routing.
+- Sensor acquisition routing for differential sensors, RTDs, and pressure transducers.
+- Power conversion compensation and return paths.
+- BeagleBone pin mapping and connector interfaces.
+- Separation between actuation power and low-level measurement circuitry.
+
+## Bring-Up Plan
+
+- Verify regulated rails and converter compensation behavior.
+- Confirm corrected BeagleBone pin mapping.
+- Validate ADC signal polarity and sensor-channel readings.
+- Exercise valve-driver and ignitor-output paths with safe loads.
+- Record ignition, sensor, and engine-control interface validation results.
+
+## Test Results
+
+Add oscilloscope captures, rail measurements, load tests, and sensor sanity-check data as hardware validation artifacts become available.
+
+## Revision History
+
+This case study describes the redesign after first-revision Flight SAM faults were identified and corrected.
+
+## What I Would Change
+
+Add final schematic PDF exports, BOM tables, featured screenshots of the corrected converter and sensor sections, and validation evidence for ignition and sensor operation.

@@ -7,44 +7,46 @@ interface ProjectNavCardsProps {
 
 const cards = [
   {
-    title: "Schematic Viewer",
+    title: "Schematic",
     href: "schematic",
     icon: FileStack,
-    text: "Click through exported schematic pages with manually defined hotspots.",
+    text: "Exported PDF/SVG sheets.",
   },
   {
-    title: "PCB Layout Viewer",
+    title: "Layout",
     href: "layout",
     icon: Cpu,
-    text: "Inspect Gerber-derived copper-layer SVG renders.",
+    text: "Copper layer inspector.",
   },
   {
-    title: "3D Board Model",
+    title: "3D Model",
     href: "model",
     icon: Box,
-    text: "Rotate the Altium STEP export or preview the interactive board model.",
+    text: "STEP board preview.",
   },
   {
-    title: "Wiki / Design Notes",
+    title: "Notes",
     href: "wiki",
     icon: BookOpen,
-    text: "Read architecture, decisions, bring-up, failures, and revision history.",
+    text: "Design wiki and bring-up notes.",
   },
 ];
 
 export function ProjectNavCards({ slug }: ProjectNavCardsProps) {
   return (
-    <section className="grid gap-4 md:grid-cols-2">
+    <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
       {cards.map((card) => {
         const Icon = card.icon;
         return (
           <Link
             key={card.href}
             href={`/projects/${slug}/${card.href}`}
-            className="rounded-lg border border-line-soft bg-panel p-5 transition hover:border-signal/45 hover:bg-panel-soft"
+            className="group rounded border border-line-soft bg-panel p-4 transition hover:border-signal/45 hover:bg-panel-soft"
           >
-            <Icon className="mb-4 size-6 text-signal" aria-hidden="true" />
-            <h2 className="text-lg font-semibold text-white">{card.title}</h2>
+            <div className="flex items-center gap-3">
+              <Icon className="size-5 text-signal" aria-hidden="true" />
+              <h2 className="text-base font-semibold text-white group-hover:text-signal">{card.title}</h2>
+            </div>
             <p className="mt-2 text-sm leading-6 text-slate-400">{card.text}</p>
           </Link>
         );

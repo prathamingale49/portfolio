@@ -2,18 +2,18 @@
 
 ## Purpose
 
-The Darcy Battery Management System project documents a power and battery-management PCB package from exported Altium schematic artifacts. The available PDF contains 10 pages covering top level, primary sheet, power, load switching, ADC, connector load switches, and current-loop circuitry.
+The Darcy Battery Management System project documents a four-layer power and battery-management PCB package from exported Altium schematic and Gerber artifacts. The available PDF contains 10 pages covering top level, primary sheet, power, load switching, ADC, connector load switches, and current-loop circuitry.
 
 ## Requirements
 
 - Preserve the exported schematic PDF as the source artifact.
-- Add board layout renders when Gerber-derived or manually exported SVGs are available.
-- Add the Altium STEP export for the interactive 3D model when available.
+- Preserve the generated Gerber-derived copper layer SVGs.
+- Preserve the Altium STEP/GLB export for the interactive 3D model.
 - Keep the project static-first and avoid raw Altium document parsing.
 
 ## System Context
 
-The board belongs in the power electronics and avionics portion of the Darcy stack. The portfolio focus should be power-path decisions, load-switch channel consistency, measurement strategy, and validation planning.
+The board is the primary power-distribution node for Darcy avionics, drawing energy from a 12-cell lithium-ion pack and distributing protected power to vehicle subsystems. The portfolio focus is power-path decisions, load-switch channel consistency, measurement strategy, and validation planning.
 
 ## Architecture
 
@@ -25,7 +25,7 @@ Use the schematic page to open the exported PDF. The PDF viewer preserves the Al
 
 ## PCB Layout Walkthrough
 
-Layout renders have not been added yet. Add top/bottom or layer-specific SVGs under `public/generated/darcy-battery-management-system/layout` when the Gerber render pipeline or manual exports are ready.
+The layout viewer uses Gerber-derived copper-layer SVG renders for the top layer, two inner layers, and bottom layer. Replace or regenerate those SVGs as the Altium layout changes.
 
 ## Bring-up Plan
 
@@ -41,7 +41,7 @@ No lab evidence has been added yet.
 
 ## Revision History
 
-The current portfolio entry is based on the exported Altium schematic PDF dated March 18, 2026.
+The current portfolio entry is based on the exported Altium schematic PDF dated March 18, 2026, revision 2.1.
 
 ## What I Would Change
 

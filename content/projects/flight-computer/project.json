@@ -1,0 +1,92 @@
+{
+  "slug": "flight-computer",
+  "title": "Flight Computer",
+  "subtitle": "Black box and central flight-computer board for sensing, telemetry, storage, and recovery coordination",
+  "category": ["Avionics", "Embedded Systems", "RF / Telemetry"],
+  "status": "Designed",
+  "role": "Test Engineer",
+  "tools": ["Altium", "Oscilloscope", "Bench Supply"],
+  "layerCount": 4,
+  "stackup": "Four copper-layer flight computer PCB exported from Altium Gerbers",
+  "boardSize": "TBD from mechanical export",
+  "summary": "Primary avionics compute board for the flight stack, organized around power regulation, input connectors, ADC measurement, IMU/barometer/magnetometer sensing, flash storage, current-loop interfacing, telemetry, USB, and recovery-system connectivity.",
+  "thumbnail": "/generated/recovery-system/thumbnails/card.svg",
+  "tags": ["Flight Computer", "Avionics", "Sensors", "Telemetry", "Embedded", "Altium"],
+  "highlights": [
+    { "label": "Schematic Pages", "value": "11" },
+    { "label": "Sensors", "value": "IMU / baro / mag" },
+    { "label": "Copper Layers", "value": "4" },
+    { "label": "Revision", "value": "4.0" }
+  ],
+  "keyComponents": [
+    "Microcontroller or compute module",
+    "IMU",
+    "Barometer",
+    "Magnetometer",
+    "Telemetry interface",
+    "Recovery system interface",
+    "Power regulation"
+  ],
+  "mainConstraints": [
+    "Keep precision sensor, ADC, and reference routing reviewable for state-estimation quality",
+    "Separate telemetry, storage, and digital interfaces from sensitive measurement paths",
+    "Make recovery-system and current-loop interfaces auditable at schematic and test level",
+    "Provide accessible bring-up points for rails, buses, sensors, and external connectors"
+  ],
+  "publicNote": "Layout Gerbers, 3D model, and exported schematic PDF are connected. Add BOM, pick-and-place, and lab evidence as the design package matures.",
+  "model3d": {
+    "title": "Flight Computer 3D Model",
+    "description": "Interactive 3D board model from the Altium STEP export.",
+    "glbFile": "/content/projects/flight-computer/model/flight-computer.glb",
+    "stepFile": "/content/projects/flight-computer/model/flight-computer.step",
+    "rotation": { "x": 10, "y": -30, "z": -135 },
+    "position": { "x": -43, "y": 6, "z": 17 },
+    "zoom": 1.25,
+    "camera": {
+      "position": { "x": -42.853, "y": -231.784, "z": -44.179 },
+      "target": { "x": -49.106, "y": -78.896, "z": -48.019 }
+    }
+  },
+  "schematic": {
+    "pages": [
+      {
+        "id": "pdf",
+        "title": "Exported Schematic PDF",
+        "file": "/content/projects/flight-computer/schematic/flight-computer.pdf",
+        "description": "Exported Altium schematic PDF dated 7/22/2026, revision 4.0. The PDF covers connectors, power, ADCs, sensors, flash, current-loop, telemetry, USB, recovery-system interface, and layout notes.",
+        "hotspots": []
+      }
+    ]
+  },
+  "layout": {
+    "views": [
+      {
+        "id": "copper-top",
+        "title": "1 TOP",
+        "file": "/generated/flight-computer/layout/copper-top.svg",
+        "color": "#d84a3a"
+      },
+      {
+        "id": "copper-1",
+        "title": "2 INNER 1",
+        "file": "/generated/flight-computer/layout/copper-1.svg",
+        "color": "#b88900"
+      },
+      {
+        "id": "copper-2",
+        "title": "3 INNER 2",
+        "file": "/generated/flight-computer/layout/copper-2.svg",
+        "color": "#157f91"
+      },
+      {
+        "id": "copper-bottom",
+        "title": "4 BOTTOM",
+        "file": "/generated/flight-computer/layout/copper-bottom.svg",
+        "color": "#151cff"
+      }
+    ],
+    "callouts": []
+  },
+  "tests": [],
+  "revisions": []
+}

@@ -5,7 +5,7 @@ const config = [
   ...nextVitals,
   ...nextTs,
   {
-    ignores: [".next/**", "node_modules/**", "public/**"],
+    ignores: [".next/**", "node_modules/**", "public/**", "work/**"],
   },
   {
     rules: {

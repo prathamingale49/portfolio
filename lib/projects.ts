@@ -6,6 +6,16 @@ import type { Project, TocItem } from "@/types/project";
 
 const projectsDirectory = path.join(process.cwd(), "content", "projects");
 
+const projectOrder = [
+  "recovery-system",
+  "rf-link-evaluation-board",
+  "vespula-avionics-module",
+  "darcy-battery-management-system",
+  "flight-computer",
+  "darcy-umbilical",
+  "hardware-in-the-loop",
+];
+
 export function getProjectSlugs(): string[] {
   if (!fs.existsSync(projectsDirectory)) {
     return [];
@@ -15,7 +25,25 @@ export function getProjectSlugs(): string[] {
     .readdirSync(projectsDirectory, { withFileTypes: true })
     .filter((entry) => entry.isDirectory())
     .map((entry) => entry.name)
-    .sort();
+    .filter((slug) => fs.existsSync(path.join(projectsDirectory, slug, "project.json")))
+    .sort((a, b) => {
+      const aIndex = projectOrder.indexOf(a);
+      const bIndex = projectOrder.indexOf(b);
+
+      if (aIndex === -1 && bIndex === -1) {
+        return a.localeCompare(b);
+      }
+
+      if (aIndex === -1) {
+        return 1;
+      }
+
+      if (bIndex === -1) {
+        return -1;
+      }
+
+      return aIndex - bIndex;
+    });
 }
 
 export function getProject(slug: string): Project {

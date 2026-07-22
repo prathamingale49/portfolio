@@ -1,0 +1,105 @@
+{
+  "slug": "vespula-avionics-module",
+  "title": "Vespula Avionics Module",
+  "subtitle": "Flight System Avionics Module for engine actuation, sensing, and vehicle control",
+  "category": ["Avionics", "Embedded Systems", "Power Electronics"],
+  "status": "Designed",
+  "role": "Responsible Engineer",
+  "tools": ["Altium", "Oscilloscope", "Bench Supply"],
+  "layerCount": 6,
+  "stackup": "Six copper-layer avionics module PCB exported from Altium Gerbers",
+  "boardSize": "TBD from mechanical export",
+  "summary": "Lead electrical design for the Flight System Avionics Module, the flight engine controller responsible for actuation and sensing across the rocket's 48 V avionics bus. The board drives solenoid valves and ignitors while reading differential sensors, RTDs, and pressure transducers for engine start and shutdown control.",
+  "thumbnail": "/generated/recovery-system/thumbnails/card.svg",
+  "tags": ["Avionics", "Embedded", "Sensors", "Power", "Vehicle Interface", "Altium"],
+  "highlights": [
+    { "label": "Bus", "value": "48 V" },
+    { "label": "Sensor Types", "value": "RTD / PT / differential" },
+    { "label": "Outputs", "value": "Valves / ignitors" },
+    { "label": "Copper Layers", "value": "6" }
+  ],
+  "keyComponents": [
+    "BeagleBone control interface",
+    "Solenoid valve drivers",
+    "Ignitor power circuitry",
+    "Differential sensor interfaces",
+    "RTD interfaces",
+    "Pressure transducer interfaces",
+    "Power conversion and compensation network"
+  ],
+  "mainConstraints": [
+    "Correct inherited schematic faults including driven boot pins and flipped ADC signals",
+    "Restore stable ignitor power and converter compensation",
+    "Rework BeagleBone pin mapping while preserving vehicle control interfaces",
+    "Separate high-current actuation paths from low-level sensor acquisition",
+    "Validate reliable ignition, valve, and sensor operation after redesign"
+  ],
+  "publicNote": "Layout Gerbers and 3D model are connected. Add exported schematic PDF/SVG pages, BOM, pick-and-place, and lab evidence as the design package matures.",
+  "model3d": {
+    "title": "Vespula Avionics Module 3D Model",
+    "description": "Interactive 3D board model from the Altium STEP export.",
+    "glbFile": "/content/projects/vespula-avionics-module/model/vespula-avionics-module.glb",
+    "stepFile": "/content/projects/vespula-avionics-module/model/vespula-avionics-module.step",
+    "rotation": { "x": 0, "y": 0, "z": 0 },
+    "position": { "x": 0, "y": 0, "z": 0 },
+    "zoom": 1,
+    "camera": {
+      "position": { "x": 189.819, "y": 110.114, "z": 149.009 },
+      "target": { "x": 89.053, "y": 20.559, "z": -10.485 }
+    }
+  },
+  "schematic": {
+    "pages": [
+      {
+        "id": "pdf",
+        "title": "Exported Schematic PDF",
+        "file": "/content/projects/vespula-avionics-module/schematic/vespula-avionics-module.pdf",
+        "description": "Place the exported Altium schematic PDF here when available.",
+        "hotspots": []
+      }
+    ]
+  },
+  "layout": {
+    "views": [
+      {
+        "id": "copper-top",
+        "title": "1 SIG1",
+        "file": "/generated/vespula-avionics-module/layout/copper-top.svg",
+        "color": "#d84a3a"
+      },
+      {
+        "id": "copper-1",
+        "title": "2 GND1",
+        "file": "/generated/vespula-avionics-module/layout/copper-1.svg",
+        "color": "#b88900"
+      },
+      {
+        "id": "copper-2",
+        "title": "3 SIG2",
+        "file": "/generated/vespula-avionics-module/layout/copper-2.svg",
+        "color": "#157f91"
+      },
+      {
+        "id": "copper-3",
+        "title": "4 PWR",
+        "file": "/generated/vespula-avionics-module/layout/copper-3.svg",
+        "color": "#0f7a43"
+      },
+      {
+        "id": "copper-4",
+        "title": "5 GND2",
+        "file": "/generated/vespula-avionics-module/layout/copper-4.svg",
+        "color": "#8b5cf6"
+      },
+      {
+        "id": "copper-bottom",
+        "title": "6 SIG3",
+        "file": "/generated/vespula-avionics-module/layout/copper-bottom.svg",
+        "color": "#151cff"
+      }
+    ],
+    "callouts": []
+  },
+  "tests": [],
+  "revisions": []
+}

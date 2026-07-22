@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Download } from "lucide-react";
 import { getProject, getProjectSlugs } from "@/lib/projects";
+import { getAssetUrl } from "@/lib/assets";
 import { BoardModelViewer } from "@/components/viewers/BoardModelViewer";
 
 export function generateStaticParams() {
@@ -29,10 +30,25 @@ export default async function ProjectModelPage({ params }: { params: Promise<{ s
           <ArrowLeft className="size-4" aria-hidden="true" />
           {project.title}
         </Link>
+        {model?.stepFile ? (
+          <a
+            href={getAssetUrl(model.stepFile)}
+            download
+            className="inline-flex w-fit items-center gap-2 rounded border border-line-soft px-3 py-2 text-sm font-medium text-slate-200 hover:border-copper/60"
+          >
+            <Download className="size-4" aria-hidden="true" />
+            Download STEP source
+          </a>
+        ) : null}
         <BoardModelViewer
           title={model?.title ?? "3D Board Model"}
-          description={model?.description ?? "Add an Altium STEP export to show the board model."}
+          description={model?.description ?? "Add an Altium GLB or STEP export to show the board model."}
+          glbFile={model?.glbFile}
           stepFile={model?.stepFile}
+          rotation={model?.rotation}
+          position={model?.position}
+          zoom={model?.zoom}
+          camera={model?.camera}
         />
       </div>
     </main>

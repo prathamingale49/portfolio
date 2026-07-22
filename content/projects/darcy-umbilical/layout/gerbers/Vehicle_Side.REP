@@ -1,0 +1,286 @@
+*************************************************************
+FileName = Vehicle_Side.GBR
+AutoAperture = True
+*************************************************************
+Generating : Bottom Courtyard
+      File : Vehicle_Side.GM16
+
+    Adding Layer      : Bottom Courtyard
+
+
+Used DCodes :
+    D38
+    D40
+*************************************************************
+
+*************************************************************
+Generating : Top Courtyard
+      File : Vehicle_Side.GM15
+
+    Adding Layer      : Top Courtyard
+
+
+Used DCodes :
+    D12
+    D38
+    D40
+*************************************************************
+
+*************************************************************
+Generating : Top Assembly
+      File : Vehicle_Side.GM13
+
+    Adding Layer      : Top Assembly
+
+
+Used DCodes :
+    D12
+    D40
+*************************************************************
+
+*************************************************************
+Generating : Board
+      File : Vehicle_Side.GM1
+
+    Adding Layer      : Board
+
+
+Used DCodes :
+    D38
+    D39
+*************************************************************
+
+*************************************************************
+Generating : Keep-Out Layer
+      File : Vehicle_Side.GKO
+
+    Adding Layer      : Keep-Out Layer
+
+
+Used DCodes :
+*************************************************************
+
+*************************************************************
+Generating : Bottom Overlay
+      File : Vehicle_Side.GBO
+
+    Adding Layer      : Bottom Overlay
+
+
+Used DCodes :
+    D10
+    D11
+    D12
+    D14
+    D36
+    D37
+*************************************************************
+
+*************************************************************
+Generating : Bottom Paste
+      File : Vehicle_Side.GBP
+
+    Adding Layer      : Bottom Paste
+
+    Adding Layer      : Bottom Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D34
+    D35
+*************************************************************
+
+*************************************************************
+Generating : Bottom Solder
+      File : Vehicle_Side.GBS
+
+    Adding Layer      : Bottom Solder
+
+    Adding Layer      : Bottom Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D15
+    D16
+    D17
+    D18
+    D19
+    D20
+    D21
+    D22
+    D32
+    D33
+*************************************************************
+
+*************************************************************
+Generating : Top Solder
+      File : Vehicle_Side.GTS
+
+    Adding Layer      : Top Solder
+
+    Adding Layer      : Top Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D15
+    D16
+    D17
+    D18
+    D19
+    D20
+    D21
+    D22
+*************************************************************
+
+*************************************************************
+Generating : Top Paste
+      File : Vehicle_Side.GTP
+
+    Adding Layer      : Top Paste
+
+    Adding Layer      : Top Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+*************************************************************
+
+*************************************************************
+Generating : Top Overlay
+      File : Vehicle_Side.GTO
+
+    Adding Layer      : Top Overlay
+
+
+Used DCodes :
+    D10
+    D11
+    D12
+    D13
+    D14
+*************************************************************
+
+*************************************************************
+Generating : Top Pad Master
+      File : Vehicle_Side.GPT
+
+    Adding Layer      : Top Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D15
+    D20
+    D21
+    D25
+    D26
+    D27
+    D28
+*************************************************************
+
+*************************************************************
+Generating : Bottom Pad Master
+      File : Vehicle_Side.GPB
+
+    Adding Layer      : Bottom Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D15
+    D20
+    D21
+    D25
+    D26
+    D27
+    D28
+    D30
+    D31
+*************************************************************
+
+*************************************************************
+Generating : Bottom Layer
+      File : Vehicle_Side.GBL
+
+    Adding Layer      : Bottom Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D11
+    D15
+    D20
+    D21
+    D23
+    D24
+    D25
+    D26
+    D27
+    D28
+    D29
+    D30
+    D31
+*************************************************************
+
+*************************************************************
+Generating : Top Layer
+      File : Vehicle_Side.GTL
+
+    Adding Layer      : Top Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D15
+    D20
+    D21
+    D23
+    D24
+    D25
+    D26
+    D27
+    D28
+    D29
+*************************************************************
+
+*************************************************************
+Generating : Top Internal
+      File : Vehicle_Side.G1
+
+    Adding Layer      : Top Internal
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D15
+    D25
+    D29
+*************************************************************
+
+*************************************************************
+Generating : Bottom Internal
+      File : Vehicle_Side.G2
+
+    Adding Layer      : Bottom Internal
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D15
+    D25
+    D29
+*************************************************************
+

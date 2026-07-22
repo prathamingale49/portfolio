@@ -8,6 +8,7 @@ const withMDX = createMDX({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ["ts", "tsx", "md", "mdx"],
+  allowedDevOrigins: ["127.0.0.1"],
   turbopack: {
     root: path.resolve(),
   },

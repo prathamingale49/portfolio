@@ -1,12 +1,12 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState, type CSSProperties } from "react";
+import Link from "next/link";
+import { Eye, EyeOff, Layers3, Maximize, Minus, Plus, RotateCcw } from "lucide-react";
 import type { LayoutCallout, LayoutView } from "@/types/project";
 import { getAssetUrl } from "@/lib/assets";
 import { EmptyState } from "@/components/EmptyState";
-import { CalloutPanel } from "@/components/viewers/CalloutPanel";
 import { HotspotOverlay } from "@/components/viewers/HotspotOverlay";
-import { ViewerToolbar } from "@/components/viewers/ViewerToolbar";
 
 interface LayoutViewerProps {
   slug: string;
@@ -19,95 +19,231 @@ interface Pan {
   y: number;
 }
 
+const BOARD_COPPER_COLOR = "#c89b3c";
+
+function shortLayerTitle(title: string) {
+  const match = /^(\d+)\s+(.+)$/.exec(title);
+  return match?.[2] ?? title;
+}
+
+function layerNumber(title: string, index: number) {
+  return /^(\d+)/.exec(title)?.[1] ?? String(index + 1);
+}
+
+function layerColor(view: LayoutView) {
+  return view.color ?? BOARD_COPPER_COLOR;
+}
+
 export function LayoutViewer({ slug, views, callouts }: LayoutViewerProps) {
-  const [selectedViewId, setSelectedViewId] = useState(views[0]?.id ?? "");
+  const [enabledIds, setEnabledIds] = useState<Set<string>>(
+    () => new Set(views[0] ? [views[0].id] : []),
+  );
+  const [focusedLayerId, setFocusedLayerId] = useState(views[0]?.id ?? "");
   const [selectedCallout, setSelectedCallout] = useState<LayoutCallout | undefined>();
+  const [missingAssetIds, setMissingAssetIds] = useState<Set<string>>(() => new Set());
   const [zoom, setZoom] = useState(1);
   const [pan, setPan] = useState<Pan>({ x: 0, y: 0 });
-  const [missingAsset, setMissingAsset] = useState(false);
   const dragStart = useRef<{ pointerId: number; x: number; y: number; pan: Pan } | null>(null);
 
-  const selectedView = useMemo(
-    () => views.find((view) => view.id === selectedViewId) ?? views[0],
-    [selectedViewId, views],
+  const enabledViews = useMemo(
+    () => views.filter((view) => enabledIds.has(view.id) && !missingAssetIds.has(view.id)),
+    [enabledIds, missingAssetIds, views],
   );
 
-  const hasCallouts = callouts.length > 0;
-
+  const focusedLayer = views.find((view) => view.id === focusedLayerId) ?? views[0];
   const activeCallouts = useMemo(
-    () => callouts.filter((callout) => callout.view === selectedView?.id),
-    [callouts, selectedView?.id],
+    () => callouts.filter((callout) => enabledIds.has(callout.view)),
+    [callouts, enabledIds],
   );
 
-  const selectedAssetUrl = useMemo(() => {
-    const assetUrl = getAssetUrl(selectedView?.file);
-    const version = selectedView?.color?.replace("#", "") ?? selectedView?.id ?? "layout";
-
-    return assetUrl ? `${assetUrl}${assetUrl.includes("?") ? "&" : "?"}v=${version}` : "";
-  }, [selectedView?.color, selectedView?.file, selectedView?.id]);
-
-  if (!selectedView) {
+  if (!views.length) {
     return (
       <EmptyState
         title="No layout views"
-        message="Add top.svg and bottom.svg under public/generated/[slug]/layout or list your own generated board views in project.json."
+        message="Add generated copper SVGs under public/generated/[slug]/layout or list your own board exports in project.json."
       />
     );
   }
 
-  function selectView(viewId: string) {
-    setSelectedViewId(viewId);
+  function toggleLayer(viewId: string) {
+    setEnabledIds((current) => {
+      const next = new Set(current);
+      if (next.has(viewId)) {
+        next.delete(viewId);
+      } else {
+        next.add(viewId);
+      }
+      return next;
+    });
+    setFocusedLayerId(viewId);
     setSelectedCallout(undefined);
-    setMissingAsset(false);
-    setPan({ x: 0, y: 0 });
-    setZoom(1);
   }
 
-  const toolbarExtra = (
-    <div className="flex flex-wrap items-center gap-2">
-      {views.map((view) => (
-        <button
-          key={view.id}
-          type="button"
-          onClick={() => selectView(view.id)}
-          className={`flex h-9 items-center gap-2 rounded border px-3 text-sm ${
-            selectedView.id === view.id
-              ? "border-copper/50 bg-copper/15 text-white"
-              : "border-line-soft bg-[#0b1018] text-slate-300 hover:border-copper/40"
-          }`}
-        >
-          {view.color ? (
-            <span
-              className="h-3.5 w-3.5 rounded-sm border border-white/20"
-              style={{ backgroundColor: view.color }}
-              aria-hidden="true"
-            />
-          ) : null}
-          {view.title}
-        </button>
-      ))}
-    </div>
-  );
+  function soloLayer(viewId: string) {
+    setEnabledIds(new Set([viewId]));
+    setFocusedLayerId(viewId);
+    setSelectedCallout(undefined);
+  }
+
+  function showAllLayers() {
+    setEnabledIds(new Set(views.map((view) => view.id)));
+    setSelectedCallout(undefined);
+  }
+
+  function resetView() {
+    setZoom(1);
+    setPan({ x: 0, y: 0 });
+  }
+
+  const activeLayerLabel =
+    enabledViews.length === 0
+      ? "No layers enabled"
+      : enabledViews.length === 1
+        ? enabledViews[0].title
+        : `${enabledViews.length} layers visible`;
 
   return (
-    <div
-      className={`grid min-h-[calc(100vh-57px)] grid-cols-1 border-y border-line-soft ${
-        hasCallouts ? "lg:grid-cols-[minmax(0,1fr)_22rem]" : ""
-      }`}
-    >
-      <main className="min-w-0 bg-[#0b1018]">
-        <ViewerToolbar
-          zoom={zoom}
-          onZoomIn={() => setZoom((value) => Math.min(value + 0.15, 2.8))}
-          onZoomOut={() => setZoom((value) => Math.max(value - 0.15, 0.45))}
-          onReset={() => {
-            setZoom(1);
-            setPan({ x: 0, y: 0 });
-          }}
-          extra={toolbarExtra}
-        />
+    <main className="grid min-h-[calc(100vh-57px)] grid-cols-1 bg-[#090d13] md:grid-cols-[16rem_minmax(0,1fr)]">
+      <aside className="border-b border-line-soft bg-[#0d121a] md:border-b-0 md:border-r">
+        <div className="sticky top-[57px] space-y-5 p-4">
+          <div>
+            <Link href={`/projects/${slug}`} className="text-xs font-medium text-slate-500 hover:text-slate-200">
+              Project overview
+            </Link>
+            <div className="mt-4 flex items-center gap-2">
+              <Layers3 className="size-4 text-copper" aria-hidden="true" />
+              <h1 className="text-sm font-semibold text-white">Copper Stack</h1>
+            </div>
+            <p className="mt-2 text-xs leading-5 text-slate-500">
+              Toggle exported Gerber SVG layers. Drag the board to pan.
+            </p>
+          </div>
+
+          <div className="space-y-1.5">
+            {views.map((view, index) => {
+              const enabled = enabledIds.has(view.id);
+              const missing = missingAssetIds.has(view.id);
+              const color = layerColor(view);
+
+              return (
+                <div
+                  key={view.id}
+                  className={`grid grid-cols-[2rem_1.25rem_minmax(0,1fr)_2rem] items-center gap-2 rounded px-2 py-2 text-sm ${
+                    focusedLayer?.id === view.id ? "bg-white/[0.06] text-white" : "text-slate-300"
+                  }`}
+                >
+                  <button
+                    type="button"
+                    onClick={() => toggleLayer(view.id)}
+                    className={`grid size-7 place-items-center rounded border ${
+                      enabled
+                        ? "border-signal/60 bg-signal/20 text-white"
+                        : "border-line-soft bg-[#141922] text-slate-500"
+                    }`}
+                    aria-label={`${enabled ? "Hide" : "Show"} ${view.title}`}
+                    title={`${enabled ? "Hide" : "Show"} ${view.title}`}
+                  >
+                    {enabled ? (
+                      <Eye className="size-3.5" aria-hidden="true" />
+                    ) : (
+                      <EyeOff className="size-3.5" aria-hidden="true" />
+                    )}
+                  </button>
+                  <span
+                    className="size-4 rounded-sm border border-white/20"
+                    style={{ backgroundColor: color }}
+                    aria-hidden="true"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => soloLayer(view.id)}
+                    className="min-w-0 text-left hover:text-white"
+                    title={`Solo ${view.title}`}
+                  >
+                    <span className="mr-2 text-xs tabular-nums text-slate-500">
+                      {layerNumber(view.title, index)}
+                    </span>
+                    <span className={`truncate ${missing ? "line-through decoration-slate-500" : ""}`}>
+                      {shortLayerTitle(view.title)}
+                    </span>
+                  </button>
+                  <span className="text-right text-[10px] uppercase tracking-wide text-slate-600">
+                    {missing ? "Miss" : enabled ? "On" : ""}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="grid grid-cols-2 gap-2">
+            <button
+              type="button"
+              onClick={showAllLayers}
+              className="rounded border border-line-soft bg-[#141922] px-3 py-2 text-xs font-medium text-slate-200 hover:border-copper/45"
+            >
+              All
+            </button>
+            <button
+              type="button"
+              onClick={() => setEnabledIds(new Set())}
+              className="rounded border border-line-soft bg-[#141922] px-3 py-2 text-xs font-medium text-slate-200 hover:border-copper/45"
+            >
+              Clear
+            </button>
+          </div>
+
+          <div className="rounded border border-line-soft bg-[#111720] p-3">
+            <p className="text-xs uppercase tracking-wide text-slate-500">Visible</p>
+            <p className="mt-1 text-sm font-medium text-slate-100">{activeLayerLabel}</p>
+          </div>
+        </div>
+      </aside>
+
+      <section className="min-w-0">
+        <div className="sticky top-[57px] z-20 flex min-h-14 flex-wrap items-center justify-between gap-3 border-b border-line-soft bg-[#0d121a]/95 px-3 py-2 backdrop-blur">
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setZoom((value) => Math.max(value - 0.15, 0.5))}
+              aria-label="Zoom out"
+              title="Zoom out"
+              className="grid size-9 place-items-center rounded border border-line-soft bg-[#141922] text-slate-200 hover:border-signal/45"
+            >
+              <Minus className="size-4" aria-hidden="true" />
+            </button>
+            <span className="min-w-16 text-center text-xs tabular-nums text-slate-400">
+              {Math.round(zoom * 100)}%
+            </span>
+            <button
+              type="button"
+              onClick={() => setZoom((value) => Math.min(value + 0.15, 3))}
+              aria-label="Zoom in"
+              title="Zoom in"
+              className="grid size-9 place-items-center rounded border border-line-soft bg-[#141922] text-slate-200 hover:border-signal/45"
+            >
+              <Plus className="size-4" aria-hidden="true" />
+            </button>
+            <button
+              type="button"
+              onClick={resetView}
+              aria-label="Reset view"
+              title="Reset view"
+              className="grid size-9 place-items-center rounded border border-line-soft bg-[#141922] text-slate-200 hover:border-signal/45"
+            >
+              <RotateCcw className="size-4" aria-hidden="true" />
+            </button>
+            <Maximize className="ml-1 hidden size-4 text-slate-600 sm:block" aria-hidden="true" />
+          </div>
+          <div className="text-xs text-slate-500">{activeLayerLabel}</div>
+        </div>
+
         <div
-          className="viewer-scrollbar h-[calc(100vh-113px)] cursor-grab overflow-hidden bg-[#d9e2ea] active:cursor-grabbing"
+          className="viewer-scrollbar h-[calc(100vh-113px)] cursor-grab overflow-hidden bg-[#e5ebf1] active:cursor-grabbing"
+          onWheel={(event) => {
+            event.preventDefault();
+            const direction = event.deltaY > 0 ? -0.12 : 0.12;
+            setZoom((value) => Math.min(Math.max(value + direction, 0.5), 3));
+          }}
           onPointerDown={(event) => {
             dragStart.current = {
               pointerId: event.pointerId,
@@ -119,37 +255,73 @@ export function LayoutViewer({ slug, views, callouts }: LayoutViewerProps) {
           }}
           onPointerMove={(event) => {
             if (!dragStart.current) return;
-            const dx = event.clientX - dragStart.current.x;
-            const dy = event.clientY - dragStart.current.y;
-            setPan({ x: dragStart.current.pan.x + dx, y: dragStart.current.pan.y + dy });
+            setPan({
+              x: dragStart.current.pan.x + event.clientX - dragStart.current.x,
+              y: dragStart.current.pan.y + event.clientY - dragStart.current.y,
+            });
           }}
           onPointerUp={() => {
             dragStart.current = null;
           }}
+          onPointerCancel={() => {
+            dragStart.current = null;
+          }}
         >
           <div
-            className="relative mx-auto my-10 aspect-[16/10] w-[96%] min-w-[760px] max-w-[92rem] origin-center rounded border border-slate-300 bg-[#f8fafc] p-8 shadow-[0_24px_70px_rgba(2,6,23,0.32)] sm:p-10"
-            style={{ transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})` }}
+            className="relative mx-auto my-8 aspect-square origin-center rounded border border-slate-300 bg-white p-10 shadow-[0_24px_70px_rgba(15,23,42,0.24)]"
+            style={{
+              width: "min(calc(100% - 2rem), calc(100vh - 10rem), 54rem)",
+              transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`,
+            }}
           >
-            {missingAsset ? (
-              <div className="grid h-full place-items-center p-8">
+            <div className="absolute inset-6 rounded-sm border border-slate-300/80 bg-white" />
+
+            {enabledViews.length === 0 ? (
+              <div className="absolute inset-6 grid place-items-center">
                 <EmptyState
-                  title="No rendered PCB view found"
-                  message="Add top.svg and bottom.svg, or run the Gerber render pipeline. Manual fallback files belong in public/generated/[slug]/layout."
+                  title="No rendered PCB view selected"
+                  message="Enable at least one copper layer, or add generated SVGs under public/generated/[slug]/layout."
                 />
               </div>
             ) : (
-              <div className="h-full w-full overflow-hidden rounded-sm bg-white">
-                <img
-                  src={selectedAssetUrl}
-                  alt={selectedView.title}
-                  className="h-full w-full object-contain contrast-125"
-                  draggable={false}
-                  onError={() => setMissingAsset(true)}
-                />
+              <div className="absolute inset-10">
+                {enabledViews.map((view, index) => {
+                  const assetUrl = getAssetUrl(view.file);
+                  const color = layerColor(view);
+                  const maskUrl = `url("${assetUrl}")`;
+                  const layerStyle: CSSProperties = {
+                    backgroundColor: color,
+                    opacity: enabledViews.length === 1 ? 0.95 : Math.max(0.4, 0.84 - index * 0.07),
+                    mixBlendMode: "multiply",
+                    WebkitMaskImage: maskUrl,
+                    WebkitMaskRepeat: "no-repeat",
+                    WebkitMaskPosition: "center",
+                    WebkitMaskSize: "contain",
+                    maskImage: maskUrl,
+                    maskRepeat: "no-repeat",
+                    maskPosition: "center",
+                    maskSize: "contain",
+                  };
+
+                  return (
+                    <div key={view.id} className="absolute inset-0">
+                      <img
+                        src={assetUrl}
+                        alt=""
+                        aria-hidden="true"
+                        className="hidden"
+                        onError={() =>
+                          setMissingAssetIds((current) => new Set(current).add(view.id))
+                        }
+                      />
+                      <div className="absolute inset-0" style={layerStyle} />
+                    </div>
+                  );
+                })}
               </div>
             )}
-            {hasCallouts ? (
+
+            {activeCallouts.length > 0 ? (
               <HotspotOverlay
                 items={activeCallouts}
                 activeId={selectedCallout?.id}
@@ -159,15 +331,7 @@ export function LayoutViewer({ slug, views, callouts }: LayoutViewerProps) {
             ) : null}
           </div>
         </div>
-      </main>
-      {hasCallouts ? (
-        <CalloutPanel
-          slug={slug}
-          title={selectedView.title}
-          description="Gerber-derived or manually supplied board render with percentage-based layout callouts."
-          selected={selectedCallout}
-        />
-      ) : null}
-    </div>
+      </section>
+    </main>
   );
 }

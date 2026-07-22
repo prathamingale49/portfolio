@@ -1,23 +1,22 @@
 {
   "slug": "hardware-in-the-loop",
   "title": "Hardware In The Loop",
-  "subtitle": "HITL avionics board for sensor, actuator, power, and communication emulation",
+  "subtitle": "Layout in progress; HITL avionics board for sensor, actuator, power, and communication emulation",
   "category": ["Avionics", "Test / HITL", "Embedded Systems", "Power Electronics"],
   "status": "Designed",
-  "role": "Schematic design, responsible engineering, and PCB layout design",
-  "dateRange": "2026",
-  "tools": ["Altium Designer", "Oscilloscope", "Bench Supply"],
+  "role": "Schematic Designer",
+  "tools": ["Altium", "Oscilloscope", "Bench Supply"],
   "layerCount": 0,
   "stackup": "Stackup to be added from the Altium layer stack manager or fabrication package",
   "boardSize": "TBD from mechanical export",
-  "summary": "A hardware-in-the-loop PCB project for Yellow Jacket Space Program that combines power conversion, CM5-based control, communications, ADC/DAC signal paths, sensor emulation, valve outputs, detonator interfaces, and switched power outputs.",
+  "summary": "A layout-in-progress hardware-in-the-loop PCB project for Yellow Jacket Space Program that combines power conversion, CM5-based control, communications, ADC/DAC signal paths, sensor emulation, valve outputs, detonator interfaces, and switched power outputs.",
   "thumbnail": "/generated/recovery-system/thumbnails/card.svg",
-  "tags": ["HITL", "Avionics", "Sensor Emulation", "CM5", "Altium"],
+  "tags": ["HITL", "Avionics", "Sensor Emulation", "CM5", "Layout In Progress", "Altium"],
   "highlights": [
     { "label": "Schematic Pages", "value": "30" },
     { "label": "Power Domains", "value": "48 V / 24 V / 5 V / 3.3 V" },
     { "label": "Signal Domains", "value": "ADC / DAC / GPIO" },
-    { "label": "Export Type", "value": "Altium PDF" }
+    { "label": "Layout", "value": "In progress" }
   ],
   "keyComponents": [
     "Raspberry Pi CM5",
@@ -38,7 +37,10 @@
   "publicNote": "This project is derived from the exported Altium schematic PDF only. Raw .SchDoc and .PcbDoc files are not parsed by this portfolio.",
   "model3d": {
     "title": "Hardware In The Loop 3D Model",
-    "description": "Add an Altium STEP export under content/projects/hardware-in-the-loop/model to replace the interactive placeholder."
+    "description": "Add an Altium STEP export under content/projects/hardware-in-the-loop/model to replace the interactive placeholder.",
+    "rotation": { "x": 0, "y": 0, "z": 0 },
+    "position": { "x": 0, "y": 0, "z": 0 },
+    "zoom": 1
   },
   "schematic": {
     "pages": [

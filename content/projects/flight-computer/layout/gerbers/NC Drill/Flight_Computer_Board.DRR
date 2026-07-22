@@ -1,0 +1,21 @@
+----------------------------------------------------------------------------------------------------------------------------------
+NCDrill File Report For: Flight_Computer_Board.PcbDoc   7/22/2026  7:36:46 AM
+----------------------------------------------------------------------------------------------------------------------------------
+
+Layer Pair : Top Layer to Bottom Layer
+ASCII RoundHoles File : Flight_Computer_Board.TXT
+
+Tool       Hole Size               Hole Tolerance               Hole Type       Hole Count   Plated         Tool Travel
+----------------------------------------------------------------------------------------------------------------------------------
+T1      12mil (0.3mm)                                             Round             499       PTH        66.03inch (1677.07mm)
+T2      30mil (0.762mm)                                           Round             18        PTH        3.30inch (83.82mm)
+T3      40mil (1.016mm)                                           Round             54        PTH        8.95inch (227.33mm)
+T4      40mil (1.02mm)          +/-2mil (0.05mm)                  Round             13        PTH        5.32inch (135.16mm)
+T5      40mil (1.02mm)                                            Round             13        PTH        10.76inch (273.29mm)
+T6      94mil (2.4mm)                                             Round             4         PTH        3.45inch (87.63mm)
+T7      114mil (2.9mm)                                            Round             7         PTH        9.98inch (253.48mm)
+T8      118mil (3mm)                                              Round             7         NPTH       6.36inch (161.42mm)
+----------------------------------------------------------------------------------------------------------------------------------
+Totals                                                                              615
+
+Total Processing Time (hh:mm:ss) : 00:00:00

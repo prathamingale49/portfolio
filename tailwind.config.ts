@@ -11,16 +11,16 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        panel: "#10151f",
-        "panel-soft": "#151b28",
-        "line-soft": "#283241",
-        copper: "#d48a3a",
-        solder: "#25b77f",
-        signal: "#55b8ff",
-        warning: "#f0c35a",
+        panel: "#111511",
+        "panel-soft": "#171c17",
+        "line-soft": "#2d332d",
+        copper: "#c7a04a",
+        solder: "#4f8069",
+        signal: "#8aa0a3",
+        warning: "#c8a957",
       },
       boxShadow: {
-        glow: "0 0 0 1px rgba(85,184,255,0.18), 0 20px 80px rgba(0,0,0,0.32)",
+        glow: "0 0 0 1px rgba(199,160,74,0.14), 0 18px 60px rgba(0,0,0,0.28)",
       },
     },
   },

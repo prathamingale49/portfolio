@@ -57,8 +57,32 @@ export interface LayoutView {
 
 export interface ProjectModel3D {
   stepFile?: string;
+  glbFile?: string;
   title: string;
   description: string;
+  rotation?: {
+    x: number;
+    y: number;
+    z: number;
+  };
+  position?: {
+    x: number;
+    y: number;
+    z: number;
+  };
+  zoom?: number;
+  camera?: {
+    position: {
+      x: number;
+      y: number;
+      z: number;
+    };
+    target: {
+      x: number;
+      y: number;
+      z: number;
+    };
+  };
 }
 
 export interface ProjectFeature {
@@ -104,7 +128,6 @@ export interface Project {
   category: ProjectCategory[];
   status: ProjectStatus;
   role: string;
-  dateRange: string;
   tools: string[];
   layerCount: number;
   stackup: string;

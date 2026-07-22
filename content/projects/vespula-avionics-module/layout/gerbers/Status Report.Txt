@@ -1,0 +1,10 @@
+Output: Generates pick and place files
+Type  : Pick Place
+From  : Variant [[No Variations]] of Project [Flight_System_Avionics_Module.PrjPcb]
+   Generated File[Pick Place for PCB1.csv]
+
+
+Files Generated   : 1
+Documents Printed : 0
+
+Finished Output Generation At 9:25:55 PM On 10/12/2025

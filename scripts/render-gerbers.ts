@@ -13,7 +13,8 @@ function log(slug: string, message: string) {
 function getManufacturingFiles(gerberDir: string) {
   return fs
     .readdirSync(gerberDir)
-    .filter((file) => /\.(gbr|drl|txt)$/i.test(file))
+    .filter((file) => !/^status\s+report/i.test(file))
+    .filter((file) => /\.(gbr|gtl|gbl|g[0-9]+|gto|gbo|gts|gbs|gtp|gbp|gko|gm[0-9]*|drl|txt)$/i.test(file))
     .map((file) => path.join(gerberDir, file));
 }
 
@@ -32,44 +33,167 @@ function findRenderedPair(outputDir: string) {
   };
 }
 
-const copperLayerOutputs = [
-  {
-    source: "PCB0_Copper_Signal_Top.gbr",
-    rendered: "PCB0_Copper_Signal_Top.gbr.top.copper.svg",
-    output: "copper-top.svg",
-    color: "#ff1f1f",
-  },
-  {
-    source: "PCB0_Copper_Signal_1.gbr",
-    rendered: "PCB0_Copper_Signal_1.gbr.inner.copper.svg",
-    output: "copper-1.svg",
-    color: "#c99a00",
-  },
-  {
-    source: "PCB0_Copper_Signal_2.gbr",
-    rendered: "PCB0_Copper_Signal_2.gbr.inner.copper.svg",
-    output: "copper-2.svg",
-    color: "#2aa6bf",
-  },
-  {
-    source: "PCB0_Copper_Signal_3.gbr",
-    rendered: "PCB0_Copper_Signal_3.gbr.inner.copper.svg",
-    output: "copper-3.svg",
-    color: "#129a55",
-  },
-  {
-    source: "PCB0_Copper_Signal_4.gbr",
-    rendered: "PCB0_Copper_Signal_4.gbr.inner.copper.svg",
-    output: "copper-4.svg",
-    color: "#8b5cf6",
-  },
-  {
-    source: "PCB0_Copper_Signal_Bot.gbr",
-    rendered: "PCB0_Copper_Signal_Bot.gbr.bottom.copper.svg",
-    output: "copper-bottom.svg",
-    color: "#151cff",
-  },
-];
+const copperLayerOutputsBySlug: Record<string, Array<{
+  source: string;
+  rendered: string;
+  output: string;
+  color: string;
+}>> = {
+  "recovery-system": [
+    {
+      source: "PCB0_Copper_Signal_Top.gbr",
+      rendered: "PCB0_Copper_Signal_Top.gbr.top.copper.svg",
+      output: "copper-top.svg",
+      color: "#d84a3a",
+    },
+    {
+      source: "PCB0_Copper_Signal_1.gbr",
+      rendered: "PCB0_Copper_Signal_1.gbr.inner.copper.svg",
+      output: "copper-1.svg",
+      color: "#c99a00",
+    },
+    {
+      source: "PCB0_Copper_Signal_2.gbr",
+      rendered: "PCB0_Copper_Signal_2.gbr.inner.copper.svg",
+      output: "copper-2.svg",
+      color: "#2aa6bf",
+    },
+    {
+      source: "PCB0_Copper_Signal_3.gbr",
+      rendered: "PCB0_Copper_Signal_3.gbr.inner.copper.svg",
+      output: "copper-3.svg",
+      color: "#129a55",
+    },
+    {
+      source: "PCB0_Copper_Signal_4.gbr",
+      rendered: "PCB0_Copper_Signal_4.gbr.inner.copper.svg",
+      output: "copper-4.svg",
+      color: "#8b5cf6",
+    },
+    {
+      source: "PCB0_Copper_Signal_Bot.gbr",
+      rendered: "PCB0_Copper_Signal_Bot.gbr.bottom.copper.svg",
+      output: "copper-bottom.svg",
+      color: "#151cff",
+    },
+  ],
+  "darcy-umbilical": [
+    {
+      source: "Vehicle_Side.GTL",
+      rendered: "Vehicle_Side.GTL.top.copper.svg",
+      output: "copper-top.svg",
+      color: "#d84a3a",
+    },
+    {
+      source: "Vehicle_Side.G1",
+      rendered: "Vehicle_Side.G1.inner.copper.svg",
+      output: "copper-1.svg",
+      color: "#b88900",
+    },
+    {
+      source: "Vehicle_Side.G2",
+      rendered: "Vehicle_Side.G2.inner.copper.svg",
+      output: "copper-2.svg",
+      color: "#0f7a43",
+    },
+    {
+      source: "Vehicle_Side.GBL",
+      rendered: "Vehicle_Side.GBL.bottom.copper.svg",
+      output: "copper-bottom.svg",
+      color: "#151cff",
+    },
+  ],
+  "darcy-battery-management-system": [
+    {
+      source: "DBMS_Copper_Signal_Top.gbr",
+      rendered: "DBMS_Copper_Signal_Top.gbr.top.copper.svg",
+      output: "copper-top.svg",
+      color: "#d84a3a",
+    },
+    {
+      source: "DBMS_Copper_Signal_1.gbr",
+      rendered: "DBMS_Copper_Signal_1.gbr.inner.copper.svg",
+      output: "copper-1.svg",
+      color: "#b88900",
+    },
+    {
+      source: "DBMS_Copper_Signal_2.gbr",
+      rendered: "DBMS_Copper_Signal_2.gbr.inner.copper.svg",
+      output: "copper-2.svg",
+      color: "#157f91",
+    },
+    {
+      source: "DBMS_Copper_Signal_Bot.gbr",
+      rendered: "DBMS_Copper_Signal_Bot.gbr.bottom.copper.svg",
+      output: "copper-bottom.svg",
+      color: "#151cff",
+    },
+  ],
+  "flight-computer": [
+    {
+      source: "Flight_Computer_Board.GTL",
+      rendered: "Flight_Computer_Board.GTL.top.copper.svg",
+      output: "copper-top.svg",
+      color: "#d84a3a",
+    },
+    {
+      source: "Flight_Computer_Board.G1",
+      rendered: "Flight_Computer_Board.G1.inner.copper.svg",
+      output: "copper-1.svg",
+      color: "#b88900",
+    },
+    {
+      source: "Flight_Computer_Board.G2",
+      rendered: "Flight_Computer_Board.G2.inner.copper.svg",
+      output: "copper-2.svg",
+      color: "#157f91",
+    },
+    {
+      source: "Flight_Computer_Board.GBL",
+      rendered: "Flight_Computer_Board.GBL.bottom.copper.svg",
+      output: "copper-bottom.svg",
+      color: "#151cff",
+    },
+  ],
+  "vespula-avionics-module": [
+    {
+      source: "PCB1_Copper_Signal_Top.gbr",
+      rendered: "PCB1_Copper_Signal_Top.gbr.top.copper.svg",
+      output: "copper-top.svg",
+      color: "#d84a3a",
+    },
+    {
+      source: "PCB1_Copper_Signal_1.gbr",
+      rendered: "PCB1_Copper_Signal_1.gbr.inner.copper.svg",
+      output: "copper-1.svg",
+      color: "#b88900",
+    },
+    {
+      source: "PCB1_Copper_Signal_2.gbr",
+      rendered: "PCB1_Copper_Signal_2.gbr.inner.copper.svg",
+      output: "copper-2.svg",
+      color: "#157f91",
+    },
+    {
+      source: "PCB1_Copper_Signal_3.gbr",
+      rendered: "PCB1_Copper_Signal_3.gbr.inner.copper.svg",
+      output: "copper-3.svg",
+      color: "#0f7a43",
+    },
+    {
+      source: "PCB1_Copper_Signal_4.gbr",
+      rendered: "PCB1_Copper_Signal_4.gbr.inner.copper.svg",
+      output: "copper-4.svg",
+      color: "#8b5cf6",
+    },
+    {
+      source: "PCB1_Copper_Signal_Bot.gbr",
+      rendered: "PCB1_Copper_Signal_Bot.gbr.bottom.copper.svg",
+      output: "copper-bottom.svg",
+      color: "#151cff",
+    },
+  ],
+};
 
 function colorizeLayerSvg(svg: string, color: string) {
   const withoutRootColor = svg
@@ -81,6 +205,7 @@ function colorizeLayerSvg(svg: string, color: string) {
 }
 
 function renderCopperLayers(slug: string, gerberDir: string, outputDir: string) {
+  const copperLayerOutputs = copperLayerOutputsBySlug[slug] ?? [];
   const copperFiles = copperLayerOutputs
     .map((layer) => path.join(gerberDir, layer.source))
     .filter((file) => fs.existsSync(file));
@@ -114,10 +239,16 @@ function renderCopperLayers(slug: string, gerberDir: string, outputDir: string) 
   }
 
   for (const layer of copperLayerOutputs) {
-    const renderedPath = path.join(outputDir, layer.rendered);
-    if (fs.existsSync(renderedPath)) {
+    const renderedPath = [
+      path.join(outputDir, layer.rendered),
+      path.join(outputDir, `${layer.source}.drawing.svg`),
+    ].find((candidate) => fs.existsSync(candidate));
+
+    if (renderedPath) {
       const svg = fs.readFileSync(renderedPath, "utf8");
       fs.writeFileSync(path.join(outputDir, layer.output), colorizeLayerSvg(svg, layer.color));
+    } else {
+      log(slug, `could not find rendered copper output for ${layer.source}.`);
     }
   }
 }

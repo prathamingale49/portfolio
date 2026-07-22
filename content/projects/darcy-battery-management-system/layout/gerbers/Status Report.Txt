@@ -1,0 +1,13 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : Project [Darcy_BMS.PrjPcb]
+   Generated File[DBMS.TXT]
+   Generated File[DBMS.DRL]
+   Generated File[DBMS.LDP]
+   Generated File[DBMS.DRR]
+
+
+Files Generated   : 4
+Documents Printed : 0
+
+Finished Output Generation At 6:07:08 PM On 2/26/2025

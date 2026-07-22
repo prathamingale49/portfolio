@@ -96,43 +96,51 @@ export function SchematicViewer({ slug, pages }: SchematicViewerProps) {
   );
 
   return (
-    <div className="grid min-h-[calc(100vh-57px)] grid-cols-1 border-y border-line-soft lg:grid-cols-[17rem_minmax(0,1fr)_22rem]">
-      <aside className="border-b border-line-soft bg-panel p-4 lg:border-b-0 lg:border-r">
-        <p className="text-xs uppercase tracking-wide text-slate-500">Schematic Pages</p>
-        <div className="mt-4 grid gap-2">
-          {pages.map((page) => (
-            <button
-              key={page.id}
-              type="button"
-              onClick={() => selectPage(page.id)}
-              className={`rounded border px-3 py-2 text-left text-sm transition ${
-                selectedPage.id === page.id
-                  ? "border-signal/50 bg-signal/12 text-white"
-                  : "border-line-soft bg-[#0b1018] text-slate-300 hover:border-signal/35"
-              }`}
-            >
-              {page.title}
-            </button>
-          ))}
-        </div>
-        {trail.length > 1 ? (
-          <div className="mt-6">
-            <p className="text-xs uppercase tracking-wide text-slate-500">Path</p>
-            <div className="mt-2 flex flex-wrap gap-2 text-xs text-slate-400">
-              {trail.map((page, index) => (
-                <button
-                  key={`${page.id}-${index}`}
-                  type="button"
-                  onClick={() => selectPage(page.id, false)}
-                  className="rounded border border-line-soft px-2 py-1 hover:border-signal/40 hover:text-white"
-                >
-                  {page.title}
-                </button>
-              ))}
-            </div>
+    <div
+      className={
+        isPdf
+          ? "grid min-h-[calc(100vh-57px)] grid-cols-1 border-y border-line-soft"
+          : "grid min-h-[calc(100vh-57px)] grid-cols-1 border-y border-line-soft lg:grid-cols-[17rem_minmax(0,1fr)_22rem]"
+      }
+    >
+      {!isPdf ? (
+        <aside className="border-b border-line-soft bg-panel p-4 lg:border-b-0 lg:border-r">
+          <p className="text-xs uppercase tracking-wide text-slate-500">Schematic Pages</p>
+          <div className="mt-4 grid gap-2">
+            {pages.map((page) => (
+              <button
+                key={page.id}
+                type="button"
+                onClick={() => selectPage(page.id)}
+                className={`rounded border px-3 py-2 text-left text-sm transition ${
+                  selectedPage.id === page.id
+                    ? "border-signal/50 bg-signal/12 text-white"
+                    : "border-line-soft bg-[#0b1018] text-slate-300 hover:border-signal/35"
+                }`}
+              >
+                {page.title}
+              </button>
+            ))}
           </div>
-        ) : null}
-      </aside>
+          {trail.length > 1 ? (
+            <div className="mt-6">
+              <p className="text-xs uppercase tracking-wide text-slate-500">Path</p>
+              <div className="mt-2 flex flex-wrap gap-2 text-xs text-slate-400">
+                {trail.map((page, index) => (
+                  <button
+                    key={`${page.id}-${index}`}
+                    type="button"
+                    onClick={() => selectPage(page.id, false)}
+                    className="rounded border border-line-soft px-2 py-1 hover:border-signal/40 hover:text-white"
+                  >
+                    {page.title}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ) : null}
+        </aside>
+      ) : null}
       <main className="min-w-0 bg-[#080b10]">
         {isPdf ? (
           <>
@@ -155,7 +163,7 @@ export function SchematicViewer({ slug, pages }: SchematicViewerProps) {
             </div>
             <div className="h-[calc(100vh-113px)] bg-[#080b10] p-3">
               <iframe
-                src={`${selectedAssetUrl}#view=FitH`}
+                src={`${selectedAssetUrl}#view=FitH&navpanes=0`}
                 title={selectedPage.title}
                 className="h-full w-full rounded border border-line-soft bg-white shadow-glow"
               />
@@ -224,13 +232,15 @@ export function SchematicViewer({ slug, pages }: SchematicViewerProps) {
           </>
         )}
       </main>
-      <CalloutPanel
-        slug={slug}
-        title={selectedPage.title}
-        description={selectedPage.description}
-        selected={selectedHotspot}
-        page={selectedPage}
-      />
+      {!isPdf ? (
+        <CalloutPanel
+          slug={slug}
+          title={selectedPage.title}
+          description={selectedPage.description}
+          selected={selectedHotspot}
+          page={selectedPage}
+        />
+      ) : null}
       {selectedHotspot?.type === "wiki" && selectedHotspot.target ? (
         <Link className="sr-only" href={`/projects/${slug}/wiki#${selectedHotspot.target}`}>
           Open selected wiki section

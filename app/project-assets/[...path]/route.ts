@@ -9,6 +9,8 @@ const contentTypeByExtension: Record<string, string> = {
   ".jpeg": "image/jpeg",
   ".gif": "image/gif",
   ".pdf": "application/pdf",
+  ".glb": "model/gltf-binary",
+  ".gltf": "model/gltf+json",
   ".step": "model/step",
   ".stp": "model/step",
   ".csv": "text/csv",
@@ -37,6 +39,8 @@ export async function GET(
     return new NextResponse(body, {
       headers: {
         "Content-Type": contentTypeByExtension[ext] ?? "application/octet-stream",
+        "Content-Length": String(body.byteLength),
+        "Cache-Control": "public, max-age=3600",
       },
     });
   } catch {

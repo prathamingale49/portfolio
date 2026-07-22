@@ -1,0 +1,9 @@
+DRC Rules Export File for PCB: c:\programdata\altium\vaultserverdata\arkservice\516e9ae8-4ca9-450f-9981-d5041fbf7b2e\s\e\Vehicle_Side.PcbDoc
+RuleKind=Clearance|RuleName=Stitching VRTN1|Scope=Board|Minimum=5.00
+RuleKind=MinimumAnnularRing|RuleName=MinimumAnnularRing|Scope=Board|Minimum=0.00
+RuleKind=ShortCircuit|RuleName=ShortCircuit|Scope=Board|Allowed=0
+RuleKind=SolderMaskExpansion|RuleName=SolderMaskExpansion|Scope=Board|Minimum=1.50
+RuleKind=Width|RuleName=Width_1|Scope=Board|Minimum=10.00
+RuleKind=Width|RuleName=Width|Scope=Board|Minimum=7.87
+RuleKind=Clearance|RuleName=Clearance|Scope=Board|Minimum=10.00
+RuleKind=Clearance|RuleName=Clearance_1|Scope=Board|Minimum=10.00

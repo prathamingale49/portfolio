@@ -1,0 +1,20 @@
+# Flight Computer
+
+## Purpose
+
+The Flight Computer project documents the black-box and central compute board for the avionics stack. The exported schematic PDF contains 11 pages covering connectors, power, ADCs, sensors, flash, current-loop circuitry, telemetry, USB, recovery-system interface, and layout notes.
+
+## Requirements
+
+- Preserve the exported Altium schematic PDF as the source artifact.
+- Keep power, sensing, telemetry, storage, and recovery interfaces reviewable.
+- Preserve the generated Gerber-derived copper layer SVGs and the Altium 3D model export.
+- Document rail bring-up, bus enumeration, sensor checks, and recovery-interface validation.
+
+## PCB Layout Walkthrough
+
+The layout viewer uses Gerber-derived copper-layer SVG renders for the top layer, two inner layers, and bottom layer. Add callouts for sensor placement, ADC/reference routing, telemetry, storage, and recovery-interface regions as validation notes mature.
+
+## Bring-Up Plan
+
+Document rail bring-up, bus enumeration, sensor sanity checks, telemetry checks, flash/storage checks, and recovery-interface tests.
