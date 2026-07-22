@@ -78,11 +78,11 @@ const experience = [
 ];
 
 const skills = [
-  ["Power", "Isolated LLC, AC/DC and DC/DC converters, ZVS, loop gain, EMI filters, PFC"],
-  ["PCB", "Stackup, impedance control, return paths, creepage, current density, PDN"],
-  ["Mixed signal", "I/V/T sensing, SAR ADCs, comparators, discrete voters, SPI, I2C, CAN, Ethernet, USB"],
-  ["Lab", "Oscilloscopes, HV/current probes, e-loads, AP310, PX8000, IR camera, thermal chambers"],
-  ["EDA & software", "Altium Designer, LTspice, SIMPLIS, TINA-TI, VS Code, GitHub, Enovia, Jira, Excel"],
+  ["Power", "Isolated LLC, AC/DC and DC/DC Converters, ZVS, Loop Gain, EMI Filters, PFC"],
+  ["PCB", "Stackup, Impedance Control, Return Paths, Creepage, Current Density, PDN"],
+  ["Mixed Signal", "I/V/T Sensing, SAR ADCs, Comparators, Discrete Voters, SPI, I2C, CAN, Ethernet, USB"],
+  ["Lab", "Oscilloscopes, HV/Current Probes, E-Loads, AP310, PX8000, IR Camera, Thermal Chambers"],
+  ["EDA & Software", "Altium Designer, LTspice, SIMPLIS, TINA-TI, VS Code, GitHub, ENOVIA, Jira, Excel"],
 ];
 
 export default function HomePage() {
