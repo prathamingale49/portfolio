@@ -8,7 +8,6 @@
   "tools": ["Altium", "VNA", "Spectrum Analyzer", "Oscilloscope"],
   "layerCount": 4,
   "stackup": "Four-layer RF and mixed-signal PCB stackup to be finalized from Altium exports",
-  "boardSize": "TBD from mechanical export",
   "summary": "A 2.4 GHz mixed-signal RF evaluation board for characterizing a LoRa telemetry transceiver under controlled transmit, receive, and mismatch conditions. The board combines switched RF test paths, forward and reverse power measurement, detector telemetry, current and temperature sensing, a 12-bit SAR ADC, and Compute Module 5 control and data logging.",
   "thumbnail": "/generated/recovery-system/thumbnails/card.svg",
   "tags": ["RF", "Telemetry", "LoRa", "Directional Coupler", "CM5", "Layout In Progress", "Altium"],
