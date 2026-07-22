@@ -1,6 +1,6 @@
 ## Purpose
 
-The Vespula Avionics Module is the flight engine controller for vehicle actuation and engine-related sensing. It runs from the 48 V avionics bus, commands solenoid valves and ignitors, and reads RTDs, pressure transducers, and differential sensors used during engine start and shutdown.
+The Vespula Avionics Module is the flight engine controller for vehicle actuation and engine-related sensing. It runs from the 48 V avionics bus, commands solenoid valves and igniters, and reads RTDs, pressure transducers, and differential sensors used during engine start and shutdown.
 
 ## My Responsibility
 
@@ -13,7 +13,7 @@ Review and bring-up of the inherited design exposed a few real issues:
 - Controller boot pins were actively driven into invalid states.
 - Multiple ADC signals had reversed polarity or mapping.
 - More than fifteen BeagleBone control and interface pins required reassignment.
-- The ignitor power stage did not regulate reliably.
+- The igniter power stage did not regulate reliably.
 - Actuation and sensor behavior could not be validated consistently in the original configuration.
 
 These were system-level problems, not isolated assembly defects, so fixing them meant coordinating schematic, pin-map, firmware-interface, and PCB changes together.
@@ -22,15 +22,15 @@ These were system-level problems, not isolated assembly defects, so fixing them 
 
 The redesign started by rebuilding signal ownership at the controller and vehicle connectors. Boot-sensitive pins were removed from conflicting functions, ADC polarity was corrected, and the controller pin map was brought back in line with the intended engine-control interfaces.
 
-The ignitor converter and its compensation were revised to restore stable power behavior. High-current output paths and low-level sensor interfaces were then reviewed together to ensure that the electrical changes remained valid in the PCB layout.
+The igniter converter and its compensation were revised to restore stable power behavior. High-current output paths and low-level sensor interfaces were then reviewed together to ensure that the electrical changes remained valid in the PCB layout.
 
 ## PCB Layout
 
-The six-layer layout separates valve and ignitor current paths from RTD, pressure-transducer, and differential-sensor circuitry. The power layer supports actuation-current distribution, while adjacent reference planes provide return continuity for sensor and controller signals.
+The six-layer layout separates valve and igniter current paths from RTD, pressure-transducer, and differential-sensor circuitry. The power layer supports actuation-current distribution, while adjacent reference planes provide return continuity for sensor and controller signals.
 
 Featured layout callouts should identify:
 
-- Ignitor current path
+- Igniter current path
 - Solenoid-driver region
 - Converter switching loop
 - Sensor acquisition area
@@ -39,7 +39,7 @@ Featured layout callouts should identify:
 
 ## Bring-Up
 
-Bring-up started with controller boot behavior and regulated rails before progressing to ADC polarity, sensor scaling, valve outputs, and ignitor operation.
+Bring-up started with controller boot behavior and regulated rails before progressing to ADC polarity, sensor scaling, valve outputs, and igniter operation.
 
 The corrected revision restored reliable controller startup, valid sensor acquisition, and repeatable actuation behavior. That was the important milestone: the board became usable flight and test hardware, not just a schematic cleanup.
 

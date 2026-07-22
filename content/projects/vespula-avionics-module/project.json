@@ -9,19 +9,19 @@
   "layerCount": 6,
   "stackup": "Six copper-layer avionics module PCB exported from Altium Gerbers",
   "boardSize": "TBD from mechanical export",
-  "summary": "A six-layer flight engine controller operating from the vehicle's 48 V avionics bus. The board commands solenoid valves and ignitors while acquiring differential sensors, RTDs, and pressure transducers used during engine start and shutdown. After major first-revision faults were found, I owned the electrical and PCB revision, led bring-up, and became the board's day-to-day operational owner.",
+  "summary": "A six-layer flight engine controller operating from the vehicle's 48 V avionics bus. The board commands solenoid valves and igniters while acquiring differential sensors, RTDs, and pressure transducers used during engine start and shutdown. After major first-revision faults were found, I owned the electrical and PCB revision, led bring-up, and became the board's day-to-day operational owner.",
   "thumbnail": "/generated/recovery-system/thumbnails/card.svg",
   "tags": ["Avionics", "Embedded", "Sensors", "Power", "Vehicle Interface", "Altium"],
   "highlights": [
     { "label": "Vehicle Bus", "value": "48 V" },
     { "label": "Control Pins Remapped", "value": "15+" },
-    { "label": "Actuation Outputs", "value": "Valves / ignitors" },
-    { "label": "Sensor Interfaces", "value": "RTD / PT / differential" }
+    { "label": "Actuation Outputs", "value": "Valves / Igniters" },
+    { "label": "Sensor Interfaces", "value": "RTD / PT / Differential" }
   ],
   "keyComponents": [
     "BeagleBone control interface",
     "Solenoid valve drivers",
-    "Ignitor power circuitry",
+    "Igniter power circuitry",
     "Differential sensor interfaces",
     "RTD interfaces",
     "Pressure transducer interfaces",
@@ -29,7 +29,7 @@
   ],
   "mainConstraints": [
     "Audit and correct inherited schematic and pin-mapping errors",
-    "Restore stable ignitor power by correcting converter behavior and compensation",
+    "Restore stable igniter power by correcting converter behavior and compensation",
     "Correct ADC signal polarity and digital boot-state conflicts",
     "Separate high-current actuation paths from low-level sensor acquisition",
     "Verify the revised board behaves predictably during engine-control operations"

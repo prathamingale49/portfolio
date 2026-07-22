@@ -16,7 +16,7 @@
     { "label": "Power Domains", "value": "48 V / 24 V / 5 V / 3.3 V" },
     { "label": "Analog I/O", "value": "ADC + DAC" },
     { "label": "Sensor Emulation", "value": "RTD / TC / PT" },
-    { "label": "Layout", "value": "In progress" }
+    { "label": "Layout", "value": "In Progress" }
   ],
   "keyComponents": [
     "Raspberry Pi CM5",

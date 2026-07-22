@@ -16,7 +16,7 @@
     { "label": "RF Band", "value": "2.4 GHz" },
     { "label": "TX Range", "value": "0-12 dBm" },
     { "label": "Target VSWR", "value": "1.1:1-3:1" },
-    { "label": "Telemetry ADC", "value": "8 ch / 12 bit" }
+    { "label": "Telemetry ADC", "value": "8 Ch / 12 Bit" }
   ],
   "keyComponents": [
     "2.4 GHz LoRa transceiver",

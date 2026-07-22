@@ -16,7 +16,7 @@
     { "label": "Deployment Channels", "value": "10" },
     { "label": "Independent MCU Domains", "value": "3" },
     { "label": "Simultaneous Load Step", "value": "300 W" },
-    { "label": "3.3 V Peak Reduced", "value": "8.2 to 3.9 V" }
+    { "label": "3.3 V Peak Reduced", "value": "8.2 V -> 3.9 V" }
   ],
   "keyComponents": [
     "Triple STM32 control architecture",

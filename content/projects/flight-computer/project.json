@@ -13,10 +13,10 @@
   "thumbnail": "/generated/recovery-system/thumbnails/card.svg",
   "tags": ["Flight Computer", "Avionics", "Sensors", "Telemetry", "Embedded", "Altium"],
   "highlights": [
-    { "label": "Sensor Suite", "value": "IMU / baro / mag" },
-    { "label": "Flight Data", "value": "Onboard flash" },
+    { "label": "Sensor Suite", "value": "IMU / Baro / Mag" },
+    { "label": "Flight Data", "value": "Onboard Flash" },
     { "label": "External Interfaces", "value": "Telemetry / USB" },
-    { "label": "Ownership", "value": "Bring-up / test" }
+    { "label": "Ownership", "value": "Bring-Up / Test" }
   ],
   "keyComponents": [
     "Primary compute and control",

@@ -13,9 +13,9 @@
   "thumbnail": "/generated/recovery-system/thumbnails/card.svg",
   "tags": ["BMS", "Power", "Load Switches", "ADC", "Current Loop", "Altium"],
   "highlights": [
-    { "label": "Battery Source", "value": "12S Li-ion" },
+    { "label": "Battery Source", "value": "12S Li-Ion" },
     { "label": "Controlled Load Paths", "value": "5" },
-    { "label": "Power Telemetry", "value": "Current + voltage" },
+    { "label": "Power Telemetry", "value": "Current + Voltage" },
     { "label": "Copper Layers", "value": "4" }
   ],
   "keyComponents": [
