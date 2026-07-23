@@ -4,7 +4,7 @@ A static-first Next.js portfolio for PCB case studies built from web-friendly Al
 
 ## Creation Disclosure
 
-This website was created with the use of OpenAI Codex as a coding assistant. Project artifacts, engineering decisions, and design ownership should still be reviewed and maintained by the portfolio owner.
+This website was created with the help of OpenAI Codex.
 
 ## Tech Stack
 
