@@ -8,7 +8,7 @@
   "tools": ["Altium", "Oscilloscope", "Electronic Load", "Bench Supply"],
   "layerCount": 6,
   "stackup": "Six copper-layer mixed-signal avionics PCB with high-current recovery-driver routing and separated logic/power regions",
-  "summary": "A six-layer mixed-signal recovery controller for fault-tolerant rocket deployment. The board combines dual input power paths, four regulated power stages, three independent STM32 control domains, discrete median-voting logic, redundant hardware safing, inertial and environmental sensing, and ten 24 V ignition channels.",
+  "summary": "A six-layer mixed-signal recovery controller for fault-tolerant rocket parachute deployment. The board combines dual input power paths, four regulated power stages, three independent STM32 control domains, discrete median-voting logic, 4x redundant hardware safing, inertial and environmental sensing, and ten 24 V ignition channels.",
   "thumbnail": "/generated/recovery-system/thumbnails/card.svg",
   "tags": ["Avionics", "Recovery", "Voting Logic", "Redundant Control", "High Current", "Altium"],
   "highlights": [
@@ -23,8 +23,8 @@
     "Dual protected input power paths",
     "48 V to 24 V buck converters",
     "3.3 V buck converters",
-    "Ten constant-current ignition drivers",
-    "IMU, barometer, and magnetometer interfaces",
+    "10 constant-current ignition drivers",
+    "3x IMU, barometer, and magnetometer interfaces",
     "Hardware RBF, ESTOP, and abort paths"
   ],
   "mainConstraints": [
