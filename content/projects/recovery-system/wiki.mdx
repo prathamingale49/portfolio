@@ -1,6 +1,6 @@
 ## Purpose
 
-At a high level, the Recovery System is the board that decides when the rocket is allowed to deploy recovery. It combines redundant compute, hardware voting, safing interfaces, local sensing, protected power conversion, and ten high-current ignition channels on a single six-layer PCB.
+At a high level, the Recovery System is the board that decides when the rocket is allowed to deploy recovery parachutes. It combines redundant compute, hardware voting, safing interfaces, local sensing, protected power conversion, and ten high-current ignition channels on a single six-layer PCB.
 
 The goal was not just to fire deployment loads. The board had to stay inhibited during integration, tolerate a single control-domain fault, survive the simultaneous firing transient, and keep running without resetting its microcontrollers or corrupting sensor data.
 
@@ -10,9 +10,9 @@ I was the Design Responsible Engineer for the board. I owned the system architec
 
 ## Architecture
 
-Two protected battery feeds enter independent power paths before supplying the board's deployment and logic rails. Four buck converters generate the required 24 V and low-voltage domains.
+Two protected battery feeds enter independent power paths before supplying the board's deployment and logic rails. Four buck converters generate the required 24 V and 3.3 V domains.
 
-Three STM32 control domains independently process local sensor data and receive flight-computer commands. Their deployment commands pass through discrete voting logic before reaching the driver banks. Hardware RBF, ESTOP, abort, and software-enable paths provide multiple independent mechanisms for preventing an unintended deployment.
+Three STM32 control domains independently process local sensor data via an Extended Kalman Filter (EKF) and receive flight-computer commands. Their deployment commands pass through discrete digital median voting logic before reaching the driver banks. Hardware RBF, ESTOP, abort, and software-enable paths provide multiple independent mechanisms for preventing an unintended deployment.
 
 Ten output channels drive 24 V deployment loads. Each channel provides command, current-control, sensing, and fault-feedback behavior.
 
