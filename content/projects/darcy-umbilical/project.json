@@ -41,6 +41,32 @@
     "position": { "x": 0, "y": 0, "z": 0 },
     "zoom": 1
   },
+  "deepDives": [
+    {
+      "slug": "vehicle-interface-architecture",
+      "title": "Vehicle Interface Architecture",
+      "description": "Placeholder for the ground-to-vehicle boundary, power entry, Ethernet path, connector keying, and signal audit trail.",
+      "image": "/generated/darcy-umbilical/layout/copper-top.svg",
+      "tag": "Interface",
+      "metric": "Power + Ethernet"
+    },
+    {
+      "slug": "safing-protection-paths",
+      "title": "Safing and Protection Paths",
+      "description": "Placeholder for RBF, ESTOP, transient protection, ESD handling, and how external interfaces fail safely.",
+      "image": "/generated/darcy-umbilical/layout/copper-1.svg",
+      "tag": "Safing",
+      "metric": "ESTOP + RBF"
+    },
+    {
+      "slug": "connector-layout-validation",
+      "title": "Connector Layout and Validation",
+      "description": "Placeholder for connector placement, impedance-sensitive routing, power separation, labeling, and integration checks.",
+      "image": "/generated/darcy-umbilical/layout/copper-bottom.svg",
+      "tag": "PCB",
+      "metric": "4 Layers"
+    }
+  ],
   "schematic": {
     "pages": [
       {

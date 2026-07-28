@@ -48,6 +48,32 @@
       "target": { "x": 47.848, "y": 44.249, "z": 71.836 }
     }
   },
+  "deepDives": [
+    {
+      "slug": "power-architecture",
+      "title": "Dual-Tree Power Architecture",
+      "description": "Two protected power inputs, four regulated rails, and validation under a 300 W simultaneous deployment event.",
+      "image": "/content/projects/recovery-system/media/featured-power-path.svg",
+      "tag": "Power",
+      "metric": "300 W Load Step"
+    },
+    {
+      "slug": "fault-tolerant-control",
+      "title": "Fault-Tolerant Control",
+      "description": "Three independent STM32 domains, discrete median voting, and hardware-controlled deployment inhibits.",
+      "image": "/content/projects/recovery-system/media/featured-voting-logic.svg",
+      "tag": "Safety Architecture",
+      "metric": "3 MCU Domains"
+    },
+    {
+      "slug": "ignition-drivers",
+      "title": "Ignition Driver Channels",
+      "description": "Ten current-controlled 24 V channels with sensing, fault feedback, and high-current layout optimization.",
+      "image": "/content/projects/recovery-system/media/featured-driver-bank.svg",
+      "tag": "High Current",
+      "metric": "10 Channels"
+    }
+  ],
   "schematic": {
     "pages": [
       {

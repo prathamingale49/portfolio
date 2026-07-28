@@ -1,0 +1,31 @@
+# Dual-Tree Power Architecture
+
+Use this page for the power topology story: requirements, energy flow, schematic crops, layout screenshots, and validation.
+
+## System Requirement
+
+Replace this section with the actual constraints: independent battery feeds, deployment-channel load, regulated rails, fault boundaries, and what must keep running during simultaneous deployment.
+
+## Power Block Diagram
+
+<Figure src="/content/projects/recovery-system/media/featured-power-path.svg" alt="Power architecture placeholder" caption="Replace this placeholder with a clean block diagram that emphasizes power-tree separation, protected inputs, regulated rails, and deployment energy flow." />
+
+## Input Protection
+
+Add a focused schematic crop here and explain what abnormal conditions the input stage protects against, where the paths remain independent, and what happens when one input is lost.
+
+## Conversion Stages
+
+<DesignDecision title="What this section should prove">
+Use this section to explain the topology choice, operating range, load-step behavior, compensation target, current limits, and bulk capacitance strategy.
+</DesignDecision>
+
+## PCB Layout
+
+<Figure src="/generated/recovery-system/layout/copper-3.svg" alt="Recovery power layer placeholder" caption="Replace or supplement this generated layer image with annotated screenshots showing high-current paths, return paths, converter placement, and domain boundaries." />
+
+## Validation
+
+<MeasuredResult before="8.2 V" after="3.9 V" label="Peak 3.3 V rail transient" note="Replace these values or expand the caption with the final measured setup and scope evidence." />
+
+Add screenshots and words for the load-step test, what failed first, what changed, and how the new behavior was verified.

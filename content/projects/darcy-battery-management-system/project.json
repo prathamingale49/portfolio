@@ -46,6 +46,32 @@
       "target": { "x": 33.637, "y": 44.566, "z": 6.097 }
     }
   },
+  "deepDives": [
+    {
+      "slug": "power-distribution-architecture",
+      "title": "Power Distribution Architecture",
+      "description": "Placeholder for the 12S input path, protection strategy, regulated rails, load outputs, and vehicle power boundaries.",
+      "image": "/generated/darcy-battery-management-system/layout/copper-top.svg",
+      "tag": "Power",
+      "metric": "12S Li-Ion"
+    },
+    {
+      "slug": "load-switching-telemetry",
+      "title": "Load Switching and Telemetry",
+      "description": "Placeholder for connector-level switching, current and voltage telemetry, ADC paths, and current-loop sensor interfacing.",
+      "image": "/generated/darcy-battery-management-system/layout/copper-1.svg",
+      "tag": "Circuit Walkthrough",
+      "metric": "5 Load Paths"
+    },
+    {
+      "slug": "layout-validation",
+      "title": "Layout and Validation",
+      "description": "Placeholder for high-current routing, measurement isolation, staged bring-up, and channel-by-channel validation evidence.",
+      "image": "/generated/darcy-battery-management-system/layout/copper-bottom.svg",
+      "tag": "PCB",
+      "metric": "4 Layers"
+    }
+  ],
   "schematic": {
     "pages": [
       {

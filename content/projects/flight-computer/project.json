@@ -49,6 +49,32 @@
       "target": { "x": -49.106, "y": -78.896, "z": -48.019 }
     }
   },
+  "deepDives": [
+    {
+      "slug": "flight-compute-architecture",
+      "title": "Flight Compute Architecture",
+      "description": "Placeholder for compute, power regulation, external interfaces, recovery coordination, and board-level data flow.",
+      "image": "/generated/flight-computer/layout/copper-top.svg",
+      "tag": "Architecture",
+      "metric": "Flight Data"
+    },
+    {
+      "slug": "sensing-and-storage",
+      "title": "Sensing and Storage",
+      "description": "Placeholder for IMU, barometer, magnetometer, ADC acquisition, onboard flash, telemetry, and interface validation.",
+      "image": "/generated/flight-computer/layout/copper-1.svg",
+      "tag": "Subsystem",
+      "metric": "IMU / Flash"
+    },
+    {
+      "slug": "bringup-validation",
+      "title": "Bring-Up and Validation",
+      "description": "Placeholder for staged power-up, sensor plausibility checks, communication testing, and system integration evidence.",
+      "image": "/generated/flight-computer/layout/copper-bottom.svg",
+      "tag": "Test",
+      "metric": "Bring-Up"
+    }
+  ],
   "schematic": {
     "pages": [
       {

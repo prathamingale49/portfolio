@@ -42,6 +42,32 @@
     "position": { "x": 0, "y": 0, "z": 0 },
     "zoom": 1
   },
+  "deepDives": [
+    {
+      "slug": "test-platform-architecture",
+      "title": "Test Platform Architecture",
+      "description": "Placeholder for the CM5 control path, programmable interfaces, power domains, and how the board emulates flight hardware.",
+      "image": "/generated/recovery-system/thumbnails/card.svg",
+      "tag": "Architecture",
+      "metric": "CM5 Control"
+    },
+    {
+      "slug": "sensor-emulation-channels",
+      "title": "Sensor Emulation Channels",
+      "description": "Placeholder for RTD, thermocouple, pressure-transducer, current-loop, differential-sensor, ADC, and DAC channels.",
+      "image": "/generated/recovery-system/thumbnails/card.svg",
+      "tag": "Emulation",
+      "metric": "ADC + DAC"
+    },
+    {
+      "slug": "automation-validation-flow",
+      "title": "Automation and Validation Flow",
+      "description": "Placeholder for test sequencing, bench access, expected measurements, failure injection, and reusable verification scripts.",
+      "image": "/generated/recovery-system/thumbnails/card.svg",
+      "tag": "Test",
+      "metric": "HITL"
+    }
+  ],
   "schematic": {
     "pages": [
       {

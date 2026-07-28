@@ -1,0 +1,36 @@
+# Fault-Tolerant Control
+
+Use this page for the triple-MCU architecture, voting logic, hardware safing paths, physical separation, and failure-injection evidence.
+
+## Fault Model
+
+Describe the single faults this design is intended to tolerate: one MCU stuck high, one MCU stuck low, one MCU reset, disconnected command paths, software faults, asserted safing inputs, and local rail failures.
+
+## Control Architecture
+
+<Figure src="/content/projects/recovery-system/media/featured-voting-logic.svg" alt="Voting logic placeholder" caption="Replace this placeholder with a block diagram showing MCU A/B/C commands, the discrete voter, safing inputs, and the deployment enable chain." />
+
+## Median Voter
+
+| MCU A | MCU B | MCU C | Output |
+| --- | --- | --- | --- |
+| 0 | 0 | 0 | 0 |
+| 0 | 0 | 1 | 0 |
+| 0 | 1 | 1 | 1 |
+| 1 | 1 | 1 | 1 |
+
+Add the schematic crop, startup behavior, unpowered behavior, and whether voting is per-channel or shared.
+
+## Hardware Safing
+
+<DesignDecision title="Hardware inhibits before software confidence">
+Explain how RBF, ESTOP, ABORT, and software enable interact, and what each mechanism prevents.
+</DesignDecision>
+
+## Physical Fault Separation
+
+Add layout screenshots showing MCU domains, separate command routing, local power regions, and the point where signals converge.
+
+## Verification
+
+Use this section for a compact failure-injection matrix and lab evidence.

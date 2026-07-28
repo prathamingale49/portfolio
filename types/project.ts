@@ -92,6 +92,15 @@ export interface ProjectFeature {
   tag?: string;
 }
 
+export interface ProjectDeepDive {
+  slug: string;
+  title: string;
+  description: string;
+  image: string;
+  tag?: string;
+  metric?: string;
+}
+
 export interface LayoutCallout {
   id: string;
   label: string;
@@ -140,6 +149,7 @@ export interface Project {
   publicNote?: string;
   model3d?: ProjectModel3D;
   featured?: ProjectFeature[];
+  deepDives?: ProjectDeepDive[];
   schematic: {
     pages: SchematicPage[];
   };

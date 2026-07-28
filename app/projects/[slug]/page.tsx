@@ -4,6 +4,7 @@ import { ProjectHeader } from "@/components/ProjectHeader";
 import { ProjectNavCards } from "@/components/ProjectNavCards";
 import { ProjectStats } from "@/components/ProjectStats";
 import { FeaturedProjectSection } from "@/components/FeaturedProjectSection";
+import { ProjectDeepDiveSection } from "@/components/ProjectDeepDiveSection";
 
 export function generateStaticParams() {
   return getProjectSlugs().map((slug) => ({ slug }));
@@ -55,6 +56,7 @@ export default async function ProjectOverviewPage({ params }: { params: Promise<
             ) : null}
           </div>
         </section>
+        {project.deepDives ? <ProjectDeepDiveSection projectSlug={project.slug} deepDives={project.deepDives} /> : null}
         <ProjectStats project={project} />
         {project.featured ? <FeaturedProjectSection features={project.featured} /> : null}
       </div>

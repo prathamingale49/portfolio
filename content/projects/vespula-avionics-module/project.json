@@ -47,6 +47,32 @@
       "target": { "x": 89.053, "y": 20.559, "z": -10.485 }
     }
   },
+  "deepDives": [
+    {
+      "slug": "revision-architecture",
+      "title": "Revision Architecture",
+      "description": "Placeholder for the inherited faults, revised control mapping, 48 V bus behavior, and board-level ownership story.",
+      "image": "/generated/vespula-avionics-module/layout/copper-top.svg",
+      "tag": "Revision",
+      "metric": "48 V Bus"
+    },
+    {
+      "slug": "actuation-and-ignition",
+      "title": "Actuation and Ignition",
+      "description": "Placeholder for solenoid drivers, igniter power, converter behavior, compensation fixes, and high-current routing.",
+      "image": "/generated/vespula-avionics-module/layout/copper-3.svg",
+      "tag": "Power",
+      "metric": "Valves / Igniters"
+    },
+    {
+      "slug": "sensor-layout-validation",
+      "title": "Sensor Layout and Validation",
+      "description": "Placeholder for RTD, pressure-transducer, differential-sensor acquisition, ADC polarity fixes, and validation evidence.",
+      "image": "/generated/vespula-avionics-module/layout/copper-bottom.svg",
+      "tag": "Sensors",
+      "metric": "RTD / PT"
+    }
+  ],
   "schematic": {
     "pages": [
       {

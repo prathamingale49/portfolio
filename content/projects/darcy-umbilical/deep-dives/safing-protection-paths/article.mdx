@@ -1,0 +1,21 @@
+# Safing and Protection Paths
+
+Use this page for RBF, ESTOP, transient protection, ESD handling, and how external interfaces fail safely.
+
+## Fault Model
+
+List the external faults this interface must tolerate: ESD, incorrect handling, disconnected ground equipment, asserted safing signals, and power sequencing edge cases.
+
+## Protection Chain
+
+<Figure src="/generated/darcy-umbilical/layout/copper-1.svg" alt="Darcy umbilical safing placeholder" caption="Replace this placeholder with schematic crops for TVS/ESD parts, ESTOP routing, RBF routing, and protected connector pins." />
+
+## Safing Behavior
+
+<DesignDecision title="What this section should answer">
+Explain which signals are hard inhibits, which are status or command inputs, and how the board behaves when the umbilical is removed.
+</DesignDecision>
+
+## Verification
+
+Add continuity checks, bench measurements, and integration evidence.

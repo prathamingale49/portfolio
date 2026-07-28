@@ -5,6 +5,8 @@ interface MDXContentProps {
   source: string;
 }
 
+type MdxAttributes = Record<string, string>;
+
 function slugify(value: string): string {
   return value
     .toLowerCase()
@@ -33,6 +35,79 @@ function renderInline(text: string): React.ReactNode[] {
 
     return part;
   });
+}
+
+function parseAttributes(raw: string): MdxAttributes {
+  const attributes: MdxAttributes = {};
+  const matches = raw.matchAll(/([A-Za-z][\w-]*)="([^"]*)"/g);
+
+  for (const match of matches) {
+    attributes[match[1]] = match[2];
+  }
+
+  return attributes;
+}
+
+function splitTableRow(line: string): string[] {
+  return line
+    .replace(/^\|/, "")
+    .replace(/\|$/, "")
+    .split("|")
+    .map((cell) => cell.trim());
+}
+
+function renderFigure(attributes: MdxAttributes, key: string) {
+  const src = attributes.src ?? "";
+  const alt = attributes.alt ?? attributes.caption ?? "";
+
+  return (
+    <figure key={key} className="not-prose my-7 overflow-hidden rounded border border-line-soft bg-panel">
+      <div className="bg-[#0b1018]">
+        <img src={getAssetUrl(src)} alt={alt} className="w-full" />
+      </div>
+      {attributes.caption ? (
+        <figcaption className="border-t border-line-soft px-4 py-3 text-sm leading-6 text-slate-400">
+          {renderInline(attributes.caption)}
+        </figcaption>
+      ) : null}
+    </figure>
+  );
+}
+
+function renderMeasuredResult(attributes: MdxAttributes, key: string) {
+  return (
+    <div key={key} className="not-prose my-6 rounded border border-copper/35 bg-copper/10 p-4">
+      <p className="text-xs uppercase tracking-wide text-copper">{attributes.label ?? "Measured result"}</p>
+      <div className="mt-3 grid gap-3 sm:grid-cols-2">
+        <div>
+          <p className="text-xs uppercase tracking-wide text-slate-500">Before</p>
+          <p className="mt-1 text-2xl font-semibold text-white">{attributes.before ?? "TBD"}</p>
+        </div>
+        <div>
+          <p className="text-xs uppercase tracking-wide text-slate-500">After</p>
+          <p className="mt-1 text-2xl font-semibold text-white">{attributes.after ?? "TBD"}</p>
+        </div>
+      </div>
+      {attributes.note ? <p className="mt-3 text-sm leading-6 text-slate-300">{attributes.note}</p> : null}
+    </div>
+  );
+}
+
+function renderDesignDecision(attributes: MdxAttributes, body: string[], key: string) {
+  return (
+    <aside key={key} className="not-prose my-6 rounded border border-signal/35 bg-signal/10 p-4">
+      <p className="text-xs uppercase tracking-wide text-signal">Design decision</p>
+      <h3 className="mt-2 text-lg font-semibold text-white">{attributes.title ?? "Decision"}</h3>
+      <div className="mt-2 space-y-3 text-sm leading-6 text-slate-300">
+        {body
+          .join("\n")
+          .split(/\n{2,}/)
+          .map((paragraph, index) => (
+            <p key={`${key}-p-${index}`}>{renderInline(paragraph.replace(/\s+/g, " ").trim())}</p>
+          ))}
+      </div>
+    </aside>
+  );
 }
 
 export function MDXContent({ source }: MDXContentProps) {
@@ -73,12 +148,59 @@ export function MDXContent({ source }: MDXContentProps) {
     }
   }
 
-  for (const line of lines) {
+  for (let index = 0; index < lines.length; index += 1) {
+    const line = lines[index];
     const trimmed = line.trim();
 
     if (!trimmed) {
       flushParagraph();
       flushList();
+      continue;
+    }
+
+    let componentSource = trimmed;
+    if (/^<(Figure|MeasuredResult)\b/.test(trimmed) && !trimmed.endsWith("/>")) {
+      index += 1;
+      while (index < lines.length && !lines[index].trim().endsWith("/>")) {
+        componentSource += ` ${lines[index].trim()}`;
+        index += 1;
+      }
+
+      if (index < lines.length) {
+        componentSource += ` ${lines[index].trim()}`;
+      }
+    }
+
+    const component = /^<([A-Za-z][\w]*)\s*([\s\S]*?)\/>$/.exec(componentSource);
+    if (component) {
+      flushParagraph();
+      flushList();
+      const attributes = parseAttributes(component[2]);
+
+      if (component[1] === "Figure") {
+        nodes.push(renderFigure(attributes, `figure-${nodes.length}`));
+        continue;
+      }
+
+      if (component[1] === "MeasuredResult") {
+        nodes.push(renderMeasuredResult(attributes, `result-${nodes.length}`));
+        continue;
+      }
+    }
+
+    const designDecision = /^<DesignDecision\s*([^>]*)>$/.exec(trimmed);
+    if (designDecision) {
+      flushParagraph();
+      flushList();
+      const body: string[] = [];
+      index += 1;
+
+      while (index < lines.length && lines[index].trim() !== "</DesignDecision>") {
+        body.push(lines[index]);
+        index += 1;
+      }
+
+      nodes.push(renderDesignDecision(parseAttributes(designDecision[1]), body, `decision-${nodes.length}`));
       continue;
     }
 
@@ -134,6 +256,52 @@ export function MDXContent({ source }: MDXContentProps) {
       flushParagraph();
       list = [];
       orderedList.push(ordered[1]);
+      continue;
+    }
+
+    if (
+      trimmed.includes("|") &&
+      index + 1 < lines.length &&
+      /^\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)+\|?$/.test(lines[index + 1].trim())
+    ) {
+      flushParagraph();
+      flushList();
+      const headers = splitTableRow(trimmed);
+      index += 2;
+      const rows: string[][] = [];
+
+      while (index < lines.length && lines[index].trim().includes("|")) {
+        rows.push(splitTableRow(lines[index].trim()));
+        index += 1;
+      }
+
+      index -= 1;
+      nodes.push(
+        <div key={`table-${nodes.length}`} className="not-prose my-6 overflow-x-auto rounded border border-line-soft">
+          <table className="min-w-full border-collapse bg-panel text-sm">
+            <thead>
+              <tr>
+                {headers.map((header) => (
+                  <th key={header} className="border-b border-line-soft px-3 py-2 text-left text-xs uppercase tracking-wide text-slate-500">
+                    {renderInline(header)}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((row, rowIndex) => (
+                <tr key={`row-${rowIndex}`} className="border-b border-line-soft last:border-0">
+                  {headers.map((header, cellIndex) => (
+                    <td key={`${header}-${cellIndex}`} className="px-3 py-2 text-slate-300">
+                      {renderInline(row[cellIndex] ?? "")}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>,
+      );
       continue;
     }
 

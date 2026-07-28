@@ -1,0 +1,34 @@
+# Ignition Driver Channels
+
+Use this page for the ten deployment channels, command and enable chain, current regulation, sensing, fault feedback, and high-current layout strategy.
+
+## Channel Requirements
+
+Write the channel requirements here: channel count, load voltage, current target, simultaneous activation, deterministic disabled state, fault feedback, and continuity-check behavior if supported.
+
+## One-Channel Architecture
+
+<Figure src="/content/projects/recovery-system/media/featured-driver-bank.svg" alt="Ignition driver placeholder" caption="Replace this placeholder with a one-channel block diagram before showing the replicated ten-channel bank." />
+
+## Schematic Walkthrough
+
+Add focused schematic crops for the command chain, current-control circuitry, switching device, protection, current sensing, and output connector.
+
+## Operating Sequence
+
+1. Unpowered
+2. Powered but mechanically safed
+3. Armed
+4. Valid voted command received
+5. Driver turns on
+6. Current rises and is controlled
+7. Fault or current information is reported
+8. Command is removed and the channel turns off
+
+## High-Current Layout
+
+<Figure src="/generated/recovery-system/layout/copper-top.svg" alt="Recovery top copper placeholder" caption="Replace or supplement this with annotated layout screenshots showing the outgoing current path, return path, gate-drive loop, and sense routing." />
+
+## Multi-Channel Interaction
+
+Explain what happens when all ten channels turn on: source impedance, converter response, ground bounce, thermal concentration, coupling into logic rails, and how channels are split between power trees.

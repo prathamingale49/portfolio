@@ -7,6 +7,8 @@ const contentTypeByExtension: Record<string, string> = {
   ".png": "image/png",
   ".jpg": "image/jpeg",
   ".jpeg": "image/jpeg",
+  ".webp": "image/webp",
+  ".avif": "image/avif",
   ".gif": "image/gif",
   ".pdf": "application/pdf",
   ".glb": "model/gltf-binary",

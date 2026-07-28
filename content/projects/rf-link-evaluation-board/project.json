@@ -42,6 +42,32 @@
     "position": { "x": 0, "y": 0, "z": 0 },
     "zoom": 1
   },
+  "deepDives": [
+    {
+      "slug": "rf-path-architecture",
+      "title": "RF Path Architecture",
+      "description": "Placeholder for the 2.4 GHz signal path, switched test modes, impedance control, and measurement access.",
+      "image": "/generated/recovery-system/thumbnails/card.svg",
+      "tag": "RF",
+      "metric": "2.4 GHz"
+    },
+    {
+      "slug": "power-measurement-chain",
+      "title": "Power Measurement Chain",
+      "description": "Placeholder for the directional coupler, log detector, ADC telemetry, calibration reference, and uncertainty budget.",
+      "image": "/generated/recovery-system/thumbnails/card.svg",
+      "tag": "Telemetry",
+      "metric": "FWD / REV"
+    },
+    {
+      "slug": "rf-validation-flow",
+      "title": "RF Validation Flow",
+      "description": "Placeholder for VNA, spectrum-analyzer, mismatch, conducted-power, and antenna-path validation evidence.",
+      "image": "/generated/recovery-system/thumbnails/card.svg",
+      "tag": "Test",
+      "metric": "VNA / SA"
+    }
+  ],
   "schematic": {
     "pages": [
       {
