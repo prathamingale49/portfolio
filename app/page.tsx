@@ -46,9 +46,10 @@ const experience = [
     location: "Woodinville, WA",
     icon: Satellite,
     bullets: [
-      "Increase AC/DC input EMI-filter power capability from 400 W to 550 W by identifying magnetic saturation limits, redesigning the filter, and validating full-load hardware performance.",
-      "Lead bring-up of a radiation-test coupon spanning 8 buck-converter variants, including loop-gain, efficiency, ripple, protection-threshold, and startup characterization.",
-      "Isolate temperature and load-dependent diode leakage as the root cause of high-temperature shutdowns, extending operation from 90 s at 90 C to more than 3 hr at 115 C.",
+      "Redesigned AC- and DC-path input EMI filters for a 400 W aircraft AC/DC PSU, increasing power capability 38% while addressing magnetic saturation, thermal limits, and filter impedance.",
+      "Passed DO-160 current-harmonics requirements and led EMI/EMC validation by authoring the test plan and executing conducted-emissions testing.",
+      "Led proton radiation testing of 4 buck-converter designs with no DSEE observed, then owned schematic and PCB layout for 4 follow-up heavy-ion test coupons.",
+      "Supported critical-path power and EMI bring-up for a new antenna revision with 15 buck converters, reducing VHF emissions by 15 dB through frequency, mode, stability, and input-filter optimizations.",
     ],
   },
   {
@@ -58,9 +59,10 @@ const experience = [
     location: "Woodinville, WA",
     icon: Satellite,
     bullets: [
-      "Designed a 60 W isolated half-bridge LLC resonant converter with ZVS and AP310 loop-gain validation, improving efficiency by 15% over the existing flyback.",
-      "Executed staged bring-up of a 400 W isolated AC/DC PCBA revision across CrCM PFC, LLC, boost, and buck stages with DO-160 current-harmonic validation.",
-      "Led RCA for bring-up failures involving a buck-feedback trace, chassis-coupled load-switch noise, and LLC cross-regulation collapse on the auxiliary rail.",
+      "Designed a 60 W AC/DC isolated half-bridge LLC resonant converter using ZVS to improve efficiency by 15% over the existing flyback.",
+      "Tuned the hybrid-hysteretic control loop using AP310 injection to secure phase and gain margin across 10-100% load; owned schematic, PCB layout, and bench bring-up.",
+      "Executed staged bring-up of a major 400 W isolated AC/DC PCBA revision across CrCM PFC, LLC, boost, and buck stages with DO-160 current-harmonic validation.",
+      "Led RCA for 3 bring-up failures involving a buck-feedback trace, chassis-coupled load-switch noise, and LLC cross-regulation collapse on the auxiliary rail.",
     ],
   },
   {
@@ -70,19 +72,20 @@ const experience = [
     location: "San Diego, CA",
     icon: Factory,
     bullets: [
-      "Designed a 4 kW, 50 V / 80 A mixed-signal PCB with CAN FD, hardware addressing, connector-orientation detection, protection, pre-charge, and isolated power domains.",
+      "Designed a 4 kW, 50 V / 80 A mixed-signal PCB with 1 Mbps CAN FD, discrete window comparators, automatic CAN termination, hardware addressing, and connector-orientation detection.",
+      "Integrated pre-charge, load-switch soft-start, OCP, UV/OV protection, buck and isolated power domains, creepage control, and RLC common-mode filtering.",
       "Engineered an 8-layer, 2 oz high-current PCB rated for 2.5 kW and validated power integrity and thermals at 450 A for 700 s.",
-      "Built a high-speed digital star interface for one host and two nodes with controlled impedance, ground-via shielding, capacitive coupling, and damped filtering.",
+      "Designed a high-speed digital star interface for 1 host and 2 nodes with sub-3 ns edges, controlled impedance, ground-via shielding, capacitive coupling, and damped RLC filtering.",
     ],
   },
 ];
 
 const skills = [
-  ["Power", "Isolated LLC, AC/DC and DC/DC Converters, ZVS, Loop Gain, EMI Filters, PFC"],
+  ["Power", "Isolated LLC, AC/DC and DC/DC converters, ZVS, loop gain, EMI filters, PFC and harmonic analysis"],
   ["PCB", "Stackup, Impedance Control, Return Paths, Creepage, Current Density, PDN"],
-  ["Mixed Signal", "I/V/T Sensing, SAR ADCs, Comparators, Discrete Voters, SPI, I2C, CAN, Ethernet, USB"],
-  ["Lab", "Oscilloscopes, HV/Current Probes, E-Loads, AP310, PX8000, IR Camera, Thermal Chambers"],
-  ["EDA & Software", "Altium Designer, LTspice, SIMPLIS, TINA-TI, VS Code, GitHub, ENOVIA, Jira, Excel"],
+  ["Mixed Signal", "I/V/T sensing, SAR ADCs, anti-aliasing, comparators, discrete voters, SPI, I2C, CAN, Ethernet, USB"],
+  ["Lab", "Oscilloscopes, HV/current probes, e-loads, AP310 FRA, PX8000 power analyzer, IR camera, thermal chambers"],
+  ["EDA & Software", "Altium Designer, Xpedition Designer, KiCAD, LTspice, SIMPLIS, TINA-TI, VS Code, GitHub, Enovia, Jira, Excel"],
 ];
 
 export default function HomePage() {
@@ -217,7 +220,7 @@ export default function HomePage() {
           {experience.map((item) => {
             const Icon = item.icon;
             return (
-              <article key={`${item.company}-${item.term}`} className="grid gap-4 py-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.35fr)]">
+              <article key={`${item.company}-${item.role}-${item.term}`} className="grid gap-4 py-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.35fr)]">
                 <div className="flex gap-3">
                   <Icon className="mt-1 size-5 shrink-0 text-copper" aria-hidden="true" />
                   <div>
