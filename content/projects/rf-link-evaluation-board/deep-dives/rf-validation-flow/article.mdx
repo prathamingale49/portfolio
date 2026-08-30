@@ -1,19 +1,89 @@
-# RF Validation Flow
+# Bring-Up & RF Validation
 
-Use this page for VNA, spectrum-analyzer, mismatch, conducted-power, and antenna-path validation evidence.
+The validation plan is staged so a power or control problem is found before it becomes an RF-power problem. Each phase should leave behind evidence that a future maintainer can reproduce: instrument setup, calibration state, expected result, measured result, and disposition.
 
-## Test Setup
+## Phase 1 — Unpowered Inspection
 
-Describe instruments, cables, calibration state, fixtures, power levels, and termination conditions.
+- Visual inspection of assembly, polarity, RF connectors, shields, and high-current joints
+- Resistance checks from each rail to ground
+- Continuity through intended RF paths with the board unpowered where practical
+- Verification that PA/LNA enable defaults are in the safe state
+- Confirmation that RF switches cannot power up into an undefined high-power path
 
-## Validation Sequence
+## Phase 2 — Power Tree
 
-1. Inspect launches and RF path continuity.
-2. Measure insertion loss and return loss.
-3. Validate forward and reflected detector outputs.
-4. Sweep mismatch conditions.
-5. Log telemetry and compare against instruments.
+| Check | Goal |
+| --- | --- |
+| Current-limited first power-on | Detect shorts without exposing the board to full available power |
+| Rail voltage | Confirm every supply is within intended tolerance before enabling RF loads |
+| Startup sequencing | Verify CM5, radio, ADC/monitors, and RF enables come up in a safe order |
+| Load transient behavior | Check PA/CM5 current steps do not destabilize shared rails |
+| Fault shutdown | Confirm comparator/eFuse paths remove the intended load independently of software |
 
-## Evidence
+## Phase 3 — Digital Control
 
-<Figure src="/generated/recovery-system/thumbnails/card.svg" alt="RF validation placeholder" caption="Replace this placeholder with VNA plots, spectrum captures, conducted-power measurements, or telemetry logs." />
+1. Establish CM5 operation and Ethernet communication with the flight-computer side.
+2. Confirm LR2021 identification/status reads over SPI.
+3. Exercise every RF switch with the PA disabled.
+4. Verify PA and LNA enable interlocks across all legal/illegal state combinations.
+5. Read current, voltage, temperature, and RF detector channels and confirm sane idle values.
+6. Verify hardware fault inputs are visible in the supervisory software.
+
+## Phase 4 — Passive RF Characterization
+
+Use a calibrated VNA before enabling high-power transmit stages.
+
+- Measure insertion loss and return loss through each switch/filter/connector path
+- Characterize 915 MHz and 2.4 GHz receive paths separately
+- Measure isolation between selected and unselected RF paths
+- Verify antenna-diversity switch states
+- Compare measured path loss against the link/power budget used in the design
+
+## Phase 5 — Low-Power Transmit
+
+Start with the lowest practical LR2021 output drive and keep the external PA disabled or at a controlled operating point.
+
+| Measurement | Evidence to keep |
+| --- | --- |
+| LR2021 conducted output | Commanded power versus measured spectrum-analyzer/power-meter result |
+| Frequency/spectral shape | Spectrum capture with RBW/VBW and attenuation settings documented |
+| Switch/filter loss | Power before and after key RF stages if accessible |
+| Forward detector response | Detector voltage/ADC code versus calibrated RF power |
+| Reflected detector floor | Reverse-channel response into a known good 50-ohm load |
+
+## Phase 6 — PA Characterization
+
+Increase LR2021 drive in controlled steps while watching RF output, current, temperature, and spectral content.
+
+- Measure PA gain and compression versus radio drive
+- Confirm the approximately 1 W system target only after downstream losses are included
+- Check harmonics/spurs after the output filter
+- Record supply current and thermal rise versus output power and duty cycle
+- Verify PA shutdown paths at safe injected thresholds before relying on them for fault protection
+
+<DesignDecision title="Do not begin characterization at maximum radio drive">
+The external PA gain and compression curve should be established from low drive upward. This avoids immediately operating an uncharacterized amplifier near overdrive while still producing the data needed to choose the final LR2021 power setting.
+</DesignDecision>
+
+## Phase 7 — Mismatch and Diversity
+
+Known mismatch conditions should be introduced with calibrated loads or an impedance tuner rather than by intentionally creating poorly controlled cable/connector faults.
+
+1. Establish the matched-load forward/reverse baseline.
+2. Apply known mismatch conditions across the intended range.
+3. Compare external RF measurements with detector/ADC telemetry.
+4. Verify the supervisory logic disables the PA before changing antenna paths.
+5. Switch to the alternate antenna path and confirm RF state settles before TX is re-enabled.
+6. Record the point at which coupler directivity and detector uncertainty limit useful VSWR estimation.
+
+## Phase 8 — Thermal and End-to-End Test
+
+- Run representative TX duty cycles at both bands
+- Record PA/LNA/radio temperatures and rail current over time
+- Exercise thermal and electrical protection paths
+- Send real flight-like telemetry from the flight computer through Ethernet, CM5, LR2021, RF front end, and ground station
+- Confirm RF-health telemetry and fault records are included in the data stream
+
+## Evidence Standard
+
+A test is not considered complete because the board appeared to work. The portfolio and internal documentation should retain the setup, calibration/reference plane, firmware revision, board revision, measured data, pass/fail criterion, and follow-up action. Simulated or calculated performance should remain visibly separate from measured performance.

@@ -1,19 +1,72 @@
-# RF Path Architecture
+# Dual-Band RF Path
 
-Use this page for the 2.4 GHz signal path, switched test modes, impedance control, and measurement access.
+The LR2021 supports both the 915 MHz and 2.4 GHz operating modes, but the external RF front end is intentionally split into band-specific gain, filtering, and antenna-routing paths. Only one band and one direction are active at a time.
 
-## RF Requirement
+## Functional TX Chain
 
-Replace this with frequency band, transmit range, receive/test modes, mismatch range, and what must be measured.
+| Stage | 915 MHz path | 2.4 GHz path | Design intent |
+| --- | --- | --- | --- |
+| Radio | LR2021 LF output | LR2021 HF output | Generate the commanded LoRa waveform |
+| Gain | External PA | External PA | Raise radio output toward the approximately 1 W system target |
+| Harmonic filtering | Band-specific LPF | Band-specific LPF | Reduce PA-generated harmonics before the antenna network |
+| RF sensing | Directional coupler | Directional coupler | Sample forward/reflected traveling waves |
+| T/R + diversity | RF switch network | RF switch network | Select direction and antenna path |
+| Radiation | 915 MHz antenna | 2.4 GHz antenna | Send the selected band to the ground station |
 
-## Signal Path
+The target power is a system target, not a guaranteed PA output number. Final LR2021 drive, PA compression, filter loss, coupler loss, switch loss, trace loss, and connector loss must be measured together before the antenna-port power is considered verified.
 
-<Figure src="/generated/recovery-system/thumbnails/card.svg" alt="RF path placeholder" caption="Replace this placeholder with an RF block diagram or annotated layout screenshot showing the transceiver, switches, coupler, detector taps, connectors, and reference planes." />
+## Functional RX Chain
 
-## Controlled Impedance
+| Stage | Function |
+| --- | --- |
+| Antenna/diversity selection | Choose the desired physical antenna path |
+| T/R switch | Disconnect the TX chain and route the antenna toward the receiver |
+| LNA | Improve weak-signal level before subsequent loss |
+| Band-pass filter | Reject out-of-band interference before the LR2021 input |
+| LR2021 | Demodulate the selected 915 MHz or 2.4 GHz signal |
 
-Explain stackup assumptions, launch geometry, reference continuity, and discontinuities you planned around.
+LNA gain alone does not make a good receive path. Gain, noise figure, out-of-band rejection, compression, switch/filter insertion loss, and susceptibility to onboard digital/switching noise have to be evaluated as one receive chain.
 
-## Validation Access
+## Why Half-Duplex Switching
 
-Add how VNA, conducted-power, spectrum-analyzer, and antenna tests connect to the board.
+<DesignDecision title="Use RF switches rather than a passive split as the primary T/R architecture">
+The radio does not require simultaneous transmit and receive. A switched architecture avoids continuously sacrificing transmit power in a Wilkinson-style split and avoids the size/integration cost of a circulator. A duplexer was also not selected because simultaneous operation is not required and a high-power TX path increases receiver-isolation difficulty.
+</DesignDecision>
+
+## Switching Invariant
+
+The RF switch network is treated as a state machine rather than as an arbitrary GPIO collection.
+
+| Step | Required action |
+| --- | --- |
+| 1 | Disable the active PA and LNA |
+| 2 | Allow RF output to decay |
+| 3 | Change T/R and/or antenna-selection switches |
+| 4 | Wait for switch settling |
+| 5 | Enable only the amplifier needed by the new state |
+| 6 | Begin transmit or receive operation |
+
+The goal is to prevent hot-switching near the high-power TX condition and to avoid a state where a PA drives directly into an unintended or poorly terminated path.
+
+## Diversity
+
+The antenna switch network is intended to give the CM5 a second path when the selected antenna is poorly matched or the link quality degrades. Diversity is useful only if the supervisory logic can distinguish a real antenna/path problem from a radio or PA problem; this is one reason forward/reflected RF telemetry is part of the architecture.
+
+## PCB Requirements
+
+- Controlled-impedance routing from the LR2021 through switches, filters, couplers, and connectors
+- Continuous RF return paths with no accidental plane gaps beneath critical transmission lines
+- Via fencing and compact ground-return geometry around RF launches and switching nodes
+- Physical separation between sensitive RX regions and CM5/Ethernet/switching-power noise sources
+- Short, low-inductance decoupling around PAs, LNAs, switches, and the LR2021
+- Thermal copper and via structures sized around PA dissipation rather than RF routing alone
+- Layout access that still permits VNA, spectrum-analyzer, and conducted-power validation
+
+## Open RF Items
+
+- Final PA/LNA/filter selections for both bands
+- Measured PA gain/compression versus LR2021 drive setting
+- Final T/R and diversity switch insertion loss, isolation, and power handling
+- Antenna-port conducted-power target after all downstream losses
+- Receiver cascaded noise figure and blocker tolerance
+- Final controlled-impedance geometry from the production stackup

@@ -1,58 +1,109 @@
-## Purpose
+## Project Purpose
 
-The RF Link Evaluation Board is a 2.4 GHz characterization board for a LoRa telemetry transceiver, its RF path, and the mixed-signal telemetry around it.
+The RF Telemetry System is the vehicle-side communications subsystem responsible for moving flight data from the onboard computing stack to the ground station while also reporting whether the radio link itself is healthy.
 
-The point of the board is to answer practical questions that are hard to settle from a transceiver datasheet alone: conducted transmit power, reflected power under antenna mismatch, current consumption, board temperature, insertion loss through switched paths, and the real accuracy limits of the VSWR measurement chain.
+The project grew out of a practical failure mode: flight data is only useful if it can be recovered. The current LR2021-based revision therefore treats telemetry as more than a radio. It combines data transport, RF amplification and filtering, antenna selection, forward/reflected power sensing, electrical and thermal monitoring, and hardware fault handling.
 
-## My Responsibility
+The public portfolio page intentionally separates three classes of information: architecture decisions, preliminary design targets, and measured results. Anything not yet validated on hardware is presented as a target or open item rather than as a finished specification.
 
-I architected the board and owned the RF measurement chain, analog telemetry front end, schematic design, component selection, error analysis, and PCB implementation.
+## System Requirements
 
-## RF Architecture
+| ID | Requirement | Current approach |
+| --- | --- | --- |
+| RF-001 | Support long-range vehicle telemetry | 915 MHz LR2021 path |
+| RF-002 | Support a higher-rate short-range mode | 2.4 GHz LR2021 path |
+| RF-003 | Deliver approximately 1 W RF output per active band | External PA chain; final conducted/antenna power pending validation |
+| RF-004 | Share antennas between TX and RX without wasting several dB in a passive split | Switched half-duplex T/R architecture |
+| RF-005 | Provide antenna/path diversity | RF switch network controlled by the telemetry supervisor |
+| RF-006 | Observe forward and reflected transmit power | Directional coupler + logarithmic detector + ADC telemetry |
+| RF-007 | Prevent unsafe PA/LNA states | Hardware gating plus software sequencing |
+| RF-008 | Protect critical RF loads from thermal/electrical faults | Comparator/eFuse shutdown paths plus monitored telemetry |
+| RF-009 | Keep flight-data transport separate from low-level radio control | Flight computer → Ethernet → CM5 → SPI → LR2021 |
+| RF-010 | Preserve evidence for post-flight diagnosis | Fault, current, voltage, temperature, and RF-health logging |
 
-The transceiver connects to a switched network that supports normal antenna operation and conducted test access. A directional coupler samples forward and reverse traveling waves without interrupting the primary RF path.
+## High-Level Architecture
 
-The coupled signals feed an ADL5519 logarithmic detector. For a 0-12 dBm transmitter and the selected 29.2 dB coupler, the forward detector input is approximately -30 to -17 dBm. Across an intended mismatch range of approximately 1.1:1 to 3:1 VSWR, the reverse detector input is approximately -56 to -23 dBm.
+<Figure src="/generated/rf-link-evaluation-board/diagrams/system-architecture.svg" alt="RF telemetry system architecture" caption="Flight data moves through the flight computer and CM5 to the LR2021, while a separate health/protection path monitors and can shut down the RF front end." />
 
-Those levels keep the detector in a usable measurement region without letting the normal transmit signal overdrive the analog chain.
+| Subsystem | Responsibility |
+| --- | --- |
+| Flight computer | Produces vehicle telemetry and sends packets over Ethernet |
+| CM5 telemetry supervisor | Buffers/prioritizes data, configures the LR2021, sequences RF states, reads health telemetry, and records faults |
+| LR2021 | LoRa/modem and RF transceiver for the 915 MHz and 2.4 GHz operating modes |
+| RF front end | PA/LNA gain, band filtering, T/R switching, antenna selection, and high-power RF routing |
+| Measurement chain | Forward/reflected RF power, temperature, current, and voltage telemetry |
+| Hardware protection | Independent shutdown of unsafe RF states without relying only on Linux software |
 
-## Measurement Accuracy
+## Operating Strategy
 
-At low reflected-power levels, directional-coupler directivity is more important than detector resolution. Leakage from the forward wave into the reverse-coupled port can approach or exceed the true reflected signal, establishing a measurement floor.
+The radio is operated half-duplex with one RF band active at a time. The intended mission strategy is to favor 915 MHz when link margin is the priority, then use 2.4 GHz when the link is strong enough to justify the higher-rate mode.
 
-So the analysis keeps detector accuracy, ADC accuracy, coupler coupling tolerance, insertion loss, and coupler directivity separate. That keeps the board from claiming more return-loss accuracy than the RF hardware can actually support.
+| Mode | LR2021 state | 915 PA | 915 LNA | 2.4 PA | 2.4 LNA |
+| --- | --- | --- | --- | --- | --- |
+| RX 915 | Receive | Off | On | Off | Off |
+| TX 915 | Transmit | On | Off | Off | Off |
+| RX 2.4 | Receive | Off | Off | Off | On |
+| TX 2.4 | Transmit | Off | Off | On | Off |
+| Fault / safe | Standby or disabled | Off | Off | Off | Off |
 
-## Telemetry Architecture
+<DesignDecision title="RF switches are never treated as hot-switch devices">
+Before a T/R or antenna-selection change, the active PA and LNA are disabled. The system allows RF energy to decay, changes the switch state, waits for the switch to settle, and then enables only the amplifier required for the new mode. Hardware logic is intended to prevent software from commanding a known-unsafe combination.
+</DesignDecision>
 
-An eight-channel, 12-bit TLA2518 SAR ADC records forward and reverse detector outputs, current, voltage, temperature, and a 1.15 V calibration reference.
+## RF Signal Chains
 
-The current channels use Kelvin-connected shunts for approximately 0-100 mA measurement. Analog channels include approximately 340 Hz anti-alias filtering. Source resistance, acquisition time, sampling capacitance, and channel-to-channel voltage steps were analyzed to estimate multiplexer charge-sharing error. The worst analyzed case was approximately 0.10 LSB.
+The transmit chain for each band follows the same functional pattern:
 
-A Compute Module 5 controls the board and records data over Ethernet and USB.
+| TX stage | Function |
+| --- | --- |
+| LR2021 RF output | Generates the commanded LoRa waveform |
+| Power amplifier | Raises the transceiver output toward the approximately 1 W system target |
+| Low-pass filter | Suppresses PA-generated harmonics before the antenna path |
+| Directional coupler | Samples forward and reflected traveling waves with low main-line loss |
+| RF switch network | Selects T/R state and antenna path |
+| Antenna | Radiates the selected 915 MHz or 2.4 GHz signal |
 
-## PCB Layout
+The receive chain reverses the emphasis: antenna selection is followed by low-noise gain and band-selective filtering before the LR2021 input.
 
-The RF path should be shown separately from the digital and power regions. The important layout callouts are:
+| RX stage | Function |
+| --- | --- |
+| Antenna + diversity switch | Selects the available receive path |
+| T/R switch | Routes the antenna toward the receive chain |
+| LNA | Raises weak received signals while minimizing added noise |
+| Band-pass filtering | Rejects out-of-band energy before the transceiver |
+| LR2021 RF input | Demodulates the selected band |
 
-- Controlled-impedance transceiver-to-switch routing
-- Directional-coupler orientation
-- RF-switch and connector transitions
-- Ground-via fencing
-- Continuous reference planes
-- Detector isolation from digital interfaces
-- Kelvin-shunt routing
-- ADC filtering and reference placement
+## RF Health and Fault Awareness
 
-## Validation Plan
+The design treats observability as part of the RF architecture rather than as an afterthought. Forward and reflected power help distinguish a transmitter problem from an antenna/path mismatch. Current and voltage telemetry help identify power-tree faults, while temperature sensing gives both software and hardware a view of thermal stress.
 
-1. VNA measurement of each passive and switched RF path.
-2. Conducted transmit-power measurement across commanded power levels.
-3. Detector calibration against an external RF power meter.
-4. Known mismatch testing with calibrated terminations or an impedance tuner.
-5. Current and temperature telemetry calibration.
-6. ADC settling verification during worst-case channel switching.
-7. End-to-end data logging through the CM5.
+The important distinction is between telemetry and protection. The CM5 may reduce power, change antennas, or log a warning, but critical faults also have a path that can remove RF enable or power without waiting for Linux software.
 
-## Current Status
+## Design Decisions
 
-Schematic design and analysis are complete. PCB layout and physical RF validation should stay as separate milestones so simulated and measured performance do not get mixed together.
+| Decision | Selected approach | Why |
+| --- | --- | --- |
+| TX/RX sharing | RF T/R switches | Low insertion loss and compatible with the half-duplex radio |
+| Passive Wilkinson as primary T/R element | Rejected | A simple split spends valuable transmit power continuously |
+| Circulator | Not selected | Size, cost, insertion loss, and integration penalties |
+| Duplexer for simultaneous operation | Not selected | The design does not require simultaneous TX/RX and isolation becomes difficult around a high-power PA |
+| RF link health | Coupler + detector telemetry | Provides evidence that RF energy actually reached the antenna path |
+| Protection ownership | Hardware + software | Software supervises behavior; hardware retains authority to force unsafe RF states off |
+
+## Current Design Status
+
+The architecture and schematic are still being refined. The following items should remain explicit until measured or finalized:
+
+- Final LR2021 drive settings for each external PA
+- Conducted output power and downstream switch/filter loss
+- Final LNA and filter selections for each band
+- Directional-coupler and detector calibration constants
+- Thermal shutdown thresholds and latch/recovery behavior
+- Final board stackup and controlled-impedance geometry
+- Antenna-switch insertion loss and isolation
+- Full link-budget assumptions and ground-station configuration
+- Measured RF spectral performance, VSWR accuracy, and thermal performance
+
+## Documentation Map
+
+The deep-dive pages below are deliberately split by engineering question rather than by schematic sheet. System Architecture explains ownership and interfaces; Dual-Band RF Path covers the signal chain and sequencing; RF Power & VSWR Telemetry covers observability; Protection & Fault Handling documents fault responses; and Bring-Up & RF Validation defines the evidence needed before design targets become verified performance.

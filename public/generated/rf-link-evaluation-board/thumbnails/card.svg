@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">RF Telemetry System</title>
+  <desc id="desc">Stylized dual-band LR2021 telemetry architecture showing CM5 control, LR2021 radio, 915 MHz and 2.4 GHz RF front ends, and forward/reflected RF sensing.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#07111f"/>
+      <stop offset="1" stop-color="#0e1726"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" x2="1">
+      <stop offset="0" stop-color="#38bdf8"/>
+      <stop offset="1" stop-color="#f59e0b"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="630" rx="32" fill="url(#bg)"/>
+  <circle cx="1050" cy="90" r="150" fill="#0ea5e9" opacity="0.07"/>
+  <circle cx="1060" cy="560" r="190" fill="#f59e0b" opacity="0.06"/>
+  <text x="70" y="78" fill="#94a3b8" font-family="Inter,Arial,sans-serif" font-size="22" letter-spacing="4">AVIONICS / RF TELEMETRY</text>
+  <text x="70" y="132" fill="#f8fafc" font-family="Inter,Arial,sans-serif" font-weight="700" font-size="50">Dual-Band LR2021 Telemetry</text>
+  <text x="70" y="172" fill="#cbd5e1" font-family="Inter,Arial,sans-serif" font-size="23">915 MHz + 2.4 GHz • half-duplex • antenna diversity • RF-health telemetry</text>
+
+  <g transform="translate(70 245)">
+    <rect x="0" y="45" width="205" height="112" rx="18" fill="#111c2d" stroke="#334155" stroke-width="2"/>
+    <text x="102" y="88" text-anchor="middle" fill="#e2e8f0" font-family="Inter,Arial,sans-serif" font-weight="700" font-size="26">CM5</text>
+    <text x="102" y="120" text-anchor="middle" fill="#94a3b8" font-family="Inter,Arial,sans-serif" font-size="17">Telemetry supervisor</text>
+    <text x="102" y="145" text-anchor="middle" fill="#38bdf8" font-family="Inter,Arial,sans-serif" font-size="15">Ethernet • SPI • Health</text>
+
+    <line x1="205" y1="101" x2="300" y2="101" stroke="#94a3b8" stroke-width="3" marker-end="url(#arrow)"/>
+    <text x="252" y="88" text-anchor="middle" fill="#64748b" font-family="Inter,Arial,sans-serif" font-size="14">SPI</text>
+
+    <rect x="315" y="45" width="205" height="112" rx="18" fill="#111c2d" stroke="#38bdf8" stroke-width="2"/>
+    <text x="417" y="88" text-anchor="middle" fill="#f8fafc" font-family="Inter,Arial,sans-serif" font-weight="700" font-size="28">LR2021</text>
+    <text x="417" y="120" text-anchor="middle" fill="#94a3b8" font-family="Inter,Arial,sans-serif" font-size="17">LoRa transceiver</text>
+    <text x="417" y="145" text-anchor="middle" fill="#38bdf8" font-family="Inter,Arial,sans-serif" font-size="15">LF + HF RF paths</text>
+
+    <path d="M520 80 H610 V30 H690" fill="none" stroke="#94a3b8" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M520 122 H610 V190 H690" fill="none" stroke="#94a3b8" stroke-width="3" marker-end="url(#arrow)"/>
+
+    <rect x="705" y="0" width="300" height="105" rx="18" fill="#111c2d" stroke="#38bdf8" stroke-width="2"/>
+    <text x="855" y="38" text-anchor="middle" fill="#f8fafc" font-family="Inter,Arial,sans-serif" font-weight="700" font-size="24">915 MHz Front End</text>
+    <text x="855" y="69" text-anchor="middle" fill="#94a3b8" font-family="Inter,Arial,sans-serif" font-size="16">PA • LPF • Coupler • LNA • BPF</text>
+    <text x="855" y="93" text-anchor="middle" fill="#38bdf8" font-family="Inter,Arial,sans-serif" font-size="15">long-range reliability mode</text>
+
+    <rect x="705" y="150" width="300" height="105" rx="18" fill="#111c2d" stroke="#f59e0b" stroke-width="2"/>
+    <text x="855" y="188" text-anchor="middle" fill="#f8fafc" font-family="Inter,Arial,sans-serif" font-weight="700" font-size="24">2.4 GHz Front End</text>
+    <text x="855" y="219" text-anchor="middle" fill="#94a3b8" font-family="Inter,Arial,sans-serif" font-size="16">PA • LPF • Coupler • LNA • BPF</text>
+    <text x="855" y="243" text-anchor="middle" fill="#f59e0b" font-family="Inter,Arial,sans-serif" font-size="15">higher-rate short-range mode</text>
+  </g>
+
+  <g transform="translate(70 525)">
+    <rect x="0" y="0" width="1060" height="55" rx="15" fill="#0b1422" stroke="#263449"/>
+    <text x="28" y="35" fill="#cbd5e1" font-family="Inter,Arial,sans-serif" font-size="18">FWD / REV power</text>
+    <circle cx="210" cy="28" r="5" fill="#38bdf8" filter="url(#glow)"/>
+    <text x="235" y="35" fill="#cbd5e1" font-family="Inter,Arial,sans-serif" font-size="18">PA/LNA current + temperature</text>
+    <circle cx="540" cy="28" r="5" fill="#f59e0b" filter="url(#glow)"/>
+    <text x="565" y="35" fill="#cbd5e1" font-family="Inter,Arial,sans-serif" font-size="18">hardware shutdown</text>
+    <circle cx="760" cy="28" r="5" fill="#38bdf8" filter="url(#glow)"/>
+    <text x="785" y="35" fill="#cbd5e1" font-family="Inter,Arial,sans-serif" font-size="18">~1 W target / active band</text>
+  </g>
+  <rect x="70" y="202" width="1060" height="3" rx="2" fill="url(#accent)" opacity="0.9"/>
+</svg>

@@ -1,69 +1,86 @@
 {
   "slug": "rf-link-evaluation-board",
-  "title": "RF Link Evaluation Board",
-  "subtitle": "Layout in progress; 2.4 GHz mixed-signal evaluation platform for RF-path characterization, VSWR measurement, and automated telemetry logging",
+  "title": "RF Telemetry System",
+  "subtitle": "Evolving a 2.4 GHz RF link-evaluation platform into an LR2021-based 915 MHz / 2.4 GHz flight telemetry subsystem with RF-health monitoring and hardware-first protection",
   "category": ["RF / Telemetry", "Avionics", "Embedded Systems", "Test / HITL"],
   "status": "Designed",
   "role": "Design Responsible Engineer",
   "tools": ["Altium", "VNA", "Spectrum Analyzer", "Oscilloscope"],
   "layerCount": 4,
-  "stackup": "Four-layer RF and mixed-signal PCB stackup to be finalized from Altium exports",
-  "summary": "A 2.4 GHz mixed-signal RF evaluation board for characterizing a LoRa telemetry transceiver under controlled transmit, receive, and mismatch conditions. The board combines switched RF test paths, forward and reverse power measurement, detector telemetry, current and temperature sensing, a 12-bit SAR ADC, and Compute Module 5 control and data logging.",
-  "thumbnail": "/generated/recovery-system/thumbnails/card.svg",
-  "tags": ["RF", "Telemetry", "LoRa", "Directional Coupler", "CM5", "Layout In Progress", "Altium"],
+  "stackup": "The existing evaluation-board implementation is four layers; the stackup for the LR2021 flight revision is still being finalized",
+  "summary": "An avionics RF project that began as a 2.4 GHz link-characterization board and is now being developed into a dual-band LR2021 flight telemetry subsystem. The current architecture combines a CM5 telemetry supervisor, 915 MHz and 2.4 GHz half-duplex RF paths, external PA/LNA/filter stages, antenna diversity, forward/reflected power sensing, system-health telemetry, and hardware paths that can force unsafe RF states off independently of Linux software.",
+  "thumbnail": "/generated/rf-link-evaluation-board/thumbnails/card.svg",
+  "tags": ["LR2021", "915 MHz", "2.4 GHz", "LoRa", "RF", "Telemetry", "VSWR", "CM5", "Altium"],
   "highlights": [
-    { "label": "RF Band", "value": "2.4 GHz" },
-    { "label": "TX Range", "value": "0-12 dBm" },
-    { "label": "Target VSWR", "value": "1.1:1-3:1" },
-    { "label": "Telemetry ADC", "value": "8 Ch / 12 Bit" }
+    { "label": "RF Bands", "value": "915 MHz / 2.4 GHz" },
+    { "label": "Transceiver", "value": "LR2021" },
+    { "label": "TX Target", "value": "~1 W / band" },
+    { "label": "Architecture", "value": "Half-duplex + diversity" }
   ],
   "keyComponents": [
-    "2.4 GHz LoRa transceiver",
-    "29.2 dB directional coupler",
-    "ADL5519 dual-channel logarithmic detector",
-    "Switched RF test paths",
-    "Raspberry Pi CM5",
-    "TLA2518 eight-channel, 12-bit SAR ADC",
-    "Kelvin-shunt current monitoring",
-    "1.15 V telemetry calibration reference"
+    "Semtech LR2021 dual-band LoRa transceiver",
+    "Raspberry Pi Compute Module 5 telemetry supervisor",
+    "External PA, LNA, and band-selective filter chains",
+    "Directional couplers for forward and reflected RF sampling",
+    "ADL5519 dual-channel logarithmic RF detector",
+    "RF T/R and antenna-diversity switch network",
+    "Current, voltage, and temperature telemetry",
+    "Comparator and eFuse-based hardware shutdown paths"
   ],
   "mainConstraints": [
-    "Maintain controlled-impedance RF paths with continuous reference planes and minimal discontinuities",
-    "Measure forward and reflected power without overdriving the log detector",
-    "Bound measurement uncertainty introduced by directional-coupler directivity",
-    "Keep detector and ADC signals isolated from digital, USB, Ethernet, and switching-power noise",
-    "Provide flexible RF access for VNA, spectrum-analyzer, conducted-power, and antenna-mismatch testing"
+    "Maintain controlled-impedance RF paths and continuous reference planes through a dense mixed-signal layout",
+    "Never hot-switch a high-power RF path; PA/LNA states must be safely sequenced around RF-switch transitions",
+    "Protect the PA and RF power tree from overtemperature, overcurrent, and severe antenna mismatch",
+    "Preserve observability of RF power, reflected power, temperature, current, voltage, and fault state",
+    "Do not make Linux software the only layer capable of placing the RF front end in a safe state",
+    "Support both a robust long-range 915 MHz mode and a higher-rate 2.4 GHz mode through one supervised radio architecture"
   ],
-  "publicNote": "Layout is in progress; RF validation results will be separated from schematic analysis as measurements become available.",
+  "publicNote": "This page intentionally separates architecture decisions, design targets, and measured results. RF output power, final switch/filter losses, thermal limits, component selections, and the LR2021 revision stackup remain preliminary until hardware validation is complete.",
   "model3d": {
-    "title": "RF Link Evaluation Board 3D Model",
-    "description": "A public 3D board model is not available for this project yet.",
+    "title": "RF Telemetry Board 3D Model",
+    "description": "A public 3D model for the current LR2021 revision is not available yet.",
     "rotation": { "x": 0, "y": 0, "z": 0 },
     "position": { "x": 0, "y": 0, "z": 0 },
     "zoom": 1
   },
   "deepDives": [
     {
+      "slug": "system-architecture",
+      "title": "System Architecture",
+      "description": "Flight-data flow, CM5/LR2021 responsibilities, operating modes, and the interfaces that connect the RF subsystem to the rest of the vehicle.",
+      "image": "/generated/rf-link-evaluation-board/thumbnails/card.svg",
+      "tag": "Architecture",
+      "metric": "Ethernet → SPI"
+    },
+    {
       "slug": "rf-path-architecture",
-      "title": "RF Path Architecture",
-      "description": "Placeholder for the 2.4 GHz signal path, switched test modes, impedance control, and measurement access.",
-      "image": "/generated/recovery-system/thumbnails/card.svg",
+      "title": "Dual-Band RF Path",
+      "description": "915 MHz and 2.4 GHz TX/RX chains, half-duplex switching, diversity, filtering, amplifier sequencing, and RF-layout constraints.",
+      "image": "/generated/rf-link-evaluation-board/thumbnails/card.svg",
       "tag": "RF",
-      "metric": "2.4 GHz"
+      "metric": "915 / 2.4 GHz"
     },
     {
       "slug": "power-measurement-chain",
-      "title": "Power Measurement Chain",
-      "description": "Placeholder for the directional coupler, log detector, ADC telemetry, calibration reference, and uncertainty budget.",
-      "image": "/generated/recovery-system/thumbnails/card.svg",
+      "title": "RF Power & VSWR Telemetry",
+      "description": "Forward/reflected power sampling, logarithmic detection, digitization, calibration, and the limits of antenna-mismatch observability.",
+      "image": "/generated/rf-link-evaluation-board/thumbnails/card.svg",
       "tag": "Telemetry",
       "metric": "FWD / REV"
     },
     {
+      "slug": "fault-protection",
+      "title": "Protection & Fault Handling",
+      "description": "Hardware-first PA/RF shutdown, thermal and overcurrent protection, software-supervised recovery, and fault-state observability.",
+      "image": "/generated/rf-link-evaluation-board/thumbnails/card.svg",
+      "tag": "Safety",
+      "metric": "HW shutdown"
+    },
+    {
       "slug": "rf-validation-flow",
-      "title": "RF Validation Flow",
-      "description": "Placeholder for VNA, spectrum-analyzer, mismatch, conducted-power, and antenna-path validation evidence.",
-      "image": "/generated/recovery-system/thumbnails/card.svg",
+      "title": "Bring-Up & RF Validation",
+      "description": "A staged validation plan from power-on and SPI communication through conducted RF testing, mismatch tests, thermal checks, and end-to-end telemetry.",
+      "image": "/generated/rf-link-evaluation-board/thumbnails/card.svg",
       "tag": "Test",
       "metric": "VNA / SA"
     }
@@ -74,7 +91,7 @@
         "id": "pdf",
         "title": "Exported Schematic PDF",
         "file": "/content/projects/rf-link-evaluation-board/schematic/rf-link-evaluation-board.pdf",
-        "description": "Schematic package is not currently published for this project.",
+        "description": "The LR2021 revision schematic package is not currently published on the portfolio.",
         "hotspots": []
       }
     ]
@@ -84,5 +101,16 @@
     "callouts": []
   },
   "tests": [],
-  "revisions": []
+  "revisions": [
+    {
+      "rev": "Evaluation Board",
+      "status": "Designed",
+      "notes": "2.4 GHz mixed-signal link-characterization platform used to develop the RF measurement and validation approach."
+    },
+    {
+      "rev": "LR2021 Flight Revision",
+      "status": "Designed",
+      "notes": "Current dual-band 915 MHz / 2.4 GHz architecture; component choices and validation targets remain subject to revision until bring-up."
+    }
+  ]
 }

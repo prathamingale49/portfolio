@@ -1,0 +1,65 @@
+# Protection & Fault Handling
+
+The protection philosophy is intentionally split between observation and authority. The CM5 observes the system, logs faults, changes operating strategy, and may command graceful recovery. Hardware retains the ability to force critical RF loads off when a fault must not depend on Linux software responding correctly.
+
+## Protection Hierarchy
+
+| Layer | Purpose | Examples |
+| --- | --- | --- |
+| Passive design | Prevent predictable overstress before control logic is involved | Filtering, decoupling, RF matching, thermal copper, current-limited rails |
+| Hardware protection | Force an unsafe load off quickly and independently | Comparator trip, eFuse shutdown, hardware enable gating |
+| Supervisory software | Interpret context and choose recovery behavior | Reduce TX power, swap antennas, retry a link, log fault history |
+| Ground/operator response | Recover or inhibit the subsystem when appropriate | Clear latched state, disable a band, change operating profile |
+
+## Fault Matrix
+
+The exact thresholds and latch behavior remain design parameters until component and thermal validation is complete.
+
+| Fault | Detection path | Immediate response | Supervisory response |
+| --- | --- | --- | --- |
+| PA overtemperature | Local temperature sensor + comparator | Disable affected PA | Log event; inhibit or derate band until recovery criteria are met |
+| PA overcurrent / short | Current sense, comparator, or eFuse | Remove or latch off affected PA/RF rail | Log current/rail state; require defined recovery path |
+| Severe antenna mismatch | Forward/reflected RF telemetry | Software may disable PA before changing antenna path | Swap antenna, re-evaluate match, only re-enable TX after safe switch sequencing |
+| LNA overtemperature | Temperature monitor | Disable affected receive gain if hardware path is implemented | Log and fall back to alternate mode/path |
+| Radio/RF-domain overtemperature | Local temperature monitor | Disable affected RF power domain if threshold is exceeded | Preserve fault record and prevent repeated thermal cycling |
+| Rail overvoltage / overcurrent | Power monitor + hardware trip | Disable affected RF branch | Log pre-fault telemetry and isolate the failing branch |
+| Invalid RF switch state | Hardware gating / state checks | Keep PA disabled | Re-establish a known safe switch state before retrying |
+| CM5 software failure | Watchdog / external supervisor if implemented | Keep default RF enables in a safe state | Reboot/recover without allowing uncontrolled PA enable |
+
+## Hardware Versus Software
+
+<DesignDecision title="The PA enable path must fail safe">
+A software command may request transmit, but hardware should retain a direct way to remove PA enable or RF power. The design should default to a state where a reset, unconfigured GPIO, or crashed supervisor does not leave the transmitter actively driving an unknown RF path.
+</DesignDecision>
+
+The same principle applies to switch sequencing. The CM5 can orchestrate the transition, but the logic around PA/LNA enables should make impossible or dangerous combinations difficult to command accidentally.
+
+## Fault Logging
+
+A useful fault record should capture enough context to reconstruct what happened rather than only storing one fault bit.
+
+- Timestamp or mission-time counter
+- Active band and TX/RX mode
+- Commanded LR2021 power setting
+- Selected T/R and antenna switch state
+- Forward and reflected RF measurements
+- PA/LNA current and rail voltage
+- Relevant temperatures
+- Hardware trip/latch inputs
+- Recovery action attempted
+- Whether the condition repeated after recovery
+
+## Recovery Policy
+
+Not every fault should be auto-cleared. A temporary antenna mismatch may justify an antenna swap and retry, while an electrical short or repeated overtemperature event may justify a latched shutdown for the remainder of the mission.
+
+The final firmware should explicitly classify faults into at least three groups: transient/retryable, degraded-mode, and latched/unsafe-to-retry. That classification should be reviewed against the actual hardware protection implementation before flight.
+
+## Open Protection Items
+
+- Final trip thresholds and hysteresis for each temperature/current monitor
+- Which faults latch in hardware versus software
+- Power-cycle behavior after a latched RF eFuse event
+- Default states of all PA, LNA, and RF-switch control pins during reset
+- Watchdog ownership and CM5 recovery behavior
+- Whether loss of health telemetry itself should inhibit high-power TX

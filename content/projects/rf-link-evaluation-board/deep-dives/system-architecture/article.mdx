@@ -1,0 +1,60 @@
+# System Architecture
+
+This page defines the ownership boundaries and operating logic around the LR2021-based telemetry subsystem. It is intended to answer a future maintainer's first questions: where flight data comes from, which processor owns radio state, which interfaces cross board boundaries, and what the system is allowed to do in each mode.
+
+## Data Flow
+
+<Figure src="/generated/rf-link-evaluation-board/diagrams/system-architecture.svg" alt="Flight telemetry data-flow diagram" caption="The CM5 is the telemetry supervisor between the vehicle flight computer and the LR2021 RF transceiver; health telemetry and hardware protection form a parallel supervision path." />
+
+| Link | Interface | Purpose |
+| --- | --- | --- |
+| Flight computer → CM5 | Ethernet | Move vehicle telemetry into the communications subsystem |
+| CM5 → LR2021 | SPI + control GPIO | Configure the radio, load packets, select mode, and service interrupts/status |
+| CM5 → RF front end | GPIO / enables | Sequence PAs, LNAs, T/R switches, and antenna-selection switches |
+| Sensors/monitors → CM5 | ADC / digital telemetry | Report current, voltage, temperature, forward power, reflected power, and fault state |
+| Hardware protection → RF front end | Direct logic / power control | Force unsafe RF loads off independently of software |
+
+## Responsibility Split
+
+The flight computer should not need to understand the analog details of the RF front end. Its job is to hand telemetry to the communications subsystem. The CM5 owns buffering, radio configuration, RF-state sequencing, health interpretation, and logging. The LR2021 owns the modem/transceiver function, while the external RF front end provides the gain, filtering, switching, diversity, and high-power sensing that the radio alone does not provide.
+
+<DesignDecision title="Keep flight-data ownership separate from RF-state ownership">
+The flight computer provides telemetry; the CM5 decides how that telemetry is moved over the radio. This prevents vehicle application code from directly controlling high-power RF switches and amplifiers and gives the communications subsystem one place to implement sequencing and fault-response policy.
+</DesignDecision>
+
+## Operating Modes
+
+| Mode | Purpose | Required RF state |
+| --- | --- | --- |
+| Safe / standby | Boot, fault handling, or no active link | PAs off; LNAs off unless explicitly required; switch state known |
+| RX 915 | Long-range receive | 915 receive path enabled; all TX PAs off |
+| TX 915 | Long-range transmit | 915 TX path selected; 915 PA enabled only after switches settle |
+| RX 2.4 | Higher-rate receive | 2.4 receive path enabled; all TX PAs off |
+| TX 2.4 | Higher-rate transmit | 2.4 TX path selected; 2.4 PA enabled only after switches settle |
+| Fault hold | Unsafe thermal/electrical/RF condition | Affected PA or RF power domain forced off and fault recorded |
+
+## Transition Rules
+
+Every transition involving a T/R or antenna-selection switch follows the same invariant: remove RF power first, switch second, re-enable gain last.
+
+1. Command all relevant PA and LNA enables low.
+2. Confirm or wait long enough for stored RF energy and amplifier output to decay.
+3. Change the RF switch state.
+4. Wait for the switch settling interval required by the selected part.
+5. Enable only the PA or LNA required by the destination mode.
+6. Start TX or RX operation.
+
+The final firmware should replace generic waits with values derived from the selected switch/amplifier timing specifications and verified during bring-up.
+
+## Band Strategy
+
+915 MHz is the reliability-oriented mode because the intended system trades data rate for link margin when the vehicle is far from the ground station. The 2.4 GHz path is intended for conditions where the link is strong enough to support the higher-rate mode. The exact transition policy is a system-level control problem and should use measured link health rather than distance alone.
+
+## Interface Questions Still Open
+
+- Final packet contract between the flight computer and CM5
+- Exact LR2021 interrupt/BUSY handling and SPI timing budget
+- Which RF switch enables receive direct hardware gating versus CM5-only control
+- Fault-latch ownership and the conditions required to clear a latched RF shutdown
+- Whether link-mode switching is commanded by ground, autonomous, or hybrid
+- Final watchdog behavior for a CM5 or radio-control software failure

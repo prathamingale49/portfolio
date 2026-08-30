@@ -1,21 +1,65 @@
-# Power Measurement Chain
+# RF Power & VSWR Telemetry
 
-Use this page for the directional coupler, log detector, ADC telemetry, calibration reference, and uncertainty budget.
+The RF measurement chain is intended to answer two different questions during flight and bring-up: did the transmitter actually produce RF power, and did the selected antenna path accept that power without a severe mismatch?
 
-## Measurement Goal
+## Measurement Flow
 
-Describe forward power, reflected power, VSWR, detector range, ADC range, and calibration requirements.
+The directional coupler samples a small fraction of the forward and reflected traveling waves while leaving most of the RF power on the main transmission line. Those coupled RF samples are converted into low-bandwidth analog voltages by logarithmic detector circuitry and digitized for the CM5.
 
-## Circuit Walkthrough
+| Signal | What it indicates | Diagnostic value |
+| --- | --- | --- |
+| Forward RF power | Energy leaving the PA toward the antenna | Confirms whether the TX chain is producing the expected output |
+| Reflected RF power | Energy returning from the antenna/path | Indicates mismatch, damaged routing, or a poor antenna selection |
+| PA current | Electrical load while transmitting | Helps distinguish normal RF load from electrical fault or abnormal operating point |
+| PA temperature | Thermal stress | Supports power derating and independent thermal shutdown |
+| Rail voltage | Supply integrity | Helps distinguish RF problems from power-tree faults |
 
-<Figure src="/generated/recovery-system/thumbnails/card.svg" alt="RF measurement chain placeholder" caption="Replace this placeholder with schematic crops for the coupler, ADL5519 detector, ADC input network, current monitor, temperature monitor, and reference." />
+## Directional Coupler
 
-## Accuracy Notes
+A directional coupler is not treated as an RF voltage divider. Its value is that it separates traveling-wave direction well enough to provide distinct forward and reverse samples while adding only a small insertion loss to the main path.
 
-<DesignDecision title="What limits the measurement">
-Explain coupler directivity, detector operating range, calibration reference, ADC resolution, and expected uncertainty.
+The useful RF range at the detector input depends on transmitted power, coupling factor, coupler directivity, path loss, and the true antenna mismatch. Final detector scaling therefore belongs in a measured calibration table rather than as one hard-coded theoretical conversion.
+
+## Log Detector and ADC
+
+The ADL5519-class measurement approach converts RF input power into a DC voltage suitable for digitization. The ADC then exposes that measurement to the CM5 alongside current, voltage, and temperature channels.
+
+A useful calibration record should include:
+
+- Applied RF power at a calibrated reference plane
+- Measured forward-detector voltage
+- Measured reverse-detector voltage
+- ADC code and reference voltage
+- Frequency band
+- Temperature
+- Coupler path and antenna-switch state
+
+## What Limits VSWR Accuracy
+
+<DesignDecision title="Do not claim more mismatch accuracy than coupler directivity supports">
+At low reflected-power levels, leakage from the forward wave into the reverse-coupled port can approach or exceed the true reflected signal. Detector resolution alone does not determine the measurement floor. Coupler directivity, detector accuracy, ADC accuracy, coupling tolerance, insertion loss, calibration drift, and switch-path variation must remain separate terms in the uncertainty budget.
 </DesignDecision>
 
-## Evidence
+This means the RF-health system is most trustworthy for identifying meaningful mismatch changes and severe faults unless the complete chain has been calibrated well enough to justify a precise VSWR number.
 
-Add calibration plots, measurements, or comparison tables after RF validation.
+## Fault Interpretation
+
+| Forward power | Reflected power | Likely interpretation |
+| --- | --- | --- |
+| Low | Low | Radio/PA may not be transmitting, or TX path is disabled |
+| Normal | Low | RF chain appears healthy and antenna match is likely acceptable |
+| Normal | High | Antenna/path mismatch or damaged/disconnected RF path |
+| High/abnormal | High | Possible calibration issue, switching fault, severe mismatch, or unexpected PA operating point |
+
+These are diagnostic categories, not autonomous conclusions. Software should combine RF power with switch state, commanded TX power, current, temperature, and fault inputs before changing antenna paths or disabling a PA.
+
+## Calibration / Validation Evidence
+
+The portfolio should only promote this chain from design intent to measured performance after it includes:
+
+1. Detector transfer curves at both RF bands.
+2. Forward/reverse channel calibration using known RF power.
+3. Known mismatch tests using calibrated loads or an impedance tuner.
+4. Comparison against an external power meter or spectrum analyzer.
+5. Repeatability versus temperature and antenna-switch path.
+6. A documented uncertainty budget for any published VSWR or return-loss number.
